@@ -41,7 +41,7 @@ arduino-cli upload --profile s2-mini --port /dev/cu.usbmodemYOUR_BOARD firmware/
 
 5. Tap RESET. The running device can have a different port path; the companion app discovers it again by USB product name.
 
-The firmware disables serial-line reboot shortcuts, so use the physical BOOT + RESET sequence for subsequent uploads too. Keep both buttons accessible until the gift is assembled. If the board never appears, first try another known data cable and inspect the board's actual model and pinout. The original ESP32 lacks the ESP32-S2's native USB controller; a USB-C connector alone does not imply compatibility.
+The firmware disables serial-line reboot shortcuts, so use the physical BOOT + RESET sequence for subsequent uploads too. Both controls must remain serviceable after assembly: the first enclosure uses a removable lid retained by two underside screws, with wire slack for opening. Follow the [RESET / BOOT service procedure](../docs/enclosure.md#reset--boot-service-access); prove access with the actual board before final assembly. If the board never appears, first try another known data cable and inspect the board's actual model and pinout. The original ESP32 lacks the ESP32-S2's native USB controller; a USB-C connector alone does not imply compatibility.
 
 ## Protocol version 1
 

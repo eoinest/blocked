@@ -97,6 +97,54 @@ The independent [assembly checker](../enclosure/check-assembly.py) tests the sav
 8. Fit the purchased Tab keycap and check full travel/return, including off-centre presses. Cut four 8 × 8 mm feet from the BOM's 1 mm Type D pads, round their corners, and attach them in the recesses.
 9. Test cable insertion/removal and repeated presses. Because the USB end extends beyond the two-hole mount, inspect board flex and fastener stability. Unplug and reopen to check for rubbing or pinched wires before declaring the assembly ready.
 
-BOOT and RESET remain accessible with the lid removed. The bottom feet do not cover the case screws. No headers, battery, hot-swap socket or extra circuit board are included in this envelope.
+## RESET / BOOT service access
+
+**The first version uses disassembly, with no exterior button holes or extra
+parts.** The two underside case screws remain clear of the feet. Remove those
+screws and lift the lid with its switch and keycap still attached; the cap does
+not need removal just to open the case. Support the lid beside the base rather
+than leaving it hanging from its wires.
+
+RESET restarts the board. BOOT (marked **0** on some S2 Minis) selects the ROM
+downloader when held during reset. Hold BOOT, tap/release RESET, then release
+BOOT once the USB downloader appears. See the [LOLIN instructions](https://docs.wemos.cc/en/latest/tutorials/s2/get_started_with_arduino_s2.html)
+and [firmware flashing guide](../firmware/README.md#flash). This firmware disables
+the serial-line reboot shortcut, so physical access is needed for later uploads
+as well as first assembly. A routine restart can also be done by unplugging and
+reconnecting USB, with BOOT released.
+
+1. Quit the companion and disconnect USB before opening the case.
+2. Remove the two case screws, support the lid, and expose the USB end of the
+   board. Locate the actual RESET and BOOT actuator faces using the board labels.
+   The current Blender references show side-facing buttons near the USB end;
+   exact positions and travel on the purchased clone remain unmeasured.
+   The nominal side gaps are about **8.75 mm at RESET** and **7.75 mm at BOOT**,
+   with the actuator centres about **12.15 mm below the rim**. This favors a
+   narrow tool over fingers. The modeled channels lie behind the electrical
+   header rows and clear the case posts; keep wires out of these channels.
+3. Confirm a finger or blunt nonconductive tip can reach each actuator without
+   levering against the PCB or pulling the wire joints. Do not force a tool
+   through the USB opening. If access is awkward, unplug USB and remove the two
+   PCB mounting screws too; service the supported board outside the base.
+4. Reconnect USB only once the board and lid are stable on a nonconductive work
+   surface. Perform the BOOT/RESET sequence and upload. Disconnect USB again
+   before refitting any screws and closing the case.
+
+**Assembly acceptance check:** before finalizing wire lengths, demonstrate this
+opening and flashing sequence. Leave enough service slack for the lid to clear
+the buttons and be supported beside the base, and make sure that same slack
+fits inside without touching clips, pins or screw posts. The wires in Blender
+are illustrative routes, not a validated service loop. Lid-off finger/tool
+access and board flex are also not yet physically verified.
+
+If closed-case access becomes necessary, investigate **two recessed side-wall
+holes**, aligned to the measured lateral actuators. Bottom holes cannot provide
+a direct route through the PCB, and top holes do not align with these modeled
+side-facing plungers. Hole locations, tool clearance and a travel limit must be
+checked on the actual board before changing the printable base; no hole diameter
+or location is released as fabrication-ready yet. Preserve access to both
+controls and keep the GPIO pads and USB connector clear.
+
+No headers, battery, hot-swap socket or extra circuit board are included in this envelope.
 
 ![Exploded Blender assembly](../enclosure/exploded.png)
