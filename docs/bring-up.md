@@ -67,9 +67,8 @@ board needs different clearances.
 
 ## 6. Finish the gift
 
-Use an ivory **1.5u Tab-width keycap** with a small lowercase **blocked** legend
-at the front-left. A blank cap plus a vinyl or waterslide legend is a quick
-prototype; a professionally printed MX-stem cap will hold up better. The
+Order the white **1.5u Tab-width keycap** using the [exact settings and artwork](../keycap/README.md),
+with a small lowercase **blocked** legend at the front-left. The
 revised render pairs it with a satin silver housing and a dark inset bottom
 seam. Silver/gray filament gives the color; sanding, primer, and metallic paint
 are optional finishing steps if you want to approach the render's finish.

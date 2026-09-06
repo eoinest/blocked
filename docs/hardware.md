@@ -6,57 +6,17 @@ For the gift, my pick is one **Gateron Baby Kangaroo 2.0**, a **1.5u MX-compatib
 
 Feel is personal. A single-switch sample or small tester is more useful than buying an entire keyboard's worth for this project. The printed enclosure changes the sound too. Use a manufactured cap for the nicest finger surface and durable stem; an FDM cap is fine for experimenting with the legend and shape. Choose standard MX switches with **metal electrical contacts**; optical, Hall-effect, and inductive variants require different electronics.
 
-## Switch shortlist
+## Shopping list and keycap
 
-| Choice | Feel and action | Enclosure/keycap impact |
-| --- | --- | --- |
-| **Gateron Baby Kangaroo 2.0 — gift recommendation** | Strong early tactile bump; manufacturer rates operation at 59 ± 8 gf. | Five-pin MX structure, same two-contact wiring. Validate plate coupon and cap clearance. [Manufacturer](https://www.gateron.com/products/gateron-baby-kangaroo-20-tactile-switch-set), [drawing](https://gateron.com/u_file/2308/29/file/GATERONBabyKangaroo20Switch-b4b5.pdf) |
-| **Kailh BOX White — crisp click** | Click bar, nominal 45 gf operation and 55 gf tactile force, 3.6 mm total travel. | Standard-height MX-style option; sample first if noise matters. [Manufacturer](https://www.kailh.net/collections/all-products/products/kailh-box-switch-set) |
-| **Kailh BOX Jade — emphatic click** | Thick click bar, nominal 50 gf operation and 75 gf tactile force, 3.6 mm total travel. | A firmer, louder-feeling choice for the joke; verify snap fit. [Manufacturer](https://www.kailh.net/products/kailh-box-thick-clicky-switch-set) |
-| **CHERRY MX2A Brown — mild alternative** | Soft tactile bump; 2 mm to actuation, 4 mm total. | Standard MX plate and cap. [Manufacturer](https://www.cherry.de/en-us/product/mx2a-brown) |
-| **CHERRY MX2A Blue — familiar click** | Tactile and audible click; 2.2 mm pre-travel, 4 mm total. | Same standard MX family; validate the snap fit with the coupon. [Manufacturer](https://www.cherry.de/en-us/product/mx2a-blue) |
-| **Kailh Choc V2 Brown — thinner redesign** | Tactile; 1.3 ± 0.3 mm pre-travel, 3.2 ± 0.25 mm total, nominal 45 ± 10 gf operation. | Requires a Choc-specific mounting redesign and verified cap clearance. An MX-style stem does not make the whole housing MX-compatible. [Manufacturer](https://www.kailh.net/products/kailh-choc-v2-low-profile-switch-set) |
+Use the condensed [BOM](../BOM.md) for quantities and the chosen parts.
+The selected cap is **Max Keyboard’s custom-printed OEM-profile 1.5u Tab cap**,
+white with black `blocked` on top; [exact order settings and artwork](../keycap/README.md)
+are included. The Blender cap remains an approximate visual reference, so check
+full travel and off-center presses with the purchased cap.
 
-The included enclosure targets standard MX. Low-profile switches save less overall height when the S2 Mini remains stacked underneath; a side-by-side board layout can make a flatter but wider version. Do not substitute Choc V1 caps or mounts for V2 by assumption.
-
-## Wider keycap
-
-The revised design uses a **1.5u Tab-width cap**, with a tapered ivory body and
-a small lowercase `blocked` legend at the front-left of the top surface. Tab
-is a standard 1.5u position in [Omnitype's size guide](https://intercom.help/omnitype/en/articles/5121683-keycap-sizes).
-The render uses an approximately 28 mm-wide cap, compared with the original
-18 mm square reference; exact dimensions depend on the purchased cap.
-
-[Signature Plastics sells individual blank DSA 1.5u caps](https://spkeyboards.com/products/sp-dsa-1-5-space),
-so a whole keycap set is not needed. DSA gives a lower, uniform profile; a
-[blank SA 1.5u cap](https://spkeyboards.com/products/sp-sa-1-5-space) gives a taller,
-more sculpted option. Select a light color and a single centered MX stem, and
-confirm stock and the chosen profile before ordering. The Blender cap is a
-visual reference, not an exact model of either supplier's cap.
-
-Use a small vinyl/waterslide legend for the prototype or ask a custom keycap
-printer to print `blocked` in charcoal at the front-left. The housing still
-holds one switch and the wiring is unchanged. Check that the cap returns
-freely when pressed near either end; do not substitute a 2u cap without
-revisiting stabilizers and clearances.
-
-## Parts
-
-| Quantity | Part | Notes / source |
-| --- | --- | --- |
-| 1 | ESP32-S2 Mini, preferably headerless | Existing board. The reference is LOLIN S2 Mini: USB-C, 3.3 V GPIO, 34.3 × 25.4 mm. [WEMOS](https://docs.wemos.cc/en/latest/s2/s2_mini.html) |
-| 1 (+ spare) | Mechanical MX switch | Baby Kangaroo 2.0 sample/small pack, or CHERRY MX2A Brown e.g. [single-switch listing at SparkFun](https://www.sparkfun.com/cherry-mx2a-keyswitch-brown.html). Check current availability; no purchase is required to build the software. |
-| 1 | 1.5u MX cross-stem keycap | Ivory/white, centered single stem, sculpted or uniform profile; add a small charcoal `blocked` legend. See the keycap notes above. |
-| 2 | Short insulated stranded wires | About 28–30 AWG; cut to fit with enough slack to lift the lid. |
-| As needed | Heat-shrink and thin insulating tape | Cover switch joints and any exposed wire. Avoid conductive metallic tape. |
-| 4 small squares | 1 mm insulating double-sided foam tape | Retains the board on the support pads. Place only against clear PCB areas after inspecting both sides. |
-| 1 | Data-capable USB-C cable | Short flexible cable and slim plug suit a small desk key. |
-| 2 | M2 × 8 mm 90° countersunk screws | Match the supplied enclosure; see [enclosure guide](enclosure.md). |
-| 1 set | Printed enclosure parts | [Enclosure source and assembly guide](enclosure.md). |
-| 4 | Thin adhesive silicone feet | 8 mm square × 1 mm thick to suit the enclosure recesses; these stop sliding without bonding the whole key to the desk. |
-| Optional | Small removable double-sided adhesive pad | For true desk attachment. Test on the desk finish first; avoid permanently bonding the lid shut. |
-
-A USB-powered one-switch build needs **no battery, external resistor, diode, keyboard PCB, or separate USB interface board**. A diode matters for keyboard matrices; there is no matrix here. Hot-swap sockets are optional, but unsupported loose sockets are less robust than two soldered wires for this small gift.
+[Switch alternatives](switch-research.md) are kept separately from the shopping
+list. The build needs no battery, keyboard PCB, stabilizer, diode, or external
+resistor.
 
 ## Wiring
 

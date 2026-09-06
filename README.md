@@ -47,7 +47,7 @@ rules still apply.
 
 ## Make one
 
-1. Choose a switch and check your board against [the hardware guide](docs/hardware.md).
+1. Start with the [condensed shopping list](BOM.md) and [custom keycap order settings](keycap/README.md), then check your board against [the hardware guide](docs/hardware.md).
 2. Solder the two wires, then [build and flash the firmware](firmware/README.md).
 3. [Build and install the Mac companion](companion/README.md). Run `gh auth login`
    on the recipient's Mac and grant the app Automation access to Chrome.
