@@ -2,35 +2,80 @@
 
 A small native menu bar app connects the USB button to the pull request in the active Google Chrome window. No browser extension or injected JavaScript is needed. The default review is **Request changes**, with the body **blocked**.
 
+## Recipient experience
+
+The gift should arrive **assembled, flashed and tested**. The recipient installs
+Blocked, opens it once, and completes its setup window:
+
+1. **GitHub:** the app checks for an existing GitHub CLI sign-in and displays the
+   account. If needed, **Connect GitHub** displays a one-time code and opens
+   GitHub's browser authorization page. No Terminal, token copying, or Homebrew
+   installation is required by the default app build. GitHub calls this the
+   **GitHub CLI** authorization because the bundled helper owns the sign-in.
+2. **Chrome:** choose **Allow Chrome** and accept macOS's Automation prompt.
+   Blocked reads the focused tab URL, not page contents. If permission was
+   previously denied, the setup window explains where to change it in Settings.
+3. **Enable Blocked:** the window shows the selected action and message. Leave
+   **Open Blocked when I log in** checked to keep it available after restarting
+   the Mac. macOS may require approval in Login Items.
+4. Plug in the pre-flashed button with a USB data cable, open a PR in Chrome,
+   and press. No serial-port selection or per-launch arming is needed.
+
+Enabled/paused state survives app restarts. **Pause button** stops submissions
+until enabled again. Changing action/message or advanced settings requires
+accepting the new configuration once. GitHub sign-in and Chrome's permissions
+remain controlled by GitHub and macOS; the app cannot skip those consent screens.
+The GitHub account used can differ from the one signed into Chrome.
+
+Success and error feedback appears briefly without activating Blocked or stealing
+Chrome's focus. **Last result…** retains the full message. For diagnosis, choose
+**Test next press (no review)**: that one physical press detects the PR and shows
+its action without launching a review command. For repeated bench tests, keep
+Blocked paused and select this option before each test press.
+
+![Native setup example with a fictitious device code](setup-preview.png)
+
 ## Build and install
 
-Requires macOS 13 or later, Xcode with Swift 5.9 or later and its command line tools selected, Google Chrome, and [GitHub CLI](https://cli.github.com/). The build has no third-party Swift dependencies. The packaging script produces a universal app for Apple Silicon and Intel Macs. The universal build uses Xcode's build system; a plain `swift build` can build just the host architecture with Command Line Tools alone.
+Development requires macOS 13+, Xcode/Swift 5.9+ and its selected command line
+tools. The recipient does not need Xcode. There are no third-party Swift
+packages. The default packaging script includes a pinned GitHub CLI executable
+for Intel and Apple Silicon; archive SHA256 checks run before extraction and
+on cached builds. Its MIT license ships with the app.
 
 ```sh
-# From the repository root:
 cd companion
 swift test
 ./scripts/build-app.sh
-open dist/Blocked.app
 ```
 
-Copy `dist/Blocked.app` to `/Applications` if you want to keep it there. In Terminal, run `gh auth login --hostname github.com` if you are not already signed in, and `gh auth status --hostname github.com` to check the account the button will use. The companion uses gh's existing authentication; it does not collect or store a token. A standard Homebrew install is detected at `/opt/homebrew/bin/gh` or `/usr/local/bin/gh`; another absolute executable path can be entered in Settings.
+Copy `dist/Blocked.app` to `/Applications`, then open it. The first packaging build
+needs internet to download the verified helper archives. Later builds can use
+`./scripts/build-app.sh --offline`. `--without-gh` is an explicit developer-only
+option that uses an existing GitHub CLI installation; do not distribute that
+variant as a self-contained app. See [bundled helper provenance](ThirdPartyNotices/GitHubCLI.md).
 
-The script signs locally with an ad-hoc signature and a stable bundle ID (`io.github.eoinest.blocked`). This is a source-built prototype, not a notarized download. For distribution to someone else's Mac, use your Developer ID through `SIGNING_IDENTITY` and Apple's signing/notarization workflow, or build from source on that Mac. A new ad-hoc build may require granting Automation access again. No installation or login-item changes happen automatically.
+The helper reuses GitHub CLI's configuration and credential storage. Existing
+Homebrew installations remain a fallback for developer builds. An absolute
+helper path and serial port override remain available under Settings for
+troubleshooting; neither is part of normal setup. Authentication output is
+parsed in memory; device codes are not persisted. Cancel stops the sign-in
+process, then rechecks whether credentials were saved before cancellation.
 
-## First use
+The script signs locally with an ad-hoc signature and stable bundle ID
+`io.github.eoinest.blocked`. This is a **source-built prototype, not a notarized
+installer**. A frictionless downloadable release still needs Developer ID
+signing (`SIGNING_IDENTITY`), notarization and stapling, plus clean-Mac testing.
+A rebuilt ad-hoc app may need Automation permission again. No login item is
+registered by the build script: only enabling the setup checkbox or choosing
+**Open at login** in the running app requests registration.
 
-1. Flash the firmware and connect the button with a **data-capable USB cable**. Close Arduino Serial Monitor first. The ▣ menu should say **Button connected**.
-2. Open a pull request on `https://github.com` in Google Chrome and leave that Chrome window focused.
-3. Press and release the button. macOS may ask whether Blocked can control Chrome; allow it. The first press is intentionally discarded if the permission dialog takes too long. Refocus Chrome and press again.
-4. In the ▣ menu, choose **Last result…** to see the dry-run action, exact PR URL, and body. A dry run never invokes `gh`.
-5. Choose **Arm live reviews…** and acknowledge the displayed action and message. Refocus Chrome, then press the button to post. Check the PR to confirm the account and review.
-
-Every launch starts in dry run. **Disarm live reviews** returns to dry run immediately. Settings offers request changes, comment review, or approve, plus a custom message. Saving settings also disarms. These are GitHub PR reviews: “Comment review” is not an issue comment. Only one companion instance should run at a time.
-
-Chrome must be the frontmost application at the moment the app handles the press. Opening the Blocked menu/settings means Chrome is no longer the target. Blocked accepts conversation, files, commits, and checks views of a pull request. It ignores URL query strings and anchors when forming the canonical review URL. Enterprise domains, other browsers, issues, arbitrary subpaths, and commit-specific views are intentionally unsupported in this first version.
-
-Errors appear in **Last result…** and sound the system beep. macOS permissions can be adjusted in **System Settings → Privacy & Security → Automation → Blocked → Google Chrome**. Accessibility, Input Monitoring, and Chrome's “Allow JavaScript from Apple Events” are not needed. If serial discovery fails on a clone, identify its `/dev/cu.*` path and set **Serial port** explicitly; this still requires the firmware identity handshake. Never select another device's port.
+Chrome must be frontmost when the press is handled. Opening Blocked settings
+means Chrome is no longer the target. Conversation, files, commits and checks
+views are supported; query strings and anchors are ignored when constructing
+its canonical PR URL. Other browsers, Enterprise hosts, issues and arbitrary
+subpaths remain unsupported. Chrome's “Allow JavaScript from Apple Events”,
+Accessibility and Input Monitoring permissions are not required.
 
 ## What happens on a press
 
@@ -60,14 +105,16 @@ Identity is a version/compatibility check, not cryptographic authentication. Seq
 
 ## Verification
 
-`swift test` runs 31 offline tests and skips the opt-in Chrome integration test.
+`swift test` runs 43 offline tests and skips the opt-in Chrome integration test.
 Coverage includes URL boundaries, exact window/tab identities, application or tab
 changes during capture, slow reads, dry run without even looking up gh, busy
 presses, per-PR failure cooldowns, and the production press coordinator through a
 real local fake-gh subprocess. Runner tests check exact `--request-changes` and
 `blocked` arguments, authentication/self-review/permission errors, silent failures,
 interruptions, noninteractive execution, timeouts and no automatic retries.
-These default tests make no network calls and never submit reviews.
+These default tests make no network calls and never submit reviews. Additional
+tests cover remembered enable/pause state, setup readiness, browser device-code
+parsing, existing-account checks, cancellation, timeout, and stale auth callbacks.
 
 For a real Chrome smoke test, close any sensitive modal dialogs and leave the
 desktop idle, then run from `companion`:
@@ -93,7 +140,7 @@ that the packaged app has permission. See the root bring-up instructions.
 
 ### Local verification — September 5, 2026
 
-- **Passed:** 31 offline tests, including the production press flow through fake gh.
+- **Passed:** 43 offline tests, including the production press flow through fake gh.
 - **Passed:** universal release build, Apple Silicon/Intel architecture check,
   and strict code-signature verification.
 - **Unresolved:** the live Chrome smoke test could not establish its disposable

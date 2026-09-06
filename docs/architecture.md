@@ -24,7 +24,7 @@ There is no Wi-Fi setup, firmware token, hosted server, or browser extension.
 
 | Approach | What it needs | Decision |
 | --- | --- | --- |
-| USB CDC + native Mac app | One app; Chrome Automation permission; `gh` login | Implemented. A structured press event is easy to distinguish from keyboard input. |
+| USB CDC + native Mac app | One app with bundled gh; Chrome permission; browser sign-in if needed | Implemented. A structured press event is easy to distinguish from keyboard input. |
 | USB keyboard shortcut | Global hotkey capture or keyboard automation; a reserved shortcut | Possible later, but a shortcut can conflict with another app and cannot identify the target PR by itself. |
 | Chrome extension + native messaging | Extension and installed native host | Useful for more browsers or richer page context; additional installation for this gift. |
 | ESP32 calling GitHub over Wi-Fi | Wi-Fi provisioning and credentials on device; still needs the active URL from the Mac | Adds setup without removing the desktop integration. |
@@ -46,7 +46,8 @@ Events” setting. This integration does not read page content or passwords.
 
 The companion passes the validated URL and review body as separate process
 arguments to [GitHub CLI](https://cli.github.com/manual/gh_pr_review). It uses the
-account already authenticated with `gh auth login`. The Chrome website login can
+account already authenticated with GitHub CLI, or connects it through the app's
+browser device-code flow. The Chrome website login can
 be a different account: the review is always authored by the **CLI account**.
 GitHub still enforces review permissions and repository rules. A request-changes
 review's effect on merging depends on those rules; the button does not create
@@ -54,7 +55,8 @@ a branch protection rule.
 
 ## Behavior and limits
 
-- Start in dry-run mode; explicitly enable live reviews after verifying setup.
+- Complete account/Chrome setup and enable once; remember enable/pause across
+  restarts. Offer a one-press diagnostic that never submits a review.
 - Require a fresh button press, the identified serial protocol, an eligible PR
   URL, and Google Chrome as the frontmost app.
 - Never submit a review merely because the device is connected or a key is held

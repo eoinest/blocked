@@ -30,17 +30,17 @@ plugging in. See [hardware](hardware.md) for the selected GPIO and pin cautions.
 
 Follow [firmware setup](../firmware/README.md), then close any serial monitor so
 the companion can own the USB port. Build and open
-[Blocked.app](../companion/README.md). Authenticate the recipient's own `gh`
-account and grant Chrome Automation permission during the companion setup.
+[Blocked.app](../companion/README.md). Connect the recipient's own GitHub account in the setup window and grant Chrome Automation permission during the companion setup.
 
-Keep live reviews disabled. Focus a GitHub pull request in Google Chrome and
-press the physical key. Confirm that the preview contains the expected PR,
+Keep Blocked paused. Choose **Test next press (no review)**, focus a GitHub
+pull request in Google Chrome and press the physical key. Confirm that the preview contains the expected PR,
 action, and the exact body `blocked`.
 
 ## 4. Try the important edge cases
 
 These are manual acceptance checks, **not a claim that they have passed on
-physical hardware**:
+physical hardware**. For each diagnostic press, keep Blocked paused and choose
+**Test next press (no review)** again. Later presses remain paused:
 
 | Check | Expected result |
 | --- | --- |
@@ -53,7 +53,7 @@ physical hardware**:
 | Open two Chrome windows with different PRs | Targets the front window's active tab |
 | Switch to Files changed / Commits / Checks | Still identifies the same PR |
 | Disconnect and reconnect USB | Reconnects without a stale press |
-| Quit and reopen Blocked | Starts in dry-run again |
+| Quit and reopen Blocked | Keeps enabled/paused intent; paused stays paused |
 | Deny Automation or remove CLI authentication | Clear failure; no fallback target |
 | Disconnect network during a live test | No automatic retry; inspect GitHub manually |
 

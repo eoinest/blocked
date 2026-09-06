@@ -68,7 +68,7 @@ final class SerialMonitor {
         descriptor = fd; path = candidate; openedAt = now; lastHello = now
         session = WireSession(); buffer.removeAll()
         send("HELLO\n")
-        onStatus?("Connecting to \(candidate)…")
+        onStatus?("Connecting to your button…")
     }
     private func closePort() {
         if descriptor >= 0 { Darwin.close(descriptor) }

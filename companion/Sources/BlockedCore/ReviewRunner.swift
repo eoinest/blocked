@@ -8,7 +8,8 @@ public struct ReviewRunnerError: LocalizedError {
 
 public enum ReviewRunner {
     public static func executable(custom: String) -> String? {
-        let candidates = custom.isEmpty ? ["/opt/homebrew/bin/gh", "/usr/local/bin/gh", "/usr/bin/gh"] : [custom]
+        let bundled = Bundle.main.url(forAuxiliaryExecutable: "gh")?.path
+        let candidates = custom.isEmpty ? [bundled, "/opt/homebrew/bin/gh", "/usr/local/bin/gh", "/usr/bin/gh"].compactMap { $0 } : [custom]
         return candidates.first { $0.hasPrefix("/") && FileManager.default.isExecutableFile(atPath: $0) }
     }
 

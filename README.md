@@ -14,10 +14,12 @@ menu bar app. No browser extension, cloud service, or GitHub token on the board.
 
 **Status:** initial prototype. Source, firmware, and printable enclosure files
 are provided; physical assembly and an actual button-to-review test are still
-required. The companion starts in dry-run mode on every launch.
+required. The companion now has first-run setup, bundled GitHub support,
+remembered enable/pause state and optional launch at login. A signed/notarized
+release and clean-Mac acceptance testing are still outstanding.
 
 Verified locally: ESP32-S2 firmware compile, button-state regression checks,
-eight companion tests, a universal Intel/Apple Silicon Mac app build, and mesh
+43 offline companion tests, a universal Intel/Apple Silicon Mac app build, and mesh
 checks for the printable parts. [CI configuration](ci/) is supplied as
 an inactive template because the initial publishing credentials lacked workflow
 permission.
@@ -40,7 +42,7 @@ the GitHub PR URL, and runs:
 gh pr review https://github.com/OWNER/REPO/pull/NUMBER --request-changes --body blocked
 ```
 
-That command really posts a review. Use the app's dry-run mode during setup.
+That command really posts a review. Use **Test next press (no review)** for diagnosis.
 The review is authored by the account authenticated in **GitHub CLI**, which may
 differ from the account signed into Chrome. GitHub's permissions and branch
 rules still apply.
@@ -49,21 +51,24 @@ rules still apply.
 
 1. Start with the [condensed shopping list](BOM.md) and [custom keycap order settings](keycap/README.md), then check your board against [the hardware guide](docs/hardware.md).
 2. Verify the switch coupon and clip the switch into the lid using the [key mounting guide](docs/key-mounting.md). Solder the two wires, then [build and flash the firmware](firmware/README.md).
-3. [Build and install the Mac companion](companion/README.md). Run `gh auth login`
-   on the recipient's Mac and grant the app Automation access to Chrome.
-4. Focus a PR and press the button in dry-run mode. Verify the target and body.
+3. [Build and install the Mac companion](companion/README.md). Its setup window
+   reuses an existing GitHub sign-in or connects through the browser, then requests
+   Chrome access. The default app includes its own GitHub helper.
+4. Keep the button paused, choose **Test next press (no review)**, then focus a PR
+   and press the key. Verify the target and body.
 5. Check [component dimensions and remaining measurements](docs/component-accuracy.md), then print the insert coupons and remaining [enclosure parts](docs/enclosure.md).
    Mount the PCB through its two dedicated holes with M1.6 × 4 mm screws, then
    close the lid with two M2 × 8 mm countersunk screws. Both use brass inserts.
    Add the keycap and adhesive feet.
-6. Enable live reviews in the app when ready.
+6. Enable Blocked once when ready. Its enabled/paused state survives restarts.
 
 The [key mounting guide](docs/key-mounting.md) covers the switch's plate clips,
 reinforced lid, centred Tab keycap socket, full travel and service access.
 
 See [the staged bring-up checklist](docs/bring-up.md) for assembly and the
-physical acceptance checks. Setup needs a USB data cable, a soldering iron,
-and a Mac development toolchain. The board uses no Wi-Fi.
+physical acceptance checks. Building the gift needs a USB data cable, a soldering iron,
+and a Mac development toolchain. The recipient gets a pre-flashed button and
+should only need the installed companion app; see the [experience target](docs/user-experience.md). The board uses no Wi-Fi.
 
 ## Customize it
 

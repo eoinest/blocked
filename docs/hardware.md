@@ -57,9 +57,10 @@ The USB socket must have clearance for the **cable's molded plug**, not only the
 
 This project has not yet been soldered or physically printed and fitted. Complete these checks before using the gift for real reviews:
 
-- With the Mac companion in dry-run mode, connect the board while the key is held. There should be **no action**. Release it and make a fresh press.
+- With Blocked paused and **Test next press (no review)** selected, connect the board while the key is held. There should be **no action**. Release it and make a fresh press.
 - Check one event per press, no repeated event while held, and deliberate separate presses working normally.
 - Unplug, hold the key, reconnect: again no action until release then press. Repeat after sleep/wake and restarting the companion.
+- Before each further diagnostic press, select **Test next press (no review)** again; keep the button paused.
 - Open a throwaway PR in the frontmost Chrome window and inspect the dry-run target. Then try another Chrome tab, another window, and a different foreground app; verify the selected target and guard behavior.
 - Only after the preview is correct, enable live actions and press on a test PR that the authenticated user did **not** author. Verify one review with body exactly `blocked`.
 - Finally fit the lid, confirm the key travels freely and the cable seats fully, then add the feet or removable desk pad.
