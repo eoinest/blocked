@@ -1,6 +1,12 @@
 # Shopping list — one blocked button
 
-## Buy
+For the two Amazon fastener kits already ordered, see the
+[consolidated Amazon shopping plan](docs/amazon-shopping.md). The fewest-orders
+route found is one Amazon checkout plus the custom Tab keycap order, **conditional
+on revising and validating the enclosure for captive nuts and socket-head screws**.
+The current Blender/STL files still use the heat-set inserts and screws below.
+
+## Parts for the current CAD
 
 | Need | Selected part | Purchase note |
 | --- | --- | --- |
