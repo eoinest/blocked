@@ -19,7 +19,7 @@ jobs:
         working-directory: companion
         run: |
           ./scripts/build-app.sh
-          lipo -verify_arch arm64 x86_64 dist/Blocked.app/Contents/MacOS/BlockedKey
+          lipo dist/Blocked.app/Contents/MacOS/BlockedKey -verify_arch arm64 x86_64
 
   button-state:
     runs-on: ubuntu-latest

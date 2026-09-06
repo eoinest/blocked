@@ -7,7 +7,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     private let modeLine = NSMenuItem(title: "Dry run — nothing will be posted", action: nil, keyEquivalent: "")
     private let armItem = NSMenuItem(title: "Arm live reviews…", action: #selector(toggleArmed), keyEquivalent: "")
     private let serial = SerialMonitor()
-    private var gate = PressGate()
+    private let coordinator = PressCoordinator()
     private var armed = false
     private var action: ReviewAction = .requestChanges
     private var body = "blocked"
@@ -106,39 +106,11 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         if result == "ERROR" { NSSound.beep() }
     }
     private func press() {
-        let started = ProcessInfo.processInfo.systemUptime
-        guard gate.begin(now: started) else { return }
-        do {
-            let first = try ChromeTarget.read()
-            let second = try ChromeTarget.read()
-            guard first == second, ProcessInfo.processInfo.systemUptime - started < 1 else {
-                throw BlockedError.message("Focus changed or Chrome access took too long. Press again.")
-            }
-            let command = ReviewCommand(pr: first.pr, action: action, body: body)
-            if !armed {
-                report("DRY RUN: \(action.title)\n\(first.pr.url)\n\n\(body)", result: "DRY_RUN")
-                gate.finish(); return
-            }
-            guard let executable = ReviewRunner.executable(custom: ghPath) else {
-                throw BlockedError.message("gh was not found. Install GitHub CLI and run gh auth login in Terminal, or set its absolute path in Settings.")
-            }
-            guard gate.reserveSubmission(first.pr, now: started) else {
-                throw BlockedError.message("Already attempted this PR in the last minute. Check it before trying again.")
-            }
-            // No async work between the final focus read and launching gh.
-            let submittedAction = action
-            let submittedBody = body
-            statusLine.title = "Submitting \(first.pr.owner)/\(first.pr.repository)#\(first.pr.number)…"
-            try ReviewRunner.start(executable: executable, arguments: command.arguments) { [weak self] outcome in
-                guard let self else { return }
-                self.gate.finish()
-                switch outcome {
-                case .success: self.report("Posted \(submittedAction.title.lowercased())\n\(first.pr.url)\n\n\(submittedBody)", result: "OK")
-                case .failure(let error): self.report(error.localizedDescription, result: "ERROR")
-                }
-            }
-        } catch { gate.finish(); report(error.localizedDescription, result: "ERROR") }
+        coordinator.press(armed: armed, action: action, body: body, ghPath: ghPath,
+                          submitting: { [weak self] in self?.statusLine.title = $0 },
+                          report: { [weak self] message, result in self?.report(message, result: result) })
     }
+
 }
 
 let application = NSApplication.shared

@@ -60,9 +60,54 @@ Identity is a version/compatibility check, not cryptographic authentication. Seq
 
 ## Verification
 
-`swift test` covers URL boundaries and canonicalization, argument integrity with hostile-looking message text, handshake/dedup behavior, in-flight and cooldown gates, and real subprocess success/failure/timeout using a fake local gh. These tests make no network calls and never submit reviews.
+`swift test` runs 31 offline tests and skips the opt-in Chrome integration test.
+Coverage includes URL boundaries, exact window/tab identities, application or tab
+changes during capture, slow reads, dry run without even looking up gh, busy
+presses, per-PR failure cooldowns, and the production press coordinator through a
+real local fake-gh subprocess. Runner tests check exact `--request-changes` and
+`blocked` arguments, authentication/self-review/permission errors, silent failures,
+interruptions, noninteractive execution, timeouts and no automatic retries.
+These default tests make no network calls and never submit reviews.
 
-The Swift app and packaging can be built without hardware. Real USB enumeration, DTR/RTS behavior, switch presses, first-run macOS Automation permission, and a deliberately authorized test review still need checking on the intended Mac and board. See the root bring-up instructions.
+For a real Chrome smoke test, close any sensitive modal dialogs and leave the
+desktop idle, then run from `companion`:
+
+```sh
+BLOCKED_CHROME_INTEGRATION=1 swift test --filter ChromeIntegrationTests
+```
+
+This opens two disposable Chrome windows, switches a tab, checks PR versus issue
+URLs, verifies rejection when Finder is foreground, and closes its own windows.
+It restores the previously active app. macOS can request Automation permission for
+the test runner. The fixture URLs need not resolve to real PRs; this tests URL
+detection, not remote PR existence. It never invokes gh or submits a review.
+If macOS prevents foreground activation, `BLOCKED_CHROME_INTEGRATION=reader`
+tests real AppleScript window/tab responses with an injected foreground identity;
+that mode **does not verify actual foreground-app detection**.
+
+The Swift app and packaging can be built without hardware. Real USB enumeration,
+DTR/RTS behavior, switch presses, the packaged app's first-run Automation
+permission, and a deliberately authorized test review still need checking on the
+intended Mac and board. A test runner's Automation permission does not establish
+that the packaged app has permission. See the root bring-up instructions.
+
+### Local verification — September 5, 2026
+
+- **Passed:** 31 offline tests, including the production press flow through fake gh.
+- **Passed:** universal release build, Apple Silicon/Intel architecture check,
+  and strict code-signature verification.
+- **Unresolved:** the live Chrome smoke test could not establish its disposable
+  window as the front window. Full-focus mode also encountered another foreground
+  app. Reader-only mode still observed a different Chrome window after attempting
+  to raise the fixture, so neither live mode is recorded as passing. The test
+  cleaned up its fixture windows. Rerun interactively on an idle desktop.
+- **Not performed:** any real GitHub review submission, packaged-app permission
+  onboarding, or physical USB-button test.
+
+Testing also fixed empty error messages from silent gh failures, added an explicit
+ambiguous-result message for interrupted gh processes, and corrected the `lipo`
+argument order in the optional CI template. That template remains inactive until
+installed under `.github/workflows` with appropriate GitHub permissions.
 
 ## Primary references
 

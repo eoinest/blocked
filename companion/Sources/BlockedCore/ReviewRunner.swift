@@ -46,7 +46,15 @@ public enum ReviewRunner {
             try? FileManager.default.removeItem(at: directory)
             let outcome: Result<String, Error>
             if timedOut { outcome = .failure(ReviewRunnerError(message: "GitHub timed out; it may have received the review. Check the PR before trying again.")) }
-            else if process.terminationStatus != 0 { outcome = .failure(ReviewRunnerError(message: String(text.prefix(800)).trimmingCharacters(in: .whitespacesAndNewlines))) }
+            else if process.terminationReason == .uncaughtSignal {
+                outcome = .failure(ReviewRunnerError(message: "GitHub CLI was interrupted (signal \(process.terminationStatus)); it may have received the review. Check the PR before trying again."))
+            }
+            else if process.terminationStatus != 0 {
+                let detail = String(text.prefix(800)).trimmingCharacters(in: .whitespacesAndNewlines)
+                outcome = .failure(ReviewRunnerError(message: detail.isEmpty
+                    ? "GitHub CLI exited with status \(process.terminationStatus) without an error message. Check gh auth status in Terminal and the PR before trying again."
+                    : detail))
+            }
             else { outcome = .success(text) }
             DispatchQueue.main.async { completion(outcome) }
         }
