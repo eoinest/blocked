@@ -1,0 +1,11 @@
+{
+  "scope": "Nominal modeled geometry only; physical clone dimensions and component heights unverified.",
+  "header_keepout_count": 32,
+  "header_keepout_radius_mm": 1.1,
+  "header_keepout_intersection_base_mm3": 0.0,
+  "header_keepout_intersection_lid_mm3": 0.0,
+  "pcb_intersection_base_mm3": 0.0,
+  "pcb_intersection_lid_mm3": 0.0,
+  "switch_housing_intersection_lid_mm3": 0.0,
+  "illustrative_keycap_depressed_gap_mm": 0.8
+}

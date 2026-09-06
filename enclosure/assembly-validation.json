@@ -1,0 +1,1926 @@
+{
+  "status": "PASS",
+  "blend_sha256": "31ef9b38b9cf4e02e6bdc9b1522a6ff860b2239b7e089806c1107056d5c0a38b",
+  "blender_version": "5.2.1 LTS",
+  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed.",
+  "limits": "Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. Keycap socket/skirt fit, solder joints, wire bends, screw thread form, heat-set strength and USB insertion flex excluded. Press-fit insert/plastic overlap is intentional and excluded.",
+  "checked_pairs": 383,
+  "failures": [],
+  "results": [
+    {
+      "first": "base",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_S2_MINI",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_S2_MINI",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_01",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_01",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_02",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_02",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_03",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_03",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_04",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_04",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_05",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_05",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_06",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_06",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_07",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_07",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_08",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_08",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_09",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_09",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_10",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_10",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_11",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_11",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_12",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_12",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_13",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_13",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_14",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_14",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_15",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_15",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_16",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_16",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_18",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_18",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_19",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_19",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_20",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_20",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_21",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_21",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_22",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_22",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_23",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_23",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_24",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_24",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_25",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_25",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_26",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_26",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_27",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_27",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_28",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_28",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_29",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_29",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_30",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_30",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_31",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_31",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_32",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "HEADER_KEEPOUT_32",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT actuator | approximate photo envelope",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT actuator | approximate photo envelope",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "LED | approximate photo-located envelope, not assembly CAD",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "LED | approximate photo-located envelope, not assembly CAD",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 1 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 1 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 10 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 10 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 11 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 11 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 12 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 12 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 13 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 13 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 14 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 14 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 15 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 15 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 16 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 16 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 17 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 17 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 18 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 18 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 19 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 19 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 2 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 2 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 20 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 20 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 3 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 3 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 4 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 4 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 5 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 5 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 6 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 6 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 7 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 7 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 8 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 8 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 9 | photo-estimated package and placement",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Passive 9 | photo-estimated package and placement",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET actuator | approximate photo envelope",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET actuator | approximate photo envelope",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET | approximate photo-located envelope, not assembly CAD",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET | approximate photo-located envelope, not assembly CAD",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "USB_PLUG_KEEPOUT | assumed envelope, verify actual cable",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "USB_PLUG_KEEPOUT | assumed envelope, verify actual cable",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.001",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron center/locator post | nominal envelope.002",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron cross stem | published cross, unverified height",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron lower housing | drawing-based envelope",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "Gateron upper housing | drawing-based envelope",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    }
+  ]
+}

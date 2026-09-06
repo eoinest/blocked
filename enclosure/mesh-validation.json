@@ -7,8 +7,8 @@
       42.0,
       20.5
     ],
-    "volume_mm3": 9547.784,
-    "triangles": 2922
+    "volume_mm3": 9529.289,
+    "triangles": 3730
   },
   "lid": {
     "non_manifold_edges": 0,
@@ -18,8 +18,8 @@
       42.0,
       19.7
     ],
-    "volume_mm3": 4387.799,
-    "triangles": 2864
+    "volume_mm3": 4007.639,
+    "triangles": 2804
   },
   "fit-coupon": {
     "non_manifold_edges": 0,
@@ -42,5 +42,16 @@
     ],
     "volume_mm3": 1370.776,
     "triangles": 4706
+  },
+  "board-insert-coupon": {
+    "non_manifold_edges": 0,
+    "connected_components": 1,
+    "dimensions_mm": [
+      36.0,
+      8.0,
+      5.0
+    ],
+    "volume_mm3": 602.708,
+    "triangles": 2500
   }
 }

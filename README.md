@@ -29,7 +29,7 @@ permission.
 | Controller | Your existing LOLIN-style ESP32-S2 Mini, powered by USB-C |
 | Key | Gateron Baby Kangaroo 2.0 tactile switch with a custom 1.5u `blocked` keycap |
 | Wiring | Two soldered wires: GPIO4 → switch → GND; internal pull-up |
-| Case | 46 × 42 × 22 mm body, printed PCB cradle and lid capture fingers, two hidden M2 × 8 mm screws into brass inserts, rear USB-C cutout, recessed feet |
+| Case | 46 × 42 × 22 mm body; two M1.6 screws through dedicated PCB mounting holes; two hidden M2 case screws; brass inserts, rear USB-C cutout, recessed feet |
 | Mac | Native Swift menu bar app, USB serial, Chrome Automation, existing `gh` credentials |
 
 The board sends a debounced press over USB serial. The Mac app checks that
@@ -52,9 +52,10 @@ rules still apply.
 3. [Build and install the Mac companion](companion/README.md). Run `gh auth login`
    on the recipient's Mac and grant the app Automation access to Chrome.
 4. Focus a PR and press the button in dry-run mode. Verify the target and body.
-5. Print the switch and insert coupons, then [the enclosure](docs/enclosure.md).
-   Install two M2 brass inserts, seat the board in its cradle, and close the lid
-   with two M2 × 8 mm countersunk screws. Add the keycap and adhesive feet.
+5. Check [component dimensions and remaining measurements](docs/component-accuracy.md), then print the switch and insert coupons and [the enclosure](docs/enclosure.md).
+   Mount the PCB through its two dedicated holes with M1.6 × 4 mm screws, then
+   close the lid with two M2 × 8 mm countersunk screws. Both use brass inserts.
+   Add the keycap and adhesive feet.
 6. Enable live reviews in the app when ready.
 
 See [the staged bring-up checklist](docs/bring-up.md) for assembly and the
