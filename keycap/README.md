@@ -1,6 +1,7 @@
 # Order the `blocked` keycap
 
 Recommended: [Max Keyboard — Custom Art & Custom Color Keycaps](https://maxkeyboard.com/custom-art-icon-or-text-cherry-mx-keycaps.html).
+Use a **standard Tab-sized, 1.5u keycap**, with the custom legend **`blocked`**.
 The exact 1.5u configuration was checked in the live selector on September 5,
 2026 at **US$11**, quantity one, before shipping and tax.
 
