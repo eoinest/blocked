@@ -16,6 +16,12 @@ menu bar app. No browser extension, cloud service, or GitHub token on the board.
 are provided; physical assembly and an actual button-to-review test are still
 required. The companion starts in dry-run mode on every launch.
 
+Verified locally: ESP32-S2 firmware compile, button-state regression checks,
+eight companion tests, a universal Intel/Apple Silicon Mac app build, and mesh
+checks for all three printable parts. [CI configuration](ci/) is supplied as
+an inactive template because the initial publishing credentials lacked workflow
+permission.
+
 ## The build
 
 | Part | Plan |

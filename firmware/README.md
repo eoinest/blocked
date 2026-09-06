@@ -22,6 +22,7 @@ For an entirely project-local tool cache (optional):
 export ARDUINO_DIRECTORIES_DATA="$PWD/.arduino/data"
 export ARDUINO_DIRECTORIES_DOWNLOADS="$PWD/.arduino/downloads"
 export ARDUINO_DIRECTORIES_USER="$PWD/.arduino/user"
+export ARDUINO_BUILD_CACHE_PATH="$PWD/.arduino/build-cache"
 ARDUINO_NETWORK_CONNECTION_TIMEOUT=600s arduino-cli compile --profile s2-mini firmware/blocked_key
 ```
 
@@ -58,6 +59,8 @@ After every handshake, the switch must remain released for **25 ms**, then press
 `BLOCKED_KEY 1` identifies compatible firmware; it is not cryptographic authentication. The USB connection has the privileges of the locally configured companion app.
 
 ## Verification
+
+The ESP32-S2 sketch compiled locally with the pinned profile and Arduino CLI 1.3.1: **301,938 bytes flash** (23%) and **34,736 bytes global RAM** (10%). The installer reported a network failure fetching the unrelated RISC-V toolchain; the required Xtensa/S2 toolchain completed the build and emitted the firmware `.bin` and `.elf`. The portable button-state checks also passed. This is a compile and logic check, not a physical-device test.
 
 Run the portable button-state regression checks:
 
