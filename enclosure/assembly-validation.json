@@ -1,10 +1,305 @@
 {
   "status": "PASS",
-  "blend_sha256": "e2241e58587b79dd45c18669c9a66a4b45cd5d7ea5ae9f43dcd151f8629d8bd0",
+  "blend_sha256": "07421258983dfc9be18ec7218aa4b0b26b77221e949c4809fcc8295309c54d39",
+  "parameters_sha256": "067a5998ffab6ff8ffb17b7348dd49cd720fdbf93de4efc411900f751c7f6f41",
+  "checker_sha256": "0cf0491d73640dc8f495aa3cd3ec11fa1017507bf0bd08ffd5c86d8dcc099cf4",
   "blender_version": "5.2.1 LTS",
-  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel.",
-  "limits": "Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, heat-set strength and USB insertion flex excluded. Press-fit insert/plastic overlap is intentional and excluded.",
-  "checked_pairs": 460,
+  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. Captive nut and cap-screw envelopes, hex-pocket voids, inward nut-loading sweeps, shaft reliefs, case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.",
+  "limits": "Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, nut chamfers/thread runout, printed strength, tightening torque, and USB insertion flex excluded. Intentionally mating screw/nut thread regions are excluded from collision pairs. Nominal nut installation sweeps assume loading the base nuts before the PCB and the lid nuts with the lid removed. Service gauges do not certify finger access or unknown soldered wire routing.",
+  "checked_pairs": 1193,
+  "analytical_and_feature_checks": [
+    {
+      "check": "Four captive nuts and four socket-cap screws modeled",
+      "status": "PASS",
+      "nuts": [
+        "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+        "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+        "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+        "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads"
+      ],
+      "screws": [
+        "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+        "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+        "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+        "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded"
+      ]
+    },
+    {
+      "check": "Old heat-set and countersunk design removed",
+      "status": "PASS",
+      "old_hardware_objects": [],
+      "old_parameters": [],
+      "old_stls": []
+    },
+    {
+      "check": "CASE audit fixture matches intended parameter revision",
+      "status": "PASS",
+      "expected_parameters": {
+        "case_nut_af": 4.0,
+        "case_nut_thickness": 1.6,
+        "case_nut_pocket_af": 4.2,
+        "case_nut_pocket_height": 1.7999999999999998,
+        "case_screw_diameter": 2.0,
+        "case_screw_length": 8.0,
+        "case_screw_clearance": 2.2,
+        "case_head_diameter": 4.0,
+        "case_head_height": 2.1,
+        "boss_radius": 3.6
+      },
+      "remedy": "After intentional fit-coupon retuning, review and update independent checker fixtures as well."
+    },
+    {
+      "check": "CASE hardware pair count",
+      "status": "PASS"
+    },
+    {
+      "check": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads dimensions and seating",
+      "status": "PASS",
+      "modeled_af_mm": 4.0,
+      "modeled_z_mm": [
+        7.8,
+        9.4
+      ],
+      "expected_af_mm": 4.0,
+      "expected_thickness_mm": 1.6
+    },
+    {
+      "check": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded ordered cap-head envelope",
+      "status": "PASS",
+      "modeled_total_z_mm": [
+        0.1,
+        10.2
+      ],
+      "modeled_head_z_mm": [
+        0.1,
+        2.2
+      ],
+      "expected_shaft_length_mm": 8.0,
+      "expected_head_height_mm": 2.1,
+      "limit": "Nominal unthreaded envelope; delivered hardware dimensions must be measured"
+    },
+    {
+      "check": "CASE_-17 screw-head bearing shoulder",
+      "status": "PASS",
+      "gauge_volume_mm3": 14.897721,
+      "plastic_volume_within_gauge_mm3": 14.897724,
+      "tested_support_thickness_mm": 1.78,
+      "gauge_inner_radius_mm": 1.12,
+      "gauge_outer_radius_mm": 1.98,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "CASE_-17 captive-nut bearing floor",
+      "status": "PASS",
+      "gauge_volume_mm3": 25.734783,
+      "plastic_volume_within_gauge_mm3": 25.734785,
+      "tested_support_thickness_mm": 3.48,
+      "gauge_inner_radius_mm": 1.12,
+      "gauge_outer_radius_mm": 1.9,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads dimensions and seating",
+      "status": "PASS",
+      "modeled_af_mm": 4.0,
+      "modeled_z_mm": [
+        7.8,
+        9.4
+      ],
+      "expected_af_mm": 4.0,
+      "expected_thickness_mm": 1.6
+    },
+    {
+      "check": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded ordered cap-head envelope",
+      "status": "PASS",
+      "modeled_total_z_mm": [
+        0.1,
+        10.2
+      ],
+      "modeled_head_z_mm": [
+        0.1,
+        2.2
+      ],
+      "expected_shaft_length_mm": 8.0,
+      "expected_head_height_mm": 2.1,
+      "limit": "Nominal unthreaded envelope; delivered hardware dimensions must be measured"
+    },
+    {
+      "check": "CASE_+17 screw-head bearing shoulder",
+      "status": "PASS",
+      "gauge_volume_mm3": 14.897721,
+      "plastic_volume_within_gauge_mm3": 14.897724,
+      "tested_support_thickness_mm": 1.78,
+      "gauge_inner_radius_mm": 1.12,
+      "gauge_outer_radius_mm": 1.98,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "CASE_+17 captive-nut bearing floor",
+      "status": "PASS",
+      "gauge_volume_mm3": 25.734783,
+      "plastic_volume_within_gauge_mm3": 25.734785,
+      "tested_support_thickness_mm": 3.48,
+      "gauge_inner_radius_mm": 1.12,
+      "gauge_outer_radius_mm": 1.9,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "CASE nominal fit and remaining side wall",
+      "status": "PASS",
+      "nut_pocket_across_flats_clearance_mm": 0.2,
+      "nut_pocket_axial_clearance_mm": 0.2,
+      "unopened_side_radial_wall_lower_bound_mm": 1.175,
+      "screw_tip_clearance_to_blind_relief_mm": 0.8,
+      "nominal_screw_protrusion_past_nut_mm": 0.8,
+      "nominal_thread_engagement_mm": 1.6,
+      "scope": "Analytical chosen dimensions cross-checked against hardware solids and relief/support gauges; does not establish printed strength, actual nut chamfers, thread runout, or installation torque"
+    },
+    {
+      "check": "PCB audit fixture matches intended parameter revision",
+      "status": "PASS",
+      "expected_parameters": {
+        "board_nut_af": 3.5,
+        "board_nut_thickness": 1.3,
+        "board_nut_pocket_af": 3.7,
+        "board_nut_pocket_height": 1.5,
+        "board_screw_diameter": 1.6,
+        "board_screw_length": 4.0,
+        "board_screw_clearance": 1.8,
+        "board_head_diameter": 3.2,
+        "board_head_height": 1.7,
+        "board_post_radius": 3.2
+      },
+      "remedy": "After intentional fit-coupon retuning, review and update independent checker fixtures as well."
+    },
+    {
+      "check": "PCB hardware pair count",
+      "status": "PASS"
+    },
+    {
+      "check": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads dimensions and seating",
+      "status": "PASS",
+      "modeled_af_mm": 3.5,
+      "modeled_z_mm": [
+        3.4,
+        4.7
+      ],
+      "expected_af_mm": 3.5,
+      "expected_thickness_mm": 1.3
+    },
+    {
+      "check": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded ordered cap-head envelope",
+      "status": "PASS",
+      "modeled_total_z_mm": [
+        3.1,
+        8.8
+      ],
+      "modeled_head_z_mm": [
+        7.1,
+        8.8
+      ],
+      "expected_shaft_length_mm": 4.0,
+      "expected_head_height_mm": 1.7,
+      "limit": "Nominal unthreaded envelope; delivered hardware dimensions must be measured"
+    },
+    {
+      "check": "PCB_-10.2 nut retention roof",
+      "status": "PASS",
+      "gauge_volume_mm3": 4.593992,
+      "plastic_volume_within_gauge_mm3": 4.593993,
+      "tested_support_thickness_mm": 0.78,
+      "gauge_inner_radius_mm": 0.92,
+      "gauge_outer_radius_mm": 1.65,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads dimensions and seating",
+      "status": "PASS",
+      "modeled_af_mm": 3.5,
+      "modeled_z_mm": [
+        3.4,
+        4.7
+      ],
+      "expected_af_mm": 3.5,
+      "expected_thickness_mm": 1.3
+    },
+    {
+      "check": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded ordered cap-head envelope",
+      "status": "PASS",
+      "modeled_total_z_mm": [
+        3.1,
+        8.8
+      ],
+      "modeled_head_z_mm": [
+        7.1,
+        8.8
+      ],
+      "expected_shaft_length_mm": 4.0,
+      "expected_head_height_mm": 1.7,
+      "limit": "Nominal unthreaded envelope; delivered hardware dimensions must be measured"
+    },
+    {
+      "check": "PCB_+10.2 nut retention roof",
+      "status": "PASS",
+      "gauge_volume_mm3": 4.593992,
+      "plastic_volume_within_gauge_mm3": 4.593993,
+      "tested_support_thickness_mm": 0.78,
+      "gauge_inner_radius_mm": 0.92,
+      "gauge_outer_radius_mm": 1.65,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "PCB nominal fit and remaining side wall",
+      "status": "PASS",
+      "nut_pocket_across_flats_clearance_mm": 0.2,
+      "nut_pocket_axial_clearance_mm": 0.2,
+      "unopened_side_radial_wall_lower_bound_mm": 1.064,
+      "screw_tip_clearance_to_blind_relief_mm": 0.7,
+      "nominal_screw_protrusion_past_nut_mm": 0.3,
+      "nominal_thread_engagement_mm": 1.3,
+      "scope": "Analytical chosen dimensions cross-checked against hardware solids and relief/support gauges; does not establish printed strength, actual nut chamfers, thread runout, or installation torque"
+    },
+    {
+      "check": "Both lid-off board-control service approaches modeled",
+      "status": "PASS",
+      "objects": [
+        "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+        "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board"
+      ]
+    },
+    {
+      "check": "case-fastener-coupon saved mesh present",
+      "status": "PASS"
+    },
+    {
+      "check": "board-fastener-coupon saved mesh present",
+      "status": "PASS"
+    },
+    {
+      "check": "board-fastener-coupon 1.6 mm PCB stand-in retained",
+      "status": "PASS",
+      "gauge_volume_mm3": 9.30578,
+      "plastic_volume_within_gauge_mm3": 9.305781,
+      "tested_support_thickness_mm": 1.58,
+      "gauge_inner_radius_mm": 0.92,
+      "gauge_outer_radius_mm": 1.65,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "32 modeled GPIO access axes preserved",
+      "status": "PASS",
+      "coordinate_basis": "component-models.json photo-inferred 2.54 mm grid; physical clone unmeasured"
+    },
+    {
+      "check": "PCB mounting uses the two dedicated 2 mm holes",
+      "status": "PASS",
+      "hole_pitch_x_mm": 20.4,
+      "hole_diameter_mm": 2.0,
+      "antenna_edge_offset_mm": 3.299999999999999,
+      "provenance": "WEMOS dimension PDF: 20.4 mm X pitch and 2 mm holes; 3.30 mm Y drawing-derived"
+    }
+  ],
+  "audit_failures": [],
   "failures": [],
   "results": [
     {
@@ -2305,6 +2600,3671 @@
     {
       "first": "STEM_FULL_TRAVEL",
       "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_01",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_02",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_03",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_04",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_05",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_06",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_07",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_08",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_09",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_10",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_11",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_12",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_13",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_14",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_15",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_16",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_17",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_18",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_19",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_20",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_21",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_22",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_23",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_24",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_25",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_26",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_27",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_28",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_29",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_30",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_31",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "HEADER_KEEPOUT_32",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron center/locator post | nominal envelope.002",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron cross stem | published cross, unverified height",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron electrical pin | drawing-grid position, approximate blade section.001",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron lower housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "Gateron upper housing | drawing-based envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "second": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_shaft_clearance_-17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_shaft_clearance_-17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_shaft_clearance_-17",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_hex_pocket_-17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_hex_pocket_-17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_nut_loading_sweep_-17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_head_counterbore_-17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_shaft_clearance_+17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_shaft_clearance_+17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_shaft_clearance_+17",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_hex_pocket_+17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_hex_pocket_+17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_nut_loading_sweep_+17",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_CASE_head_counterbore_+17",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_shaft_clearance_-10.2",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_shaft_clearance_-10.2",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_shaft_clearance_-10.2",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_hex_pocket_-10.2",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_hex_pocket_-10.2",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_nut_loading_sweep_-10.2",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_shaft_clearance_+10.2",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_shaft_clearance_+10.2",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_shaft_clearance_+10.2",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_hex_pocket_+10.2",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_hex_pocket_+10.2",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_nut_loading_sweep_+10.2",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_NUT_M2_+17 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_NUT_M2_-17 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_SCREW_M2_x8_+17 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CASE_SCREW_M2_x8_-17 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_NUT_M1_6_+10.2 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_NUT_M1_6_-10.2 | kit AF, assumed thickness, no threads",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_SCREW_M1_6_x4_+10.2 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "PCB_SCREW_M1_6_x4_-10.2 | conservative socket-cap envelope, unthreaded",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_case-fastener-coupon_nominal_hex_void",
+      "second": "case-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_case-fastener-coupon_nominal_nut_entry",
+      "second": "case-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_case-fastener-coupon_nominal_shaft_bore",
+      "second": "case-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_case-fastener-coupon_nominal_head_counterbore",
+      "second": "case-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_board-fastener-coupon_nominal_hex_void",
+      "second": "board-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_board-fastener-coupon_nominal_nut_entry",
+      "second": "board-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_board-fastener-coupon_nominal_shaft_bore",
+      "second": "board-fastener-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_1",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_2",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_3",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_4",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_5",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_6",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_7",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_8",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_9",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_10",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_11",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_12",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_13",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_14",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_15",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_16",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_17",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_18",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_19",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_20",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_21",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_22",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_23",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_24",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_25",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_26",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_27",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_28",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_29",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_30",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_31",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_GPIO_drill_32",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_mount_drill_-10.2",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_PCB_mount_drill_+10.2",
+      "second": "PCB_S2_MINI",
       "intersection_mm3": 0.0
     }
   ]

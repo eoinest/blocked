@@ -10,5 +10,7 @@
   "switch_latches_intersection_lid_mm3": 0.0,
   "service_keepouts_intersection_lid_mm3": 0.0,
   "depressed_keycap_shell_intersection_lid_mm3": 0.0,
+  "reset_boot_service_intersection_base_mm3": 0.0,
+  "reset_boot_service_intersection_pcb_mm3": 0.0,
   "illustrative_keycap_depressed_gap_mm": 0.8
 }

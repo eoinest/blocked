@@ -6,8 +6,9 @@ No purchases have been made by the project.
 The fewest-orders route found is **one Amazon checkout plus one Max Keyboard
 order**, assuming solder, filament, a suitable driver and a USB data cable are
 already available. It reuses the nuts and screws in the small fastener kit already
-ordered. **This route requires a CAD revision; the current exported parts do not
-accept these fasteners as direct replacements.** Separate Amazon sellers may
+ordered. The revised Blender/STL files contain captive-nut pockets and flat-bottom
+cap-head recesses. Measure the actual kit and fit the coupons before printing
+the finished case. Separate Amazon sellers may
 still ship in separate packages.
 
 ## Remaining purchases
@@ -39,40 +40,28 @@ the small matching pack is the useful purchase here.
 
 ## Reuse the ordered assortment
 
-| Already ordered | Proposed use per button | Compatibility status |
+| Already ordered | Use per button | Compatibility status |
 | --- | --- | --- |
-| [Maierke 1050-piece M1.4/M1.6/M2/M2.5 socket-cap screw, nut and washer kit](https://www.amazon.com/dp/B0GKFMJH24?th=1) | **2 × M1.6 × 4 screws + 2 × M1.6 nuts** for the PCB; **2 × M2 × 8 screws + 2 × M2 nuts** for the case | The selected kit includes these threads and lengths. Nut thickness and screw-head dimensions still need measurement. Nut pockets and flat-bottom screw recesses must be designed and checked before use. |
+| [Maierke 1050-piece M1.4/M1.6/M2/M2.5 socket-cap screw, nut and washer kit](https://www.amazon.com/dp/B0GKFMJH24?th=1) | **2 × M1.6 × 4 screws + 2 × M1.6 nuts** for the PCB; **2 × M2 × 8 screws + 2 × M2 nuts** for the case | The selected kit includes these threads and lengths. Nut thickness and screw-head dimensions still need measurement. The revised CAD includes nut pockets and flat-bottom screw recesses; physical fit is still unverified. |
 | [Weideer 2322-piece M3 kit](https://www.amazon.com/dp/B0DS8HYF64?th=1) | No parts required for this enclosure | M3 is too large for the board's two dedicated mounting holes. Keep for other projects. |
 
-Do not buy another fastener assortment for this proposed route. The switch clips
+Do not buy another fastener assortment for this route. The switch clips
 into its printed plate and the cap presses onto the MX stem; neither needs extra
 screws or a stabilizer.
 
-## Mounting changes required before printing this route
+## Revised mounting
 
-1. Replace the two M1.6 heat-set seats with captive-nut pockets beneath the PCB.
-   Keep the board's existing mounting holes and all electrical pads accessible.
-   The kit labels its M1.6 nuts as **3.5 mm across flats**; enlarge the existing
-   posts as necessary and check the neighboring pads against the real hardware.
-2. Replace the lid's M2 insert seats with captive-nut pockets. The kit labels its
-   M2 nuts as **4 mm across flats**. Check corner clearance and remaining walls.
-3. Replace the base's countersinks with flat-bottom recesses for the socket heads.
-   The existing **2 mm floor** cannot simply be cut away to hide a full-height
-   cap head; local thickness and the mating posts need adjustment.
-4. Recalculate screw engagement. Socket-cap screw length is measured **under the
-   head**; the current countersunk M2 screw length includes its head. Confirm the
-   purchased PCB screw heads clear the surrounding components too.
-5. Print fit coupons and rerun assembly checks after measuring the actual nuts
-   and screw heads. These changes have **not** been applied to the current CAD.
+The current enclosure replaces all four heat-set inserts with side-loading hex
+nut pockets. The PCB still uses its two dedicated holes; the case closes with
+socket-cap screws in flat-bottom recesses. Locally thickened floor pads retain
+plastic above those recesses. No additional fasteners or washers are required.
 
-If keeping heat-set inserts, no verified Amazon assortment was found containing
-both exact selected geometries: M1.6 **OD 2.5 × L 2.5 mm** and M2 **OD 3.6 × L 3 mm**.
-Both [M1.6](https://cnckitchenus.store/products/heat-set-insert-m1-6-100-pieces-kopie)
-and [M2](https://cnckitchenus.store/products/heat-set-insert-m2-x-3-100-pieces)
-packs can share **one CNC Kitchen US order** ($23 for both). A matching thread
-alone does not make a different insert fit the modeled holes. Keeping inserts
-also does not resolve the purchased screws' head differences; use the
-[current-CAD BOM](../BOM.md) for the original screw specifications.
+Print the [M1.6 board coupon](../enclosure/stl/board-fastener-coupon.stl) and
+[M2 case coupon](../enclosure/stl/case-fastener-coupon.stl) first. Both screws'
+lengths exclude the heads. Verify head size, nut thickness, full engagement and
+printed pocket fit against the delivered kit. The side slots remain open for
+nut insertion/removal: handle the loose nuts carefully during disassembly.
+See [assembly instructions](enclosure.md) and the [fastener audit](fastener-fit.md).
 
 Check existing soldering supplies, filament, USB data cable and matching hex
 driver before placing the Amazon order. These are excluded from the totals above.

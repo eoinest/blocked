@@ -65,7 +65,7 @@ self-reviews. Confirm the posted review reads exactly `blocked`.
 ## 5. Finish the case and check the assembly
 
 Use [the enclosure guide](enclosure.md). With the switch coupon and lid already
-checked, print the insert coupons and remaining shell. Check the actual board, plug
+checked, print the fastener coupons and remaining shell. Check the actual board, plug
 overmold, screws, wire routing, and key travel. Nothing should flex the PCB or
 press against a solder joint. Adjust the parameters if your printer or clone
 board needs different clearances.

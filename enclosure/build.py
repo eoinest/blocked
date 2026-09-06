@@ -36,6 +36,17 @@ def cylinder(r, h, x=0, y=0, z=0, top=None):
                  h=h, x=x, y=y, z=z)
 
 
+def hexagon(af, h, x=0, y=0, z=0):
+    return shape('hex', af=af, h=h, x=x, y=y, z=z)
+
+
+def nut_slot(af, height, radius, x=0, y=0, z=0, direction=1):
+    # Hex flats lie at y=±AF/2; the side mouth faces the enclosure center.
+    reach = radius + .2
+    return union(hexagon(af,height,x=x,y=y,z=z),
+                 box(reach,af,height,x=x+direction*reach/2,y=y,z=z))
+
+
 def union(*children):
     return shape("union", children=list(children))
 
@@ -56,8 +67,8 @@ def geometry():
     assert 0 < P["switch_opening"] < 18
     assert P["usb_bottom"] >= floor
     assert P["usb_bottom"] + P["usb_height"] < h
-    assert br - P['insert_outer_diameter']/2 >= 1.3
-    assert P['board_post_radius'] - P['board_insert_outer_diameter']/2 >= 1.3
+    assert br - P['case_nut_pocket_af']/math.sqrt(3) >= 1.0
+    assert P['board_post_radius'] - P['board_nut_pocket_af']/math.sqrt(3) >= 1.0
     band, inset = P['bottom_band_height'], P['bottom_inset']
     shell = difference(
         union(rounded(w - 2*inset, d - 2*inset, band + EPS, r-inset),
@@ -68,18 +79,26 @@ def geometry():
     # Only the two documented 2 mm mounting holes retain the board.
     # No supports or fingers cover electrical header pads.
     for x in (-P['board_mount_x'], P['board_mount_x']):
-        additions.append(cylinder(P['board_post_radius'], P['board_bottom']-floor+EPS,
-                                  x=x,y=P['board_mount_y'],z=floor-EPS))
+        additions.extend([
+            cylinder(P['board_post_radius'],P['board_nut_pocket_top']-floor+EPS,
+                     x=x,y=P['board_mount_y'],z=floor-EPS),
+            cylinder(P['board_contact_radius'],P['board_bottom']-P['board_nut_pocket_top']+EPS,
+                     x=x,y=P['board_mount_y'],z=P['board_nut_pocket_top']-EPS)])
+    for x in (-sx,sx):
+        additions.append(cylinder(P['case_pad_radius'],P['case_pad_top']-floor+EPS,x=x,z=floor-EPS))
     cuts = [box(P["usb_width"], 2 * wall + 2, P["usb_height"],
                 y=d / 2 - wall / 2, z=P["usb_bottom"])]
     for x in (-P['board_mount_x'],P['board_mount_x']):
-        cuts.append(cylinder(P['board_insert_seat_diameter']/2,
-                             P['board_insert_seat_depth']+EPS,x=x,y=P['board_mount_y'],
-                             z=P['board_bottom']-P['board_insert_seat_depth']))
+        cuts.extend([
+            nut_slot(P['board_nut_pocket_af'],P['board_nut_pocket_height'],P['board_post_radius'],
+                     x=x,y=P['board_mount_y'],z=P['board_nut_pocket_top']-P['board_nut_pocket_height'],
+                     direction=-1 if x>0 else 1),
+            cylinder(P['board_screw_clearance']/2,P['board_bottom']-P['board_relief_bottom']+EPS,
+                     x=x,y=P['board_mount_y'],z=P['board_relief_bottom'])])
     for x in (-sx, sx):
-        cuts += [cylinder(P["screw_clearance"] / 2, floor + 2*EPS, x=x, z=-EPS),
-                 cylinder(P['head_diameter']/2, 1.05,
-                          top=P['screw_clearance']/2, x=x, z=-EPS)]
+        cuts.extend([
+            cylinder(P['case_screw_clearance']/2,P['case_pad_top']+2*EPS,x=x,z=-EPS),
+            cylinder(P['case_head_recess_diameter']/2,P['case_head_recess_depth']+EPS,x=x,z=-EPS)])
     for x in (-12, 12):
         for y in (-13, 13):
             cuts.append(rounded(P["pad_size"], P["pad_size"],
@@ -94,14 +113,15 @@ def geometry():
         rounded(sw - 2 * P["skirt_wall"], sd - 2 * P["skirt_wall"],
                 P["skirt_height"] + 3 * EPS, 0.5, z=-P["skirt_height"] - EPS),
     )
-    post_length = h - floor - P['boss_floor_gap']
+    post_length = h - P['case_post_bottom']
     posts = [cylinder(br, post_length + EPS, x=x, z=-post_length) for x in (-sx, sx)]
     lid_cuts = [box(P["switch_opening"], P["switch_opening"], plate + 2 * EPS, z=-EPS)]
     for x in (-sx, sx):
-        lid_cuts += [cylinder(P['insert_seat_diameter']/2, P['insert_seat_depth']+EPS,
-                             x=x, z=-post_length-EPS),
-                     cylinder(P['screw_relief_diameter']/2, P['screw_relief_depth']+EPS,
-                              x=x, z=-post_length-EPS)]
+        lid_cuts.extend([
+            nut_slot(P['case_nut_pocket_af'],P['case_nut_pocket_height'],br,x=x,
+                     z=P['case_nut_pocket_bottom']-h,direction=-1 if x>0 else 1),
+            cylinder(P['case_screw_clearance']/2,P['case_relief_top']-P['case_post_bottom']+EPS,
+                     x=x,z=-post_length-EPS)])
     chamfer = P['lid_chamfer']
     lid_skin = union(rounded(w, d, plate-chamfer+EPS, r),
                      rounded(w, d, chamfer, r, z=plate-chamfer,
@@ -119,26 +139,35 @@ def geometry():
                                    x=x + 1.5 * tick - 0.75 * index,
                                    y=-13, z=-EPS))
     coupon = difference(rounded(66, 26, plate, 2), *coupon_cuts)
-    insert_coupon_cuts = []
-    for index, (x, bore) in enumerate(((-18,3.2), (-6,3.3), (6,3.4), (18,3.5))):
-        insert_coupon_cuts += [cylinder(bore/2, 3.25, x=x, z=4.8),
-                               cylinder(P['screw_relief_diameter']/2, 6.55, x=x, z=1.5)]
+    # These coupons reproduce side-loading, anti-rotation pockets and shaft fit.
+    # Board variants include AF3.3 because some nominal M1.6 nuts are only AF3.2.
+    case_coupon_cuts=[]
+    for index,(x,af,head) in enumerate(((-12,4.1,4.2),(0,4.2,4.4),(12,4.3,4.6))):
+        case_coupon_cuts.extend([
+            nut_slot(af,P['case_nut_pocket_height'],br,x=x,z=P['case_nut_pocket_bottom']),
+            cylinder(P['case_screw_clearance']/2,P['case_relief_top']+EPS,x=x,z=-EPS),
+            cylinder(head/2,P['case_head_recess_depth']+EPS,x=x,z=-EPS)])
         for tick in range(index+1):
-            insert_coupon_cuts.append(box(.8, 1.5, 8.1,
-                                          x=x + 1.5*tick - .75*index, y=-5, z=-EPS))
-    insert_coupon = difference(union(rounded(48,10,1.5,1.5),
-                                      *[cylinder(P['boss_radius'],8,x=x) for x in (-18,-6,6,18)]),
-                               *insert_coupon_cuts)
+            case_coupon_cuts.append(box(.8,1.5,13,x=x+1.5*tick-.75*index,y=-6,z=-EPS))
+    case_coupon=difference(union(rounded(36,12,1.5,1.5),
+                                  *[box(2*br,8,10.6,x=x,z=1.4)
+                                    for x in (-12,0,12)]),*case_coupon_cuts)
     board_coupon_cuts=[]
-    for index,(x,bore) in enumerate(((-12,2.2),(0,2.3),(12,2.4))):
-        board_coupon_cuts.append(cylinder(bore/2,3.55,x=x,z=1.5))
+    for index,(x,af) in enumerate(((-18,3.3),(-6,3.5),(6,3.7),(18,3.8))):
+        board_coupon_cuts.extend([
+            nut_slot(af,P['board_nut_pocket_height'],P['board_post_radius'],x=x,
+                     z=P['board_nut_pocket_top']-P['board_nut_pocket_height']),
+            cylinder(P['board_screw_clearance']/2,P['board_bottom']+P['board_thickness']-P['board_relief_bottom']+EPS,
+                     x=x,z=P['board_relief_bottom'])])
         for tick in range(index+1):
-            board_coupon_cuts.append(box(.8,1.5,5.1,x=x+1.5*tick-.75*index,y=-4,z=-EPS))
-    board_coupon=difference(union(rounded(36,8,1.5,1.5),
-                                   *[cylinder(P['board_post_radius'],5,x=x) for x in (-12,0,12)]),
-                             *board_coupon_cuts)
-    return {"base": base, "lid": lid, "fit-coupon": coupon,
-            "insert-coupon": insert_coupon,"board-insert-coupon":board_coupon}
+            board_coupon_cuts.append(box(.8,1.5,8,x=x+1.5*tick-.75*index,y=-5,z=-EPS))
+    board_coupon=difference(union(rounded(48,10,1.5,1.5),
+                                  *[union(cylinder(P['board_post_radius'],P['board_nut_pocket_top'],x=x),
+                                          cylinder(P['board_contact_radius'],P['board_bottom']+P['board_thickness']-P['board_nut_pocket_top']+EPS,
+                                                   x=x,z=P['board_nut_pocket_top']-EPS))
+                                    for x in (-18,-6,6,18)]),*board_coupon_cuts)
+    return {"base":base,"lid":lid,"fit-coupon":coupon,
+            "case-fastener-coupon":case_coupon,"board-fastener-coupon":board_coupon}
 
 
 def scad(node, level=0):
@@ -149,6 +178,8 @@ def scad(node, level=0):
                 "".join(scad(c, level + 1) for c in node["children"]) + tab + "}\n")
     x, y, z = (node[t] for t in ("x", "y", "z"))
     prefix = tab + f"translate([{x:g}, {y:g}, {z:g}]) "
+    if k == 'hex':
+        return prefix + f"cylinder(h={node['h']:g}, r={node['af']/math.sqrt(3):g}, $fn=6);\n"
     if k == "cylinder":
         return prefix + f"cylinder(h={node['h']:g}, r1={node['r']:g}, r2={node['top']:g}, $fn=64);\n"
     w, d, h = (node[t] for t in ("w", "d", "h"))
@@ -162,14 +193,14 @@ def scad(node, level=0):
 def write_scad(parts):
     result = '// Generated by build.py from parameters.json. Units: mm.\n'
     result += '// Change parameters.json and rerun build.py to edit dimensions.\n'
-    result += 'part = "assembly"; // [assembly,base,lid,fit-coupon,insert-coupon,board-insert-coupon,print-layout]\n'
+    result += 'part = "assembly"; // [assembly,base,lid,fit-coupon,case-fastener-coupon,board-fastener-coupon,print-layout]\n'
     for name, body in parts.items():
         result += f"module {name.replace('-', '_')}() {{\n{scad(body, 1)}}}\n"
     result += f'''\nif (part == "base") base();
 else if (part == "lid") translate([0,0,{P['plate']}]) rotate([180,0,0]) lid();
 else if (part == "fit-coupon") fit_coupon();
-else if (part == "insert-coupon") insert_coupon();
-else if (part == "board-insert-coupon") board_insert_coupon();
+else if (part == "case-fastener-coupon") case_fastener_coupon();
+else if (part == "board-fastener-coupon") board_fastener_coupon();
 else if (part == "print-layout") {{
     base();
     translate([{P['width'] + 6},0,{P['plate']}]) rotate([180,0,0]) lid();
@@ -194,7 +225,11 @@ def export_blender(parts):
     def primitive(n):
         k = n["kind"]
         h = n["h"]
-        if k == "cylinder":
+        if k == 'hex':
+            points=[(n['af']/math.sqrt(3)*math.cos(a*math.tau/6),
+                     n['af']/math.sqrt(3)*math.sin(a*math.tau/6)) for a in range(6)]
+            upper=points
+        elif k == "cylinder":
             points = [(n["r"] * math.cos(a * math.tau / 64),
                        n["r"] * math.sin(a * math.tau / 64)) for a in range(64)]
             upper = [(n["top"] * math.cos(a * math.tau / 64),
@@ -253,8 +288,20 @@ def export_blender(parts):
                 v.co.z = P['plate'] - v.co.z
         mesh = bmesh.new()
         mesh.from_mesh(obj.data)
+        # Exact CSG can leave coincident vertices at coplanar primitive joins.
+        # Weld only sub-micron duplicates; dimensions and fit features stay intact.
+        bmesh.ops.remove_doubles(mesh,verts=list(mesh.verts),dist=0.000001)
+        bmesh.ops.dissolve_degenerate(mesh,edges=list(mesh.edges),dist=0.000001)
         bmesh.ops.recalc_face_normals(mesh, faces=list(mesh.faces))
         bmesh.ops.triangulate(mesh, faces=list(mesh.faces))
+        # Blender's exact CSG occasionally omits a single bore-wall triangle
+        # where coaxial counterbores meet. Close only three-edge boundary loops;
+        # any larger or non-manifold defect still fails the validation below.
+        boundary = [edge for edge in mesh.edges if edge.is_boundary]
+        repaired_triangles = 0
+        if boundary:
+            repaired_triangles = len(bmesh.ops.holes_fill(mesh,edges=boundary,sides=3)['faces'])
+            bmesh.ops.recalc_face_normals(mesh,faces=list(mesh.faces))
         non_manifold = sum(not e.is_manifold for e in mesh.edges)
         volume = mesh.calc_volume(signed=True)
         unseen = set(mesh.verts)
@@ -272,11 +319,14 @@ def export_blender(parts):
         bounds = [[min(v.co[i] for v in mesh.verts), max(v.co[i] for v in mesh.verts)]
                   for i in range(3)]
         report[name] = {'non_manifold_edges': non_manifold,
+                        'repaired_csg_triangles': repaired_triangles,
                         'connected_components': components,
                         'dimensions_mm': [round(b-a, 3) for a, b in bounds],
                         'volume_mm3': round(volume, 3),
                         'triangles': len(mesh.faces)}
         if non_manifold or volume <= 0 or components != 1:
+            print('INVALID_EDGES',[(len(e.link_faces),[tuple(round(c,6) for c in v.co) for v in e.verts])
+                                    for e in mesh.edges if not e.is_manifold])
             raise RuntimeError(f'Invalid printable mesh: {name}: {report[name]}')
         mesh.to_mesh(obj.data)
         mesh.free()
@@ -286,9 +336,12 @@ def export_blender(parts):
         bpy.ops.wm.stl_export(filepath=str(output / f'{name}.stl'), export_selected_objects=True)
         objects[name] = obj
     (ROOT / 'mesh-validation.json').write_text(json.dumps(report, indent=2) + '\n')
+    if '--geometry-only' in sys.argv:
+        print('MESH_VALIDATION ' + json.dumps(report))
+        return
 
     # Render actual assembly meshes; cap/switch/PCB shapes are illustrative envelopes.
-    for name in ('fit-coupon', 'insert-coupon','board-insert-coupon'):
+    for name in ('fit-coupon', 'case-fastener-coupon','board-fastener-coupon'):
         objects[name].hide_render = True
         objects[name].hide_set(True)
     lid = objects['lid']
@@ -318,7 +371,7 @@ def export_blender(parts):
     green = material('Gateron green POM stem', (0.19, 0.5, 0.23))
     milky = material('Gateron nylon lower housing', (0.73, 0.74, 0.64))
     silver = material('USB shell', (0.45, 0.48, 0.5))
-    brass = material('M2 heat-set inserts | brass', (0.56, 0.31, 0.065))
+    brass = material('Fastener detail highlight', (0.56, 0.31, 0.065))
     brass.node_tree.nodes.get('Principled BSDF').inputs['Metallic'].default_value = 0.75
     clear = material('clear switch housing', (0.72, 0.78, 0.81))
     clear_shader = clear.node_tree.nodes.get('Principled BSDF')
@@ -556,45 +609,54 @@ def export_blender(parts):
     cable_keepout.name='USB_PLUG_KEEPOUT | assumed envelope, verify actual cable'
     cable_keepout.display_type='WIRE'; cable_keepout.hide_render=True
     move_to(cable_keepout,keepout_collection)
-    inserts, screws = [], []
-    for x in (-P['screw_x'], P['screw_x']):
-        insert = evaluate(difference(
-            cylinder(P['insert_outer_diameter']/2, P['insert_length'],
-                     x=x, z=P['floor']+P['boss_floor_gap']),
-            cylinder(1, P['insert_length']+2*EPS,
-                     x=x, z=P['floor']+P['boss_floor_gap']-EPS)))
-        insert.name = f'M2 x 3 heat-set insert at x={x:g} | brass reference, no knurl/thread detail'
-        insert.data.materials.clear()
-        insert.data.materials.append(brass)
-        for face in insert.data.polygons:
-            face.material_index = 0
-        inserts.append(insert)
-        screw = evaluate(difference(
-            union(cylinder(1.9,.3+EPS,x=x),cylinder(1.9,.9,x=x,z=.3,top=1),
-                  cylinder(1,6.8+EPS,x=x,z=1.2-EPS)),
-            box(2,.5,.4,x=x,z=-EPS), box(.5,2,.4,x=x,z=-EPS)))
-        screw.name = f'M2 x 8 countersunk Phillips screw at x={x:g} | reference, unthreaded envelope'
-        screw.data.materials.clear()
-        screw.data.materials.append(silver)
-        for face in screw.data.polygons:
-            face.material_index = 0
+    # These approaches are meaningful with the lid removed. They intentionally
+    # cross the closed lid, and certify only the stated narrow tool envelope.
+    button_service_keepouts=[]
+    for name,tool_x,face_x in (('RESET',-16,-12.25),('BOOT',16,13.25)):
+        obj=evaluate(union(box(abs(tool_x-face_x),1.5,1.5,
+                               x=(tool_x+face_x)/2,y=15.1,z=7.6),
+                           box(1.5,1.5,16.4,x=tool_x,y=15.1,z=7.6)))
+        obj.name=f'{name}_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board'
+        obj.display_type='WIRE'; obj.hide_render=True
+        obj['purpose']='Lid-off access only: test against base and PCB, not the removed lid.'
+        move_to(obj,keepout_collection); button_service_keepouts.append(obj)
+    case_nuts, screws = [], []
+    for x in (-P['screw_x'],P['screw_x']):
+        nut=evaluate(difference(
+            hexagon(P['case_nut_af'],P['case_nut_thickness'],x=x,z=P['case_nut_pocket_bottom']),
+            cylinder(P['case_screw_diameter']/2,P['case_nut_thickness']+2*EPS,
+                     x=x,z=P['case_nut_pocket_bottom']-EPS)))
+        nut.name=f'CASE_NUT_M2_{x:+g} | kit AF, assumed thickness, no threads'
+        nut.data.materials.clear(); nut.data.materials.append(silver)
+        for face in nut.data.polygons: face.material_index=0
+        case_nuts.append(nut)
+        head_top=P['case_head_recess_depth']
+        screw=evaluate(difference(
+            union(cylinder(P['case_head_diameter']/2,P['case_head_height'],
+                           x=x,z=head_top-P['case_head_height']),
+                  cylinder(P['case_screw_diameter']/2,P['case_screw_length']+EPS,x=x,z=head_top-EPS)),
+            hexagon(1.5,1.1,x=x,z=head_top-P['case_head_height']-EPS)))
+        screw.name=f'CASE_SCREW_M2_x8_{x:+g} | conservative socket-cap envelope, unthreaded'
+        screw.data.materials.clear(); screw.data.materials.append(silver)
+        for face in screw.data.polygons: face.material_index=0
         screws.append(screw)
     board_mount_refs=[]
     for x in (-P['board_mount_x'],P['board_mount_x']):
-        insert=evaluate(difference(
-            cylinder(P['board_insert_outer_diameter']/2,P['board_insert_length'],
-                     x=x,y=P['board_mount_y'],z=board_bottom-P['board_insert_length']),
-            cylinder(.8,P['board_insert_length']+2*EPS,
-                     x=x,y=P['board_mount_y'],z=board_bottom-P['board_insert_length']-EPS)))
-        insert.name=f'PCB_INSERT_M1_6_x_2_5_{x:+g}'
-        insert.data.materials.clear(); insert.data.materials.append(brass)
-        for face in insert.data.polygons: face.material_index=0
-        board_mount_refs.append(insert)
+        nut_bottom=P['board_nut_pocket_top']-P['board_nut_thickness']
+        nut=evaluate(difference(
+            hexagon(P['board_nut_af'],P['board_nut_thickness'],x=x,y=P['board_mount_y'],z=nut_bottom),
+            cylinder(P['board_screw_diameter']/2,P['board_nut_thickness']+2*EPS,
+                     x=x,y=P['board_mount_y'],z=nut_bottom-EPS)))
+        nut.name=f'PCB_NUT_M1_6_{x:+g} | kit AF, assumed thickness, no threads'
+        nut.data.materials.clear(); nut.data.materials.append(silver)
+        for face in nut.data.polygons: face.material_index=0
+        board_mount_refs.append(nut)
         screw=evaluate(difference(
-            union(cylinder(.8,4+EPS,x=x,y=P['board_mount_y'],z=board_top-4),
-                  cylinder(2.93/2,1,x=x,y=P['board_mount_y'],z=board_top)),
-            cylinder(.6,.45,x=x,y=P['board_mount_y'],z=board_top+.6)))
-        screw.name=f'PCB_SCREW_M1_6_x_4_TX5_{x:+g} | nominal, drive recess simplified'
+            union(cylinder(P['board_screw_diameter']/2,P['board_screw_length']+EPS,
+                           x=x,y=P['board_mount_y'],z=board_top-P['board_screw_length']),
+                  cylinder(P['board_head_diameter']/2,P['board_head_height'],x=x,y=P['board_mount_y'],z=board_top)),
+            hexagon(1.5,1.0,x=x,y=P['board_mount_y'],z=board_top+P['board_head_height']-.9)))
+        screw.name=f'PCB_SCREW_M1_6_x4_{x:+g} | conservative socket-cap envelope, unthreaded'
         screw.data.materials.clear(); screw.data.materials.append(silver)
         for face in screw.data.polygons: face.material_index=0
         board_mount_refs.append(screw)
@@ -616,7 +678,7 @@ def export_blender(parts):
     conform.use_negative_direction = True
     conform.use_positive_direction = False
     conform.offset = 0.025
-    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,board,usb,legend,*inserts,*screws,
+    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,board,usb,legend,*case_nuts,*screws,
                 *switch_extras,*board_extras,*board_mount_refs,*wires,cable_body,cable):
         move_to(obj, reference_collection)
     # Validate the modeled GPIO access cylinders against the printable parts.
@@ -654,6 +716,8 @@ def export_blender(parts):
         'switch_latches_intersection_lid_mm3':sum(intersection_volume(objects['lid'],o) for o in switch_clips),
         'service_keepouts_intersection_lid_mm3':sum(intersection_volume(objects['lid'],o) for o in service_keepouts),
         'depressed_keycap_shell_intersection_lid_mm3':intersection_volume(objects['lid'],travel_refs[0]),
+        'reset_boot_service_intersection_base_mm3':sum(intersection_volume(objects['base'],o) for o in button_service_keepouts),
+        'reset_boot_service_intersection_pcb_mm3':sum(intersection_volume(board,o) for o in button_service_keepouts),
         'illustrative_keycap_depressed_gap_mm':round(P['keycap_rest_gap']-C['switch']['published_dimensions']['travel_max'],3)
     }
     bpy.data.objects.remove(bundle,do_unlink=True)
@@ -707,7 +771,7 @@ def export_blender(parts):
     if '--mounting-only' not in sys.argv and '--key-mounting-only' not in sys.argv:
         bpy.ops.render.render(write_still=True)
     lid.location.z += 22
-    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,legend,*inserts,*switch_extras):
+    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,legend,*case_nuts,*switch_extras):
         obj.location.z += 22
     for obj in (*wires,cable,cable_body): obj.hide_render=True
     for obj in screws:
@@ -725,7 +789,7 @@ def export_blender(parts):
     objects['base'].hide_render = True
     for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,legend,*switch_extras):
         obj.hide_render = True
-    for obj in inserts:
+    for obj in case_nuts:
         obj.location.z -= 22
     for obj in screws:
         obj.location.z = -5
@@ -733,16 +797,18 @@ def export_blender(parts):
     cutaway_base = evaluate(difference(parts['base'],
                            box(60,4,30,y=-20,z=P['floor']),
                            box(4,22,30,x=-22,y=-10,z=P['floor']),
-                           box(4,22,30,x=22,y=-10,z=P['floor'])))
+                           box(4,22,30,x=22,y=-10,z=P['floor']),
+                           *[box(7,3.2,4,x=x,y=P['board_mount_y']-1.6,z=P['floor'])
+                             for x in (-P['board_mount_x'],P['board_mount_x'])]))
     cutaway_base.name = 'Mounting view cutaway base | presentation only'
-    post_length = P['base_height'] - P['floor'] - P['boss_floor_gap']
-    # Section the front half of each post as well, exposing the brass inserts.
+    post_length = P['base_height'] - P['case_post_bottom']
+    # Section the front half of each post as well, exposing the side-loaded nuts.
     cutaway_lid = evaluate(difference(
         parts['lid'], box(60,60,40,z=10-P['base_height']),
         *[box(7,3.4,9,x=x,y=-1.7,z=-post_length-EPS)
           for x in (-P['screw_x'],P['screw_x'])]))
     cutaway_lid.location.z = P['base_height']
-    cutaway_lid.name = 'Mounting view M2 insert posts | presentation only'
+    cutaway_lid.name = 'Mounting view M2 captive-nut posts | presentation only'
     for obj in (cutaway_base, cutaway_lid):
         obj.data.materials.clear()
         obj.data.materials.append(case_silver)
@@ -753,6 +819,10 @@ def export_blender(parts):
         obj.location.z +=4
     for obj in board_mount_refs:
         if obj.name.startswith('PCB_SCREW'): obj.location.z +=8
+    # Orange is a diagram highlight, not a claim about the purchased finish.
+    for obj in [*case_nuts,*[o for o in board_mount_refs if o.name.startswith('PCB_NUT')]]:
+        obj.data.materials.clear(); obj.data.materials.append(copper)
+        for face in obj.data.polygons: face.material_index=0
     for x in (-P['board_mount_x'],P['board_mount_x']):
         obj=primitive(cylinder(.06,8,x=x,y=P['board_mount_y'],z=board_bottom))
         obj.name='Mounting-hole alignment guide | diagram only'
@@ -780,10 +850,10 @@ def export_blender(parts):
     diagram_text('INTERNAL MOUNTING', -47, 45, 3.1)
     diagram_text('Cutaway view - PCB and screws lifted; wire routes omitted', -47, 40, 1.7)
     diagram_text('Nominal reference geometry; see component-models.json for source limits', -47, 36, 1.5)
-    diagram_text('PCB: 2 x M1.6 x 4 TX5 screws through existing 2 mm holes', -47, -33, 1.8)
-    diagram_text('PCB posts: 2 x M1.6 x 2.5 inserts | hole centers 20.4 mm apart', -47, -38, 1.7)
-    diagram_text('Case: 2 x M2 x 8 PH1 screws + 2 x M2 x 3 inserts', -47, -43, 1.8)
-    diagram_text('32 electrical holes remain accessible; no edge clips or PCB drilling', -47, -48, 1.6)
+    diagram_text('PCB: 2 x M1.6 x 4 socket-cap screws through existing 2 mm holes', -47, -33, 1.8)
+    diagram_text('PCB: 2 x AF3.5 M1.6 nuts in inward-facing side slots; no heat or glue', -47, -38, 1.7)
+    diagram_text('Case: 2 x M2 x 8 socket-cap screws + 2 x AF4 M2 nuts', -47, -43, 1.8)
+    diagram_text('32 GPIO holes stay accessible; loose nuts can slide out during service', -47, -48, 1.6)
     scene.render.filepath = str(ROOT / 'mounting.png')
     if '--key-mounting-only' not in sys.argv:
         bpy.ops.render.render(write_still=True)

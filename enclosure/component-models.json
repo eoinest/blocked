@@ -10,12 +10,11 @@
     "switch_drawing": "https://gateron.com/u_file/2308/29/file/GATERONBabyKangaroo20Switch-b4b5.pdf",
     "keycap_product": "https://maxkeyboard.com/custom-art-icon-or-text-cherry-mx-keycaps.html",
     "keycap_profile": "https://maxkeyboard.com/mechanical-keycap-layout-and-size-chart.html",
-    "case_screw_drawing": "https://belmetric.com/content/A-PDF_Drawings/MSF2X8SS.pdf",
-    "board_screw": "https://cnckitchenus.store/products/m1-6-screw-tx5-stainless-steel-aisi-304-low-head?variant=48314244333668",
-    "board_insert": "https://cnckitchenus.store/products/heat-set-insert-m1-6-100-pieces-kopie",
-    "insert_dimensions": "https://www.cnckitchen.com/s/CNCKitchen_Heat-Set-Insert-Dimensions-and-Design-Guidelines.pdf",
-    "insert_cad": "https://www.printables.com/model/482734-threaded-inserts-heat-set-inserts-by-cnc-kitchen",
-    "keycap_stabilizer_sizes": "https://intercom.help/omnitype/en/articles/5121683-keycap-sizes"
+    "keycap_stabilizer_sizes": "https://intercom.help/omnitype/en/articles/5121683-keycap-sizes",
+    "ordered_fastener_kit": "https://www.amazon.com/dp/B0GKFMJH24",
+    "m2_socket_head_reference": "https://monsterbolts.com/pages/m2-bolt-size",
+    "m1_6_socket_head_reference": "https://monsterbolts.com/pages/m1-6-bolt-size",
+    "nut_standard_reference": "https://www.westfieldfasteners.co.uk/Standards/Nut_Hex_M.html"
   },
   "board": {
     "identity": "User-listed XYCJJCXL / Nextronics S2 Mini V1.0.0; geometry referenced to official WEMOS S2 mini V1.0.0 drawing and photos, not verified against the user's physical clone.",
@@ -351,40 +350,26 @@
     }
   },
   "case_screw": {
-    "part": "BelMetric MSF2X8SS",
-    "published": {
+    "part": "Ordered Maierke kit M2x8 socket-cap screw",
+    "nominal_assumed": {
       "thread": "M2x0.4",
-      "overall_length_including_head": 8.0,
-      "head_diameter": 3.8,
-      "head_height": 1.2,
-      "head_angle_degrees": 90,
-      "drive": "PH1"
+      "under_head_length": 8,
+      "head_diameter": 4,
+      "head_height": 2.1,
+      "drive": "1.5 mm hex"
     },
-    "limits": "Independent nominal envelope; threads and exact drive recess geometry not reproduced. Vendor STEP/OBJ available but not redistributed."
+    "limits": "Kit head geometry unpublished; conservative nominal envelope based on standard supplier references. Measure purchased parts and print fit coupon. No threads, knurl or exact drive geometry modeled."
   },
   "board_screw": {
-    "part": "CNC Kitchen M1.6x4 low-head TX5",
-    "nominal": {
+    "part": "Ordered Maierke kit M1.6x4 socket-cap screw",
+    "nominal_assumed": {
       "thread": "M1.6x0.35",
-      "under_head_length": 4.0,
-      "head_diameter": 2.93,
-      "head_height": 1.0,
-      "drive": "TX5"
+      "under_head_length": 4,
+      "head_diameter": 3.2,
+      "head_height": 1.7,
+      "drive": "1.5 mm hex"
     },
-    "limits": "Independent nominal envelope; see BOM for exact selected source. Thread and drive recess details simplified."
-  },
-  "inserts": {
-    "case": {
-      "thread": "M2",
-      "length": 3.0,
-      "outer_diameter": 3.6
-    },
-    "board": {
-      "thread": "M1.6",
-      "length": 2.5,
-      "outer_diameter": 2.5
-    },
-    "status": "Published manufacturer dimensions; independent envelopes omit knurl and exact threads. Verify CAD-to-print seat diameter with coupons."
+    "limits": "Kit head geometry unpublished; conservative nominal envelope. Uses existing 2 mm PCB holes without drilling; physical seating and component clearance require checking."
   },
   "feet": {
     "count": 4,
@@ -439,5 +424,70 @@
     "limits": "No structural load or extraction-force certification. Geometry preserves access but real FDM flex, switch fit and chosen cap seating require assembly tests.",
     "aperture_cad_compensation": "14.1 mm CAD is a print-fit starting point, not the manufacturer aperture dimension. Coupon choice must produce an actual 13.98\u201314.05 mm opening and 1.45\u20131.51 mm plate at the clip land.",
     "stabilizer": "1.5u Tab is unstabilized per Omnitype keycap size table; one centered MX stem."
+  },
+  "captive_nuts": {
+    "source": "Ordered Maierke B0GKFMJH24 assortment",
+    "case": {
+      "thread": "M2",
+      "kit_reported_af": 4,
+      "assumed_thickness": 1.6,
+      "pocket_af": 4.2,
+      "pocket_height": 1.8,
+      "pocket_bottom": 7.8,
+      "loaded_nut_bottom": 7.8
+    },
+    "board": {
+      "thread": "M1.6",
+      "kit_reported_af": 3.5,
+      "assumed_thickness": 1.3,
+      "pocket_af": 3.7,
+      "pocket_height": 1.5,
+      "pocket_top": 4.7,
+      "loaded_nut_top": 4.7,
+      "contact_collar_diameter": 5.2
+    },
+    "installation": "Slide four nuts into inward-facing side pockets before attaching PCB and closing lid. Pocket floors/roofs capture nuts vertically and parallel flats resist rotation. No heat, glue, washers or additional hardware required. With screws removed, loose nuts may slide out sideways; keep the part level and retain the nuts during service.",
+    "limits": "Nut thickness and head dimensions are unmeasured. Standard M1.6 nuts are often AF3.2; this kit reports AF3.5, so do not substitute its pocket assumptions silently. Coupon AF variants and actual-part measurement are required before final printing.",
+    "coupon_variations": {
+      "board_af": [
+        3.3,
+        3.5,
+        3.7,
+        3.8
+      ],
+      "case_af": [
+        4.1,
+        4.2,
+        4.3
+      ],
+      "paired_case_head_bores": [
+        4.2,
+        4.4,
+        4.6
+      ],
+      "head_bore_depth": 2.2,
+      "board_coupon_note": "Includes an integral 1.6 mm PCB-thickness stand-in above the post, for an M1.6x4 screw engagement test."
+    }
+  },
+  "reset_boot_service": {
+    "mode": "Lid-off access; no extra plungers or unmeasured external holes",
+    "actuator_centers_assumed": [
+      [
+        -11.8,
+        15.1,
+        8.35
+      ],
+      [
+        12.8,
+        15.1,
+        8.35
+      ]
+    ],
+    "tool_diameter_assumed": 1.5,
+    "side_channel_gaps": [
+      8.75,
+      7.75
+    ],
+    "limits": "Use a narrow blunt nonconductive tool and adequate wire slack. Button coordinates and tool envelope are photo-based and not physically verified."
   }
 }
