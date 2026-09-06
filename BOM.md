@@ -6,16 +6,17 @@
 | --- | --- | --- |
 | 1 keycap | [Max Keyboard custom printed **1.5u Tab**](https://maxkeyboard.com/custom-art-icon-or-text-cherry-mx-keycaps.html) | Select **R3 1x1.5 (Tab / \|)**, White, TOP Print only; print `blocked`. **$11**. [Artwork + order settings](keycap/README.md). |
 | 1 switch | [Gateron Baby Kangaroo V2](https://milktooth.com/products/baby-kangaroo) | **$5.50 per 10-pack**; use one, keep nine spares. |
-| 2 screws | [BelMetric M2 × 8 mm Phillips countersunk](https://belmetric.com/phillips-flat-head-stainless-m2x0-4-coarse-din-965/) | Select **8 mm**, SKU **MSF2X8SS**. 90° head, 3.8 mm diameter; length includes head. Use existing screws if available. |
-| 1 small strip | [The Pi Hut 1 mm double-sided foam tape](https://thepihut.com/products/double-sided-foam-tape-10m) | Select **6 mm width**, **£2.50 / 10 m roll**; UK seller. Cut four **3.5 × 3.5 mm** squares for the PCB supports. |
+| 2 screws | [BelMetric M2 × 8 mm Phillips countersunk](https://belmetric.com/phillips-flat-head-stainless-m2x0-4-coarse-din-965/) | Select **8 mm**, SKU **MSF2X8SS**; **M2 × 0.4**, 90° head, 3.8 mm diameter, **PH1** driver. Length includes head. Insert from underneath to close the case and retain the PCB. |
+| 2 threaded inserts | [CNC Kitchen M2 × 3 mm heat-set inserts](https://cnckitchenus.store/products/heat-set-insert-m2-x-3-100-pieces) | **TC-M2x3.0**, **3.6 mm outside diameter**, **$11.50 / 100-pack**, US stock. Heat-set one into each lid post for the case screws. |
 | 4 pads | [beekeeb rubber feet — Type D](https://shop.beekeeb.com/products/rubber-feet-for-split-keyboard) | Select **Type D**, **$1 / 9 pieces**, each **20 × 15 × 1 mm**; Hong Kong seller. Cut four **8 × 8 mm** pads and round the corners to fit the pockets. |
 
-Keycap + switch pack: **$16.50 before shipping, tax, and small hardware**.
+Keycap + switch pack + insert pack: **$28 before screws, feet, shipping and tax**.
 Links and listed prices checked September 5, 2026. Quantities are for one
 finished button; retailers may sell larger packs. Shipping/tax are additional.
 The rubber feet grip the desk by friction; their adhesive attaches them to the
-case. Tape and feet are inexpensive parts, but international postage can exceed
-their price; reuse matching supplies when possible.
+case. Feet ship internationally; postage can exceed their price. Reuse matching
+supplies when possible. The board sits in a printed cradle and is captured by
+four lid fingers; it needs **no board screws, nuts, or mounting tape**.
 
 ## Buy only if missing
 
@@ -35,6 +36,7 @@ before final assembly. Small supplies can share one Adafruit order.
 
 - **Already owned:** ESP32-S2 Mini ([board reference](https://www.wemos.cc/en/latest/s2/s2_mini.html)), soldering kit, 3D printer.
 - **Print:** [base](enclosure/stl/base.stl) + [lid](enclosure/stl/lid.stl), with the
-  [fit coupon](enclosure/stl/fit-coupon.stl) first. No paint is required for this BOM.
+  [switch coupon](enclosure/stl/fit-coupon.stl) and [insert coupon](enclosure/stl/insert-coupon.stl) first. No paint is required for this BOM.
 
-Assembly details: [hardware](docs/hardware.md), [enclosure](docs/enclosure.md).
+Mounting and screw installation: [enclosure guide](docs/enclosure.md).
+Electrical assembly: [hardware guide](docs/hardware.md).

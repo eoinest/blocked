@@ -44,7 +44,7 @@ A “3-pin” MX switch has two metal electrical terminals and one plastic locat
 
 ## Check your particular S2 Mini
 
-The [reference board dimensions](https://docs.wemos.cc/en/latest/_static/files/dim_s2_mini_v1.0.0.pdf) and pin labels describe the WEMOS/LOLIN design. Boards sold as “S2 Mini” can differ in PCB outline, USB socket position, component heights, and assembly quality. Measure your board and inspect both sides before printing the finished shell. The included design assumes no tall soldered headers; foam and support positions must not crush components or bridge solder joints. A board with a USB-to-UART bridge rather than native S2 USB will not enumerate as this firmware expects.
+The [reference board dimensions](https://docs.wemos.cc/en/latest/_static/files/dim_s2_mini_v1.0.0.pdf) and pin labels describe the WEMOS/LOLIN design. Boards sold as “S2 Mini” can differ in PCB outline, USB socket position, component heights, and assembly quality. Measure your board and inspect both sides before printing the finished shell. The included design assumes no tall soldered headers. Its printed cradle and four lid fingers retain the PCB without screws through the board; their contact areas must clear components, wires, and solder joints. See the [mounting layout](enclosure.md) before soldering the leads. A board with a USB-to-UART bridge rather than native S2 USB will not enumerate as this firmware expects.
 
 The USB socket must have clearance for the **cable's molded plug**, not only the metal connector. Test that the cable seats fully before tightening the case. Keep access to the board's BOOT and RESET buttons during development. See [firmware build/flash instructions](../firmware/README.md).
 

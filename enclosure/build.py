@@ -55,6 +55,7 @@ def geometry():
     assert 0 < P["switch_opening"] < 18
     assert P["usb_bottom"] >= floor
     assert P["usb_bottom"] + P["usb_height"] < h
+    assert br - P['insert_outer_diameter']/2 >= 1.3
     band, inset = P['bottom_band_height'], P['bottom_inset']
     shell = difference(
         union(rounded(w - 2*inset, d - 2*inset, band + EPS, r-inset),
@@ -62,21 +63,20 @@ def geometry():
         rounded(w - 2 * wall, d - 2 * wall, h, r - wall, z=floor),
     )
     additions = []
-    # Small foam-covered pads. Move these to bare PCB areas after inspecting yours.
-    for x in (-P["support_x"], P["support_x"]):
-        for y in (P["board_center_y"] - P["support_y_offset"],
-                  P["board_center_y"] + P["support_y_offset"]):
-            additions.append(box(P["support_size"], P["support_size"],
-                                 P["support_height"] + EPS, x=x, y=y,
-                                 z=floor - EPS))
+    # Rigid supports touch only a narrow strip along the two bare PCB edges.
+    edge_x = P['board_width']/2 - P['retention_overlap'] + P['retention_width']/2
+    for x in (-edge_x, edge_x):
+        for y in (-P['retention_y'], P['retention_y']):
+            additions.append(box(P['retention_width'], P['retention_depth'],
+                                 P['board_bottom']-floor+EPS, x=x, y=y, z=floor-EPS))
     # Outside-edge locators do not clamp the board or require mounting holes.
     locator_x = P["board_width"] / 2 + P["board_clearance"] + 0.5
     for x in (-locator_x, locator_x):
-        for y in (-9, 10):
-            additions.append(box(1, 3, P["support_height"] + P["foam_thickness"] + 0.8,
+        for y in (-P['retention_y'], P['retention_y']):
+            additions.append(box(1, 3, P['board_bottom']-floor + 0.8,
                                  x=x, y=y, z=floor - EPS))
     front_y = P["board_center_y"] - P["board_depth"] / 2 - P["board_clearance"] - 0.5
-    additions.append(box(6, 1, P["support_height"] + P["foam_thickness"] + 0.8,
+    additions.append(box(6, 1, P['board_bottom']-floor + 0.8,
                          y=front_y, z=floor - EPS))
     cuts = [box(P["usb_width"], 2 * wall + 2, P["usb_height"],
                 y=d / 2 - wall / 2, z=P["usb_bottom"])]
@@ -100,15 +100,22 @@ def geometry():
     )
     post_length = h - floor - P['boss_floor_gap']
     posts = [cylinder(br, post_length + EPS, x=x, z=-post_length) for x in (-sx, sx)]
+    capture_bottom = P['board_bottom'] + P['board_thickness'] + P['retention_clearance']
+    finger_length = h - capture_bottom
+    fingers = [box(P['retention_width'], P['retention_depth'], finger_length+EPS,
+                   x=x, y=y, z=-finger_length)
+               for x in (-edge_x, edge_x) for y in (-P['retention_y'], P['retention_y'])]
     lid_cuts = [box(P["switch_opening"], P["switch_opening"], plate + 2 * EPS, z=-EPS)]
     for x in (-sx, sx):
-        lid_cuts += [cylinder(P['pilot_diameter']/2, P['pilot_depth'] + EPS,
-                             x=x, z=-post_length-EPS)]
+        lid_cuts += [cylinder(P['insert_seat_diameter']/2, P['insert_seat_depth']+EPS,
+                             x=x, z=-post_length-EPS),
+                     cylinder(P['screw_relief_diameter']/2, P['screw_relief_depth']+EPS,
+                              x=x, z=-post_length-EPS)]
     chamfer = P['lid_chamfer']
     lid_skin = union(rounded(w, d, plate-chamfer+EPS, r),
                      rounded(w, d, chamfer, r, z=plate-chamfer,
                              top_scale=(w-2*chamfer)/w))
-    lid = difference(union(lid_skin, skirt, *posts), *lid_cuts)
+    lid = difference(union(lid_skin, skirt, *posts, *fingers), *lid_cuts)
     # Apertures increase left-to-right; small edge notches mark 1, 2, 3.
     coupon_cuts = []
     for index, (x, opening) in enumerate(((-21.5, 14.0), (0, 14.1), (21.5, 14.2))):
@@ -118,7 +125,17 @@ def geometry():
                                    x=x + 1.5 * tick - 0.75 * index,
                                    y=-13, z=-EPS))
     coupon = difference(rounded(66, 26, plate, 2), *coupon_cuts)
-    return {"base": base, "lid": lid, "fit-coupon": coupon}
+    insert_coupon_cuts = []
+    for index, (x, bore) in enumerate(((-18,3.2), (-6,3.3), (6,3.4), (18,3.5))):
+        insert_coupon_cuts += [cylinder(bore/2, 3.25, x=x, z=4.8),
+                               cylinder(P['screw_relief_diameter']/2, 6.55, x=x, z=1.5)]
+        for tick in range(index+1):
+            insert_coupon_cuts.append(box(.8, 1.5, 8.1,
+                                          x=x + 1.5*tick - .75*index, y=-5, z=-EPS))
+    insert_coupon = difference(union(rounded(48,10,1.5,1.5),
+                                      *[cylinder(P['boss_radius'],8,x=x) for x in (-18,-6,6,18)]),
+                               *insert_coupon_cuts)
+    return {"base": base, "lid": lid, "fit-coupon": coupon, "insert-coupon": insert_coupon}
 
 
 def scad(node, level=0):
@@ -142,12 +159,13 @@ def scad(node, level=0):
 def write_scad(parts):
     result = '// Generated by build.py from parameters.json. Units: mm.\n'
     result += '// Change parameters.json and rerun build.py to edit dimensions.\n'
-    result += 'part = "assembly"; // [assembly,base,lid,fit-coupon,print-layout]\n'
+    result += 'part = "assembly"; // [assembly,base,lid,fit-coupon,insert-coupon,print-layout]\n'
     for name, body in parts.items():
         result += f"module {name.replace('-', '_')}() {{\n{scad(body, 1)}}}\n"
     result += f'''\nif (part == "base") base();
 else if (part == "lid") translate([0,0,{P['plate']}]) rotate([180,0,0]) lid();
 else if (part == "fit-coupon") fit_coupon();
+else if (part == "insert-coupon") insert_coupon();
 else if (part == "print-layout") {{
     base();
     translate([{P['width'] + 6},0,{P['plate']}]) rotate([180,0,0]) lid();
@@ -266,8 +284,9 @@ def export_blender(parts):
     (ROOT / 'mesh-validation.json').write_text(json.dumps(report, indent=2) + '\n')
 
     # Render actual assembly meshes; cap/switch/PCB shapes are illustrative envelopes.
-    objects['fit-coupon'].hide_render = True
-    objects['fit-coupon'].hide_set(True)
+    for name in ('fit-coupon', 'insert-coupon'):
+        objects[name].hide_render = True
+        objects[name].hide_set(True)
     lid = objects['lid']
     lid.rotation_euler.x = math.pi
     lid.location.z = P['base_height'] + P['plate']
@@ -291,6 +310,8 @@ def export_blender(parts):
     case_shader.inputs['Roughness'].default_value = 0.3
     pcb_blue = material('PCB blue', (0.02, 0.16, 0.5))
     silver = material('USB shell', (0.45, 0.48, 0.5))
+    brass = material('M2 heat-set inserts | brass', (0.56, 0.31, 0.065))
+    brass.node_tree.nodes.get('Principled BSDF').inputs['Metallic'].default_value = 0.75
     clear = material('clear switch housing', (0.72, 0.78, 0.81))
     clear_shader = clear.node_tree.nodes.get('Principled BSDF')
     clear_shader.inputs['Transmission Weight'].default_value = 0.55
@@ -365,8 +386,8 @@ def export_blender(parts):
                       (switch_top, 'Switch upper housing'), (switch_stem, 'Switch stem')]:
         obj.name = name + ' | reference envelope only'
         obj.data.materials.append(clear)
-    board_bottom = P['floor'] + P['support_height'] + P['foam_thickness']
-    board = primitive(rounded(P['board_width'], P['board_depth'], 1.6, 1,
+    board_bottom = P['board_bottom']
+    board = primitive(rounded(P['board_width'], P['board_depth'], P['board_thickness'], 1,
                               y=P['board_center_y'], z=board_bottom))
     board.name = 'S2 mini | official footprint, provisional height'
     board.data.materials.append(pcb_blue)
@@ -379,6 +400,28 @@ def export_blender(parts):
     usb.data.materials.append(silver)
     for face in usb.data.polygons:
         face.material_index = 0
+    inserts, screws = [], []
+    for x in (-P['screw_x'], P['screw_x']):
+        insert = evaluate(difference(
+            cylinder(P['insert_outer_diameter']/2, P['insert_length'],
+                     x=x, z=P['floor']+P['boss_floor_gap']),
+            cylinder(1, P['insert_length']+2*EPS,
+                     x=x, z=P['floor']+P['boss_floor_gap']-EPS)))
+        insert.name = f'M2 x 3 heat-set insert at x={x:g} | brass reference, no knurl/thread detail'
+        insert.data.materials.clear()
+        insert.data.materials.append(brass)
+        for face in insert.data.polygons:
+            face.material_index = 0
+        inserts.append(insert)
+        screw = evaluate(difference(
+            union(cylinder(2,1,x=x,top=1), cylinder(1,7+EPS,x=x,z=1-EPS)),
+            box(2,.5,.4,x=x,z=-EPS), box(.5,2,.4,x=x,z=-EPS)))
+        screw.name = f'M2 x 8 countersunk Phillips screw at x={x:g} | reference, unthreaded envelope'
+        screw.data.materials.clear()
+        screw.data.materials.append(silver)
+        for face in screw.data.polygons:
+            face.material_index = 0
+        screws.append(screw)
     bpy.ops.object.text_add(location=(-9.3, -4.3, cap_top + 1))
     legend = bpy.context.object
     legend.name = 'blocked legend | visual only'
@@ -397,7 +440,7 @@ def export_blender(parts):
     conform.use_negative_direction = True
     conform.use_positive_direction = False
     conform.offset = 0.025
-    for obj in (cap, switch_body, switch_top, switch_stem, board, usb, legend):
+    for obj in (cap, switch_body, switch_top, switch_stem, board, usb, legend, *inserts, *screws):
         move_to(obj, reference_collection)
     ground = primitive(box(2000, 2000, 1, z=-1.7))
     ground.name = 'Studio floor'
@@ -437,18 +480,81 @@ def export_blender(parts):
                 area.spaces.active.clip_end = 10000
                 area.spaces.active.shading.color_type = 'MATERIAL'
     bpy.ops.wm.save_as_mainfile(filepath=str(ROOT / 'blocked.blend'))
-    bpy.ops.render.render(write_still=True)
+    if '--mounting-only' not in sys.argv:
+        bpy.ops.render.render(write_still=True)
     cam.location = (64, 95, 65)
     cam.rotation_euler = (Vector((0, 0, 12)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
     scene.render.filepath = str(ROOT / 'rear.png')
-    bpy.ops.render.render(write_still=True)
+    if '--mounting-only' not in sys.argv:
+        bpy.ops.render.render(write_still=True)
     lid.location.z += 22
-    for obj in (cap, switch_body, switch_top, switch_stem, legend):
+    for obj in (cap, switch_body, switch_top, switch_stem, legend, *inserts):
         obj.location.z += 22
+    for obj in screws:
+        obj.location.z -= 12
+    ground.location.z = -14
     cam.location = (68, 84, 94)
     cam.rotation_euler = (Vector((0, 0, 26)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
     cam.data.ortho_scale = 110
     scene.render.filepath = str(ROOT / 'exploded.png')
+    if '--mounting-only' not in sys.argv:
+        bpy.ops.render.render(write_still=True)
+    # Dedicated open-inside diagram, using the actual printable geometry.
+    # Hide the deck above z=10 in an assembled duplicate so capture fingers and
+    # post ends remain visible around the PCB. Reference screws are drawn below.
+    lid.hide_render = True
+    objects['base'].hide_render = True
+    for obj in (cap, switch_body, switch_top, switch_stem, legend):
+        obj.hide_render = True
+    for obj in inserts:
+        obj.location.z -= 22
+    for obj in screws:
+        obj.location.z = -5
+        obj.location.y = -28
+    cutaway_base = evaluate(difference(parts['base'], box(60,22,30,y=-14,z=P['floor'])))
+    cutaway_base.name = 'Mounting view cutaway base | presentation only'
+    post_length = P['base_height'] - P['floor'] - P['boss_floor_gap']
+    # Section the front half of each post as well, exposing the brass inserts.
+    cutaway_lid = evaluate(difference(
+        parts['lid'], box(60,60,40,z=10-P['base_height']),
+        *[box(7,3.4,9,x=x,y=-1.7,z=-post_length-EPS)
+          for x in (-P['screw_x'],P['screw_x'])]))
+    cutaway_lid.location.z = P['base_height']
+    cutaway_lid.name = 'Mounting view capture fingers and insert posts | presentation only'
+    for obj in (cutaway_base, cutaway_lid):
+        obj.data.materials.clear()
+        obj.data.materials.append(case_silver)
+        for face in obj.data.polygons:
+            face.material_index = 0
+        move_to(obj, studio_collection)
+    cam.location = (72,-92,110)
+    target = Vector((0,0,2))
+    cam.rotation_euler = (target - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    cam.data.ortho_scale = 105
+    scene.render.resolution_x = 1200
+    scene.render.resolution_y = 1200
+    # Labels sit in the camera plane, never hidden by the model.
+    camera_rotation = cam.rotation_euler.to_quaternion()
+    right = camera_rotation @ Vector((1,0,0))
+    up = camera_rotation @ Vector((0,1,0))
+    forward = camera_rotation @ Vector((0,0,-1))
+    def diagram_text(body, x, y, size):
+        bpy.ops.object.text_add(location=cam.location+forward*20+right*x+up*y)
+        obj = bpy.context.object
+        obj.name = 'Mounting callout | ' + body
+        obj.rotation_euler = cam.rotation_euler
+        obj.data.body = body
+        obj.data.size = size
+        obj.data.materials.append(ink)
+        move_to(obj, studio_collection)
+    diagram_text('INTERNAL MOUNTING', -47, 45, 3.1)
+    diagram_text('Cutaway view - upper cover and PCB components omitted', -47, 40, 1.7)
+    diagram_text('Screws exploded forward for visibility', -47, 36, 1.5)
+    diagram_text('4 printed edge supports + 4 lid capture fingers', -47, -33, 2.0)
+    diagram_text('PCB underside 5.5 mm | top 7.1 mm | capture underside 7.3 mm', -47, -38, 1.7)
+    diagram_text('2 x M2 x 3 brass heat-set inserts, flush in lid posts', -47, -43, 1.9)
+    diagram_text('2 x M2 x 8 Phillips countersunk screws, installed from below', -47, -48, 1.7)
+    scene.render.filepath = str(ROOT / 'mounting.png')
     bpy.ops.render.render(write_still=True)
     print('MESH_VALIDATION ' + json.dumps(report))
 
