@@ -1,0 +1,16 @@
+.DS_Store
+.build/
+.swiftpm/
+build/
+dist/
+.pio/
+.arduino/
+.venv/
+__pycache__/
+*.pyc
+*.blend1
+*.blend2
+.env
+.env.*
+!.env.example
+*.local

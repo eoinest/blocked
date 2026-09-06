@@ -1,0 +1,35 @@
+{
+  "base": {
+    "non_manifold_edges": 0,
+    "connected_components": 1,
+    "dimensions_mm": [
+      40.0,
+      42.0,
+      20.5
+    ],
+    "volume_mm3": 9408.446,
+    "triangles": 3104
+  },
+  "lid": {
+    "non_manifold_edges": 0,
+    "connected_components": 1,
+    "dimensions_mm": [
+      40.0,
+      42.0,
+      3.5
+    ],
+    "volume_mm3": 2486.05,
+    "triangles": 1718
+  },
+  "fit-coupon": {
+    "non_manifold_edges": 0,
+    "connected_components": 1,
+    "dimensions_mm": [
+      66.0,
+      26.0,
+      1.5
+    ],
+    "volume_mm3": 1668.744,
+    "triangles": 426
+  }
+}
