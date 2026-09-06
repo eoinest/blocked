@@ -3,23 +3,23 @@
     "non_manifold_edges": 0,
     "connected_components": 1,
     "dimensions_mm": [
-      40.0,
+      46.0,
       42.0,
       20.5
     ],
-    "volume_mm3": 9408.446,
-    "triangles": 3104
+    "volume_mm3": 9611.484,
+    "triangles": 2860
   },
   "lid": {
     "non_manifold_edges": 0,
     "connected_components": 1,
     "dimensions_mm": [
-      40.0,
+      46.0,
       42.0,
-      3.5
+      19.7
     ],
-    "volume_mm3": 2486.05,
-    "triangles": 1718
+    "volume_mm3": 3719.401,
+    "triangles": 2292
   },
   "fit-coupon": {
     "non_manifold_edges": 0,

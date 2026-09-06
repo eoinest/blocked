@@ -27,9 +27,9 @@ permission.
 | Part | Plan |
 | --- | --- |
 | Controller | Your existing LOLIN-style ESP32-S2 Mini, powered by USB-C |
-| Key | Gateron Baby Kangaroo 2.0 tactile switch with a custom 1u `blocked` keycap |
+| Key | Gateron Baby Kangaroo 2.0 tactile switch with a custom 1.5u `blocked` keycap |
 | Wiring | Two soldered wires: GPIO4 → switch → GND; internal pull-up |
-| Case | 40 × 42 × 22 mm body, editable Blender design, removable MX plate, USB-C cutout, recessed adhesive pads |
+| Case | 46 × 42 × 22 mm body, satin silver design, hidden underside screws, rear USB-C cutout, recessed adhesive pads |
 | Mac | Native Swift menu bar app, USB serial, Chrome Automation, existing `gh` credentials |
 
 The board sends a debounced press over USB serial. The Mac app checks that

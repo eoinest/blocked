@@ -67,11 +67,14 @@ board needs different clearances.
 
 ## 6. Finish the gift
 
-A single contrasting 1u keycap with lowercase **blocked** is enough. A blank
-cap plus a vinyl legend is a quick prototype; a professionally printed MX-stem
-cap will hold up better. Print the shell in matte black or warm gray, use a red
-or cream cap, and recess the adhesive pads so they barely protrude. Put the
-USB-C cable, the repo URL, and the Mac setup instructions in the box.
+Use an ivory **1.5u Tab-width keycap** with a small lowercase **blocked** legend
+at the front-left. A blank cap plus a vinyl or waterslide legend is a quick
+prototype; a professionally printed MX-stem cap will hold up better. The
+revised render pairs it with a satin silver housing and a dark inset bottom
+seam. Silver/gray filament gives the color; sanding, primer, and metallic paint
+are optional finishing steps if you want to approach the render's finish.
+Recess the adhesive pads so they barely protrude. Put the USB-C cable, the repo
+URL, and the Mac setup instructions in the box.
 
 The first build requires soldering, flashing, and local app setup. Once those
 are done, everyday use is: open Blocked, enable live reviews, focus a PR, press.

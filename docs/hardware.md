@@ -1,8 +1,8 @@
 # Build the physical key
 
-For the gift, my pick is one **Gateron Baby Kangaroo 2.0**, a **1u MX-compatible keycap** printed or engraved with `blocked`, and your S2 Mini. Gateron describes an early, strong tactile action with nominal 59 ± 8 gf operating force and a five-pin MX structure. That is a good direction for a deliberate, satisfying one-purpose press; the exact feel still needs a sample in your hand. [Gateron product page](https://www.gateron.com/products/gateron-baby-kangaroo-20-tactile-switch-set)
+For the gift, my pick is one **Gateron Baby Kangaroo 2.0**, a **1.5u MX-compatible keycap** printed or engraved with `blocked`, and your S2 Mini. Gateron describes an early, strong tactile action with nominal 59 ± 8 gf operating force and a five-pin MX structure. That is a good direction for a deliberate, satisfying one-purpose press; the exact feel still needs a sample in your hand. [Gateron product page](https://www.gateron.com/products/gateron-baby-kangaroo-20-tactile-switch-set)
 
-**CHERRY MX2A Brown** is the easy-to-source, gentler alternative. It has 2 mm pre-travel and 4 mm total travel; CHERRY lists 45 cN actuation and 55 cN at the tactile peak. It is a soft bump, so choose the Baby Kangaroo if the gift should feel more emphatic. A 1u key needs no stabilizer. [CHERRY Brown specifications](https://www.cherry.de/fr-fr/produit/mx2a-brown)
+**CHERRY MX2A Brown** is the easy-to-source, gentler alternative. It has 2 mm pre-travel and 4 mm total travel; CHERRY lists 45 cN actuation and 55 cN at the tactile peak. It is a soft bump, so choose the Baby Kangaroo if the gift should feel more emphatic. The wider 1.5u cap still uses one centered switch; choose a cap with a single centered MX stem and check off-center presses. [CHERRY Brown specifications](https://www.cherry.de/fr-fr/produit/mx2a-brown)
 
 Feel is personal. A single-switch sample or small tester is more useful than buying an entire keyboard's worth for this project. The printed enclosure changes the sound too. Use a manufactured cap for the nicest finger surface and durable stem; an FDM cap is fine for experimenting with the legend and shape. Choose standard MX switches with **metal electrical contacts**; optical, Hall-effect, and inductive variants require different electronics.
 
@@ -19,13 +19,34 @@ Feel is personal. A single-switch sample or small tester is more useful than buy
 
 The included enclosure targets standard MX. Low-profile switches save less overall height when the S2 Mini remains stacked underneath; a side-by-side board layout can make a flatter but wider version. Do not substitute Choc V1 caps or mounts for V2 by assumption.
 
+## Wider keycap
+
+The revised design uses a **1.5u Tab-width cap**, with a tapered ivory body and
+a small lowercase `blocked` legend at the front-left of the top surface. Tab
+is a standard 1.5u position in [Omnitype's size guide](https://intercom.help/omnitype/en/articles/5121683-keycap-sizes).
+The render uses an approximately 28 mm-wide cap, compared with the original
+18 mm square reference; exact dimensions depend on the purchased cap.
+
+[Signature Plastics sells individual blank DSA 1.5u caps](https://spkeyboards.com/products/sp-dsa-1-5-space),
+so a whole keycap set is not needed. DSA gives a lower, uniform profile; a
+[blank SA 1.5u cap](https://spkeyboards.com/products/sp-sa-1-5-space) gives a taller,
+more sculpted option. Select a light color and a single centered MX stem, and
+confirm stock and the chosen profile before ordering. The Blender cap is a
+visual reference, not an exact model of either supplier's cap.
+
+Use a small vinyl/waterslide legend for the prototype or ask a custom keycap
+printer to print `blocked` in charcoal at the front-left. The housing still
+holds one switch and the wiring is unchanged. Check that the cap returns
+freely when pressed near either end; do not substitute a 2u cap without
+revisiting stabilizers and clearances.
+
 ## Parts
 
 | Quantity | Part | Notes / source |
 | --- | --- | --- |
 | 1 | ESP32-S2 Mini, preferably headerless | Existing board. The reference is LOLIN S2 Mini: USB-C, 3.3 V GPIO, 34.3 × 25.4 mm. [WEMOS](https://docs.wemos.cc/en/latest/s2/s2_mini.html) |
 | 1 (+ spare) | Mechanical MX switch | Baby Kangaroo 2.0 sample/small pack, or CHERRY MX2A Brown e.g. [single-switch listing at SparkFun](https://www.sparkfun.com/cherry-mx2a-keyswitch-brown.html). Check current availability; no purchase is required to build the software. |
-| 1 | 1u MX cross-stem keycap | Low sculpted or uniform profile; a blank cap plus a small `blocked` decal makes a simple first gift. |
+| 1 | 1.5u MX cross-stem keycap | Ivory/white, centered single stem, sculpted or uniform profile; add a small charcoal `blocked` legend. See the keycap notes above. |
 | 2 | Short insulated stranded wires | About 28–30 AWG; cut to fit with enough slack to lift the lid. |
 | As needed | Heat-shrink and thin insulating tape | Cover switch joints and any exposed wire. Avoid conductive metallic tape. |
 | 4 small squares | 1 mm insulating double-sided foam tape | Retains the board on the support pads. Place only against clear PCB areas after inspecting both sides. |

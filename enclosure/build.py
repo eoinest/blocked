@@ -26,8 +26,8 @@ def box(w, d, h, x=0, y=0, z=0):
     return shape("box", w=w, d=d, h=h, x=x, y=y, z=z)
 
 
-def rounded(w, d, h, r, x=0, y=0, z=0):
-    return shape("rounded", w=w, d=d, h=h, r=r, x=x, y=y, z=z)
+def rounded(w, d, h, r, x=0, y=0, z=0, top_scale=1):
+    return shape("rounded", w=w, d=d, h=h, r=r, x=x, y=y, z=z, top_scale=top_scale)
 
 
 def cylinder(r, h, x=0, y=0, z=0, top=None):
@@ -50,15 +50,18 @@ def geometry():
     assert w > P["board_width"] + 2 * wall
     assert d > P["board_depth"] + 2 * wall
     assert sx - br > P["board_width"] / 2 + P["board_clearance"]
+    assert sx + br <= w / 2 - wall - P["lid_clearance"] + EPS
     assert floor > P["pad_recess"] + 1
     assert 0 < P["switch_opening"] < 18
     assert P["usb_bottom"] >= floor
     assert P["usb_bottom"] + P["usb_height"] < h
+    band, inset = P['bottom_band_height'], P['bottom_inset']
     shell = difference(
-        rounded(w, d, h, r),
+        union(rounded(w - 2*inset, d - 2*inset, band + EPS, r-inset),
+              rounded(w, d, h-band, r, z=band)),
         rounded(w - 2 * wall, d - 2 * wall, h, r - wall, z=floor),
     )
-    additions = [cylinder(br, h, x=x) for x in (-sx, sx)]
+    additions = []
     # Small foam-covered pads. Move these to bare PCB areas after inspecting yours.
     for x in (-P["support_x"], P["support_x"]):
         for y in (P["board_center_y"] - P["support_y_offset"],
@@ -77,8 +80,10 @@ def geometry():
                          y=front_y, z=floor - EPS))
     cuts = [box(P["usb_width"], 2 * wall + 2, P["usb_height"],
                 y=d / 2 - wall / 2, z=P["usb_bottom"])]
-    cuts += [cylinder(P["pilot_diameter"] / 2, P["pilot_depth"] + EPS,
-                      x=x, z=h - P["pilot_depth"]) for x in (-sx, sx)]
+    for x in (-sx, sx):
+        cuts += [cylinder(P["screw_clearance"] / 2, floor + 2*EPS, x=x, z=-EPS),
+                 cylinder(P['head_diameter']/2, 1.05,
+                          top=P['screw_clearance']/2, x=x, z=-EPS)]
     for x in (-12, 12):
         for y in (-13, 13):
             cuts.append(rounded(P["pad_size"], P["pad_size"],
@@ -92,17 +97,18 @@ def geometry():
         rounded(sw, sd, P["skirt_height"] + EPS, 1.7, z=-P["skirt_height"]),
         rounded(sw - 2 * P["skirt_wall"], sd - 2 * P["skirt_wall"],
                 P["skirt_height"] + 3 * EPS, 0.5, z=-P["skirt_height"] - EPS),
-        *[cylinder(br + P["lid_clearance"], P["skirt_height"] + 3 * EPS,
-                   x=x, z=-P["skirt_height"] - EPS) for x in (-sx, sx)],
     )
+    post_length = h - floor - P['boss_floor_gap']
+    posts = [cylinder(br, post_length + EPS, x=x, z=-post_length) for x in (-sx, sx)]
     lid_cuts = [box(P["switch_opening"], P["switch_opening"], plate + 2 * EPS, z=-EPS)]
     for x in (-sx, sx):
-        lid_cuts += [
-            cylinder(P["screw_clearance"] / 2, plate + 2 * EPS, x=x, z=-EPS),
-            cylinder(P["screw_clearance"] / 2, 1.05,
-                     top=P["head_diameter"] / 2, x=x, z=plate - 1),
-        ]
-    lid = difference(union(rounded(w, d, plate, r), skirt), *lid_cuts)
+        lid_cuts += [cylinder(P['pilot_diameter']/2, P['pilot_depth'] + EPS,
+                             x=x, z=-post_length-EPS)]
+    chamfer = P['lid_chamfer']
+    lid_skin = union(rounded(w, d, plate-chamfer+EPS, r),
+                     rounded(w, d, chamfer, r, z=plate-chamfer,
+                             top_scale=(w-2*chamfer)/w))
+    lid = difference(union(lid_skin, skirt, *posts), *lid_cuts)
     # Apertures increase left-to-right; small edge notches mark 1, 2, 3.
     coupon_cuts = []
     for index, (x, opening) in enumerate(((-21.5, 14.0), (0, 14.1), (21.5, 14.2))):
@@ -129,7 +135,7 @@ def scad(node, level=0):
     if k == "box":
         return prefix + f"translate([{-w/2:g}, {-d/2:g}, 0]) cube([{w:g}, {d:g}, {h:g}]);\n"
     r = node["r"]
-    return prefix + (f"linear_extrude({h:g}) offset(r={r:g}, $fn=64) "
+    return prefix + (f"linear_extrude(height={h:g}, scale={node['top_scale']:g}) offset(r={r:g}, $fn=64) "
                      f"square([{w-2*r:g}, {d-2*r:g}], center=true);\n")
 
 
@@ -146,8 +152,8 @@ else if (part == "print-layout") {{
     base();
     translate([{P['width'] + 6},0,{P['plate']}]) rotate([180,0,0]) lid();
 }} else {{
-    color("#25282b") base();
-    translate([0,0,{P['base_height']}]) color("#383c40") lid();
+    color("#b8bbc0") base();
+    translate([0,0,{P['base_height']}]) color("#c4c7cb") lid();
 }}
 '''
     (ROOT / "blocked.scad").write_text(result)
@@ -183,7 +189,7 @@ def export_blender(parts):
                 for i in range(17):
                     a = math.radians(start + i * 90 / 16)
                     points.append((cx + r * math.cos(a), cy + r * math.sin(a)))
-            upper = points
+            upper = [(x*n.get('top_scale',1), y*n.get('top_scale',1)) for x,y in points]
         count = len(points)
         verts = [(x + n['x'], y + n['y'], n['z']) for x, y in points]
         verts += [(x + n['x'], y + n['y'], n['z'] + h) for x, y in upper]
@@ -273,12 +279,22 @@ def export_blender(parts):
         shader.inputs['Base Color'].default_value = (*color, 1)
         shader.inputs['Roughness'].default_value = 0.38
         return mat
-    dark = material('graphite', (0.048, 0.057, 0.067))
-    red = material('warm red keycap', (0.7, 0.045, 0.035))
-    white = material('legend', (1, 0.93, 0.88))
+    dark = material('charcoal legend and underside', (0.026, 0.03, 0.035))
+    ink = material('matte near-black printed legend', (0.002, 0.0025, 0.003))
+    ink_shader = ink.node_tree.nodes.get('Principled BSDF')
+    ink_shader.inputs['Roughness'].default_value = 1
+    ink_shader.inputs['Specular IOR Level'].default_value = 0
+    ivory = material('warm ivory PBT keycap', (0.84, 0.81, 0.74))
+    case_silver = material('satin silver finish', (0.48, 0.51, 0.55))
+    case_shader = case_silver.node_tree.nodes.get('Principled BSDF')
+    case_shader.inputs['Metallic'].default_value = 0.72
+    case_shader.inputs['Roughness'].default_value = 0.3
     pcb_blue = material('PCB blue', (0.02, 0.16, 0.5))
     silver = material('USB shell', (0.45, 0.48, 0.5))
-    brown = material('switch housing', (0.45, 0.33, 0.13))
+    clear = material('clear switch housing', (0.72, 0.78, 0.81))
+    clear_shader = clear.node_tree.nodes.get('Principled BSDF')
+    clear_shader.inputs['Transmission Weight'].default_value = 0.55
+    clear_shader.inputs['Roughness'].default_value = 0.18
     print_collection = bpy.data.collections.new('PRINTABLE | STL parts, millimeters')
     reference_collection = bpy.data.collections.new('REFERENCE ONLY | approximate bought parts')
     studio_collection = bpy.data.collections.new('STUDIO | render camera and lighting')
@@ -292,23 +308,63 @@ def export_blender(parts):
         move_to(obj, print_collection)
     for name in ('base', 'lid'):
         objects[name].data.materials.clear()
+        objects[name].data.materials.append(case_silver)
         objects[name].data.materials.append(dark)
         for face in objects[name].data.polygons:
-            face.material_index = 0
+            face.material_index = int(name == 'base' and face.center.z < P['bottom_band_height'] - 0.01)
         bevel = objects[name].modifiers.new('Render-only edge highlights', 'BEVEL')
         bevel.width = 0.15
         bevel.segments = 2
-    cap = primitive(rounded(18, 18, 10.5, 1.2, z=P['base_height'] + P['plate'] + 1.5))
-    cap.name = '1u custom keycap | approximate envelope, NOT printable'
-    cap.data.materials.append(red)
     plate_top = P['base_height'] + P['plate']
+    # Sculpted 1.5u purchased-keycap reference: tapered skirt and shallow dish.
+    # This is intentionally not an STL and has no manufactured MX stem socket.
+    cap_bottom = plate_top + 3
+    cap_top = cap_bottom + P['keycap_height']
+    def outline(width, depth, radius):
+        points = []
+        for cx, cy, start in [(width/2-radius, depth/2-radius, 0),
+                               (-width/2+radius, depth/2-radius, 90),
+                               (-width/2+radius, -depth/2+radius, 180),
+                               (width/2-radius, -depth/2+radius, 270)]:
+            for index in range(17):
+                angle = math.radians(start + index*90/16)
+                points.append((cx + radius*math.cos(angle), cy + radius*math.sin(angle)))
+        return points
+    bottom_ring = outline(P['keycap_width'], P['keycap_depth'], 1.1)
+    top_ring = outline(P['keycap_width']-4, P['keycap_depth']-4, 1.35)
+    rings = [[(x,y,cap_bottom) for x,y in bottom_ring]]
+    for scale in (1, .96, .85, .7, .55, .4, .25, .1):
+        rings.append([(x*scale, y*scale, cap_top-1.2*(1-scale*scale)) for x,y in top_ring])
+    count = len(bottom_ring)
+    verts = [v for ring in rings for v in ring]
+    faces = [tuple(range(count-1, -1, -1))]
+    for ring in range(len(rings)-1):
+        for i in range(count):
+            j = (i+1) % count
+            faces.append((ring*count+i, ring*count+j, (ring+1)*count+j, (ring+1)*count+i))
+    center = len(verts)
+    verts.append((0,0,cap_top-1.2))
+    for i in range(count):
+        faces.append(((len(rings)-1)*count+i, (len(rings)-1)*count+(i+1)%count, center))
+    cap_mesh = bpy.data.meshes.new('Sculpted 1.5u keycap reference mesh')
+    cap_mesh.from_pydata(verts, [], faces)
+    cap_mesh.update()
+    cap = bpy.data.objects.new('1.5u ivory keycap | sculpted reference, NOT printable', cap_mesh)
+    bpy.context.collection.objects.link(cap)
+    cap.data.materials.append(ivory)
+    for face in cap.data.polygons:
+        face.use_smooth = True
+    bevel = cap.modifiers.new('Soft molded rim and skirt', 'BEVEL')
+    bevel.width = 0.24
+    bevel.segments = 3
+    bevel = cap.modifiers.new('Weighted normals', 'WEIGHTED_NORMAL')
     switch_body = primitive(box(13.9, 13.9, 5, z=plate_top - 5))
     switch_top = primitive(rounded(15.6, 15.6, 4.5, 0.8, z=plate_top))
     switch_stem = primitive(box(4, 4, 1.5, z=plate_top + 4.5))
     for obj, name in [(switch_body, 'Switch lower body'),
                       (switch_top, 'Switch upper housing'), (switch_stem, 'Switch stem')]:
         obj.name = name + ' | reference envelope only'
-        obj.data.materials.append(brown)
+        obj.data.materials.append(clear)
     board_bottom = P['floor'] + P['support_height'] + P['foam_thickness']
     board = primitive(rounded(P['board_width'], P['board_depth'], 1.6, 1,
                               y=P['board_center_y'], z=board_bottom))
@@ -323,25 +379,35 @@ def export_blender(parts):
     usb.data.materials.append(silver)
     for face in usb.data.polygons:
         face.material_index = 0
-    bpy.ops.object.text_add(location=(0, -0.8, P['base_height'] + P['plate'] + 12.05))
+    bpy.ops.object.text_add(location=(-9.3, -4.3, cap_top + 1))
     legend = bpy.context.object
     legend.name = 'blocked legend | visual only'
     legend.data.body = 'blocked'
-    legend.data.align_x = 'CENTER'
-    legend.data.size = 2.7
-    legend.data.extrude = 0.01
-    legend.data.materials.append(white)
+    legend.data.align_x = 'LEFT'
+    legend.data.size = 2.25
+    legend.data.extrude = 0
+    legend.data.materials.append(ink)
+    bpy.ops.object.convert(target='MESH')
+    legend = bpy.context.object
+    legend.name = 'blocked legend | reference only'
+    conform = legend.modifiers.new('Conform ink to sculpted cap', 'SHRINKWRAP')
+    conform.target = cap
+    conform.wrap_method = 'PROJECT'
+    conform.use_project_z = True
+    conform.use_negative_direction = True
+    conform.use_positive_direction = False
+    conform.offset = 0.025
     for obj in (cap, switch_body, switch_top, switch_stem, board, usb, legend):
         move_to(obj, reference_collection)
     ground = primitive(box(2000, 2000, 1, z=-1.7))
     ground.name = 'Studio floor'
-    ground.data.materials.append(material('backdrop', (0.55, 0.57, 0.59)))
+    ground.data.materials.append(material('warm studio backdrop', (0.7, 0.68, 0.64)))
     move_to(ground, studio_collection)
-    bpy.ops.object.camera_add(location=(68, -84, 76))
+    bpy.ops.object.camera_add(location=(64, -95, 65))
     cam = bpy.context.object
     cam.rotation_euler = (Vector((0, 0, 12)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
     cam.data.type = 'ORTHO'
-    cam.data.ortho_scale = 85
+    cam.data.ortho_scale = 91
     bpy.context.scene.camera = cam
     move_to(cam, studio_collection)
     for location, energy, size in [((25, 0, 90), 180000, 70), ((-45, 25, 50), 80000, 60)]:
@@ -354,7 +420,7 @@ def export_blender(parts):
         move_to(light, studio_collection)
     scene = bpy.context.scene
     scene.render.engine = 'CYCLES'
-    scene.cycles.samples = 32
+    scene.cycles.samples = 48
     scene.world.color = (0.3, 0.3, 0.3)
     scene.render.resolution_x = 1100
     scene.render.resolution_y = 850
@@ -372,12 +438,16 @@ def export_blender(parts):
                 area.spaces.active.shading.color_type = 'MATERIAL'
     bpy.ops.wm.save_as_mainfile(filepath=str(ROOT / 'blocked.blend'))
     bpy.ops.render.render(write_still=True)
+    cam.location = (64, 95, 65)
+    cam.rotation_euler = (Vector((0, 0, 12)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
+    scene.render.filepath = str(ROOT / 'rear.png')
+    bpy.ops.render.render(write_still=True)
     lid.location.z += 22
     for obj in (cap, switch_body, switch_top, switch_stem, legend):
         obj.location.z += 22
     cam.location = (68, 84, 94)
     cam.rotation_euler = (Vector((0, 0, 26)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
-    cam.data.ortho_scale = 99
+    cam.data.ortho_scale = 110
     scene.render.filepath = str(ROOT / 'exploded.png')
     bpy.ops.render.render(write_still=True)
     print('MESH_VALIDATION ' + json.dumps(report))
