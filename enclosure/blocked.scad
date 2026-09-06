@@ -40,6 +40,8 @@ module lid() {
       }
       translate([-17.5, 0, -18.2]) cylinder(h=18.25, r1=3.2, r2=3.2, $fn=64);
       translate([17.5, 0, -18.2]) cylinder(h=18.25, r1=3.2, r2=3.2, $fn=64);
+      translate([0, -14.05, -2]) translate([-6, -4.55, 0]) cube([12, 9.1, 2.05]);
+      translate([0, 14.05, -2]) translate([-6, -4.55, 0]) cube([12, 9.1, 2.05]);
     }
     translate([0, 0, -0.05]) translate([-7.05, -7.05, 0]) cube([14.1, 14.1, 1.6]);
     translate([-17.5, 0, -18.25]) cylinder(h=3.25, r1=1.7, r2=1.7, $fn=64);

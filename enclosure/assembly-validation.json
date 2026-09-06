@@ -1,10 +1,10 @@
 {
   "status": "PASS",
-  "blend_sha256": "31ef9b38b9cf4e02e6bdc9b1522a6ff860b2239b7e089806c1107056d5c0a38b",
+  "blend_sha256": "e2241e58587b79dd45c18669c9a66a4b45cd5d7ea5ae9f43dcd151f8629d8bd0",
   "blender_version": "5.2.1 LTS",
-  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed.",
-  "limits": "Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. Keycap socket/skirt fit, solder joints, wire bends, screw thread form, heat-set strength and USB insertion flex excluded. Press-fit insert/plastic overlap is intentional and excluded.",
-  "checked_pairs": 383,
+  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel.",
+  "limits": "Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, heat-set strength and USB insertion flex excluded. Press-fit insert/plastic overlap is intentional and excluded.",
+  "checked_pairs": 460,
   "failures": [],
   "results": [
     {
@@ -423,6 +423,26 @@
       "intersection_mm3": 0.0
     },
     {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
       "first": "BOOT actuator | approximate photo envelope",
       "second": "base",
       "intersection_mm3": 0.0
@@ -1920,6 +1940,371 @@
     {
       "first": "Gateron upper housing | drawing-based envelope",
       "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_+1 | approximate engaged reference",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SNAP_LATCH_-1 | approximate engaged reference",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_LATCH_SERVICE_KEEPOUT_+1",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_LATCH_SERVICE_KEEPOUT_-1",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "SWITCH_SOLDER_SERVICE_KEEPOUT | access with lid removed",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "1.5u ivory keycap | sculpted reference, NOT printable",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "1.5u ivory keycap | sculpted reference, NOT printable",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "KEYCAP_MX_SOCKET | illustrative blind cross recess, not measured OEM geometry",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "KEYCAP_MX_SOCKET | illustrative blind cross recess, not measured OEM geometry",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "KEYCAP_FULL_TRAVEL_SHELL",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "KEYCAP_FULL_TRAVEL_SHELL",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "KEYCAP_FULL_TRAVEL_SOCKET",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "KEYCAP_FULL_TRAVEL_SOCKET",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "STEM_FULL_TRAVEL",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "STEM_FULL_TRAVEL",
+      "second": "lid",
       "intersection_mm3": 0.0
     }
   ]

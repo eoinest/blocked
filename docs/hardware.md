@@ -18,6 +18,11 @@ full travel and off-center presses with the purchased cap.
 list. The build needs no battery, keyboard PCB, stabilizer, diode, or external
 resistor.
 
+For the mechanical connection, follow the [key mounting guide](key-mounting.md):
+flange on top of the lid, both switch clips latched underneath, and the cap
+pressed straight onto the centred MX stem. The lid ribs carry the key load;
+wires and ESP32 pins do not support the switch.
+
 ## Wiring
 
 Unplug USB before soldering. The only two connections are:
@@ -36,7 +41,7 @@ The two switch contacts have no polarity. Pressing the switch connects GPIO4 to 
 
 A “3-pin” MX switch has two metal electrical terminals and one plastic locating post. A “5-pin” version adds two plastic stabilizing posts. Solder to the **metal terminals**, not the plastic posts or optional LED contacts. With the board unplugged, a multimeter across the switch terminals should show open circuit when released and continuity when pressed.
 
-1. Fit the switch in the printed plate coupon first. Leave the keycap off while soldering.
+1. Verify the switch and cap on the printed plate coupon first, then clip the switch into the final lid. Leave the keycap off while soldering and support the lid without loading the stem.
 2. Tin the wire ends and the two switch terminals, then solder one wire to each. Follow the switch manufacturer's soldering limits; avoid holding heat on the plastic body. Use the soldering kit's stand, ventilation and eye protection.
 3. Solder the other wire ends to GPIO4 and GND on the board. Short stripped ends and small joints are easier to insulate in the enclosure. No headers are needed.
 4. Cover bare joints with heat-shrink or insulating tape, inspect for solder bridges, and check that pressing the key closes only the intended GPIO-to-ground path.

@@ -43,4 +43,6 @@ before final assembly. Small supplies can share one Adafruit order.
   [switch coupon](enclosure/stl/fit-coupon.stl), [M2 insert coupon](enclosure/stl/insert-coupon.stl), and [M1.6 insert coupon](enclosure/stl/board-insert-coupon.stl) first. No paint is required for this BOM.
 
 Mounting and screw installation: [enclosure guide](docs/enclosure.md).
+The switch uses its existing plate clips and the cap uses its MX socket;
+the integral lid ribs add no purchased parts. [Key mounting and service](docs/key-mounting.md).
 Electrical assembly: [hardware guide](docs/hardware.md).

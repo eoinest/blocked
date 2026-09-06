@@ -106,7 +106,10 @@ def geometry():
     lid_skin = union(rounded(w, d, plate-chamfer+EPS, r),
                      rounded(w, d, chamfer, r, z=plate-chamfer,
                              top_scale=(w-2*chamfer)/w))
-    lid = difference(union(lid_skin, skirt, *posts), *lid_cuts)
+    # Ribs meet the registration skirt but leave the clip land at 1.5 mm.
+    ribs = [box(P['lid_rib_width'],P['lid_rib_length'],P['lid_rib_depth']+EPS,
+                y=y,z=-P['lid_rib_depth']) for y in (-P['lid_rib_y'],P['lid_rib_y'])]
+    lid = difference(union(lid_skin, skirt, *posts, *ribs), *lid_cuts)
     # Apertures increase left-to-right; small edge notches mark 1, 2, 3.
     coupon_cuts = []
     for index, (x, opening) in enumerate(((-21.5, 14.0), (0, 14.1), (21.5, 14.2))):
@@ -344,7 +347,7 @@ def export_blender(parts):
         bevel.segments = 2
     plate_top = P['base_height'] + P['plate']
     # Sculpted 1.5u purchased-keycap reference: tapered skirt and shallow dish.
-    # This is intentionally not an STL and has no manufactured MX stem socket.
+    # Hollow illustrative shell/socket: assumptions, not a manufactured cap CAD.
     cap_bottom = plate_top + P['keycap_rest_gap']
     cap_top = cap_bottom + P['keycap_height']
     def outline(width, depth, radius):
@@ -379,6 +382,25 @@ def export_blender(parts):
     cap = bpy.data.objects.new('1.5u ivory keycap | sculpted reference, NOT printable', cap_mesh)
     bpy.context.collection.objects.link(cap)
     cap.data.materials.append(ivory)
+    cavity=primitive(rounded(P['keycap_width']-2*P['keycap_wall'],
+                              P['keycap_depth']-2*P['keycap_wall'],6.55,1,
+                              z=cap_bottom-EPS,top_scale=.78))
+    bpy.context.view_layer.objects.active=cap
+    modifier=cap.modifiers.new('Illustrative hollow underside','BOOLEAN')
+    modifier.operation='DIFFERENCE'; modifier.solver='EXACT'; modifier.object=cavity
+    bpy.ops.object.modifier_apply(modifier=modifier.name)
+    bpy.data.objects.remove(cavity,do_unlink=True)
+    socket_bottom=plate_top+P['keycap_socket_bottom_above_plate']
+    socket_clearance=P['keycap_socket_cross_clearance']
+    socket_boss=evaluate(difference(
+        cylinder(P['keycap_socket_outer_diameter']/2,cap_top-1.6-socket_bottom,z=socket_bottom),
+        union(box(4+socket_clearance,1.1+socket_clearance,
+                  P['keycap_socket_recess_depth']+EPS,z=socket_bottom-EPS),
+              box(1.3+socket_clearance,4+socket_clearance,
+                  P['keycap_socket_recess_depth']+EPS,z=socket_bottom-EPS))))
+    socket_boss.name='KEYCAP_MX_SOCKET | illustrative blind cross recess, not measured OEM geometry'
+    socket_boss.data.materials.clear(); socket_boss.data.materials.append(ivory)
+    for face in socket_boss.data.polygons: face.material_index=0
     for face in cap.data.polygons:
         face.use_smooth = True
     bevel = cap.modifiers.new('Soft molded rim and skirt', 'BEVEL')
@@ -399,6 +421,14 @@ def export_blender(parts):
         obj.data.materials.append(mat)
         for face in obj.data.polygons: face.material_index=0
     switch_extras=[]
+    switch_clips=[]
+    for direction in (-1,1):
+        clip=evaluate(union(box(5,.3,1.65,y=direction*6.95,z=P['base_height']-1.7),
+                            box(5,.85,.5,y=direction*7.375,z=P['base_height']-.55)))
+        clip.name=f'SWITCH_SNAP_LATCH_{direction:+d} | approximate engaged reference'
+        clip.data.materials.clear(); clip.data.materials.append(milky)
+        for face in clip.data.polygons: face.material_index=0
+        switch_clips.append(clip); switch_extras.append(clip)
     for x,y in C['switch']['drawing_grid_pin_positions']['electrical']:
         obj=primitive(box(.55,.3,2.8,x=x,y=y,z=switch_lower_z-2.8))
         obj.name='Gateron electrical pin | drawing-grid position, approximate blade section'
@@ -481,6 +511,26 @@ def export_blender(parts):
         obj.color=(1,.25,.03,1)
         obj['purpose']='Nominal GPIO solder/wire access; must not intersect case or mounting posts.'
         move_to(obj,keepout_collection); header_keepouts.append(obj)
+    service_keepouts=[]
+    for direction in (-1,1):
+        obj=primitive(box(6,1.8,3,y=direction*8.1,z=P['base_height']-3.05))
+        obj.name=f'SWITCH_LATCH_SERVICE_KEEPOUT_{direction:+d}'
+        obj['purpose']='Illustrative access beside latch, with lid removed; no guaranteed tool model.'
+        obj.display_type='WIRE'; obj.hide_render=True
+        move_to(obj,keepout_collection); service_keepouts.append(obj)
+    solder_access=primitive(box(12,12,4,z=switch_lower_z-4))
+    solder_access.name='SWITCH_SOLDER_SERVICE_KEEPOUT | access with lid removed'
+    solder_access.display_type='WIRE'; solder_access.hide_render=True
+    move_to(solder_access,keepout_collection); service_keepouts.append(solder_access)
+    travel_refs=[]
+    for source,name in ((cap,'KEYCAP_FULL_TRAVEL_SHELL'),(socket_boss,'KEYCAP_FULL_TRAVEL_SOCKET'),
+                        (switch_stem,'STEM_FULL_TRAVEL')):
+        obj=source.copy(); obj.data=source.data.copy(); obj.modifiers.clear()
+        bpy.context.collection.objects.link(obj); obj.name=name
+        obj.location.z-=C['switch']['published_dimensions']['travel_max']
+        obj.display_type='WIRE'; obj.hide_render=True
+        obj['purpose']='3.4 mm depressed position. Socket/housing internal nesting unverified.'
+        move_to(obj,keepout_collection); travel_refs.append(obj)
     def wire_path(name,points,mat,radius=.45):
         curve=bpy.data.curves.new(name,'CURVE'); curve.dimensions='3D'
         spline=curve.splines.new('POLY'); spline.points.add(len(points)-1)
@@ -566,7 +616,7 @@ def export_blender(parts):
     conform.use_negative_direction = True
     conform.use_positive_direction = False
     conform.offset = 0.025
-    for obj in (cap,switch_body,switch_top,switch_stem,board,usb,legend,*inserts,*screws,
+    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,board,usb,legend,*inserts,*screws,
                 *switch_extras,*board_extras,*board_mount_refs,*wires,cable_body,cable):
         move_to(obj, reference_collection)
     # Validate the modeled GPIO access cylinders against the printable parts.
@@ -601,6 +651,9 @@ def export_blender(parts):
         'pcb_intersection_base_mm3':intersection_volume(objects['base'],board),
         'pcb_intersection_lid_mm3':intersection_volume(objects['lid'],board),
         'switch_housing_intersection_lid_mm3':intersection_volume(objects['lid'],switch_top)+intersection_volume(objects['lid'],switch_body),
+        'switch_latches_intersection_lid_mm3':sum(intersection_volume(objects['lid'],o) for o in switch_clips),
+        'service_keepouts_intersection_lid_mm3':sum(intersection_volume(objects['lid'],o) for o in service_keepouts),
+        'depressed_keycap_shell_intersection_lid_mm3':intersection_volume(objects['lid'],travel_refs[0]),
         'illustrative_keycap_depressed_gap_mm':round(P['keycap_rest_gap']-C['switch']['published_dimensions']['travel_max'],3)
     }
     bpy.data.objects.remove(bundle,do_unlink=True)
@@ -646,15 +699,15 @@ def export_blender(parts):
                 area.spaces.active.clip_end = 10000
                 area.spaces.active.shading.color_type = 'MATERIAL'
     bpy.ops.wm.save_as_mainfile(filepath=str(ROOT / 'blocked.blend'))
-    if '--mounting-only' not in sys.argv:
+    if '--mounting-only' not in sys.argv and '--key-mounting-only' not in sys.argv:
         bpy.ops.render.render(write_still=True)
     cam.location = (64, 95, 65)
     cam.rotation_euler = (Vector((0, 0, 12)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
     scene.render.filepath = str(ROOT / 'rear.png')
-    if '--mounting-only' not in sys.argv:
+    if '--mounting-only' not in sys.argv and '--key-mounting-only' not in sys.argv:
         bpy.ops.render.render(write_still=True)
     lid.location.z += 22
-    for obj in (cap, switch_body, switch_top, switch_stem, legend, *inserts,*switch_extras):
+    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,legend,*inserts,*switch_extras):
         obj.location.z += 22
     for obj in (*wires,cable,cable_body): obj.hide_render=True
     for obj in screws:
@@ -664,13 +717,13 @@ def export_blender(parts):
     cam.rotation_euler = (Vector((0, 0, 26)) - cam.location).to_track_quat('-Z', 'Y').to_euler()
     cam.data.ortho_scale = 110
     scene.render.filepath = str(ROOT / 'exploded.png')
-    if '--mounting-only' not in sys.argv:
+    if '--mounting-only' not in sys.argv and '--key-mounting-only' not in sys.argv:
         bpy.ops.render.render(write_still=True)
     # Dedicated mounting diagram using actual mounting-hole coordinates.
     # The board and its screws are lifted for visibility; the two base posts stay put.
     lid.hide_render = True
     objects['base'].hide_render = True
-    for obj in (cap, switch_body, switch_top, switch_stem, legend,*switch_extras):
+    for obj in (cap,socket_boss,switch_body,switch_top,switch_stem,legend,*switch_extras):
         obj.hide_render = True
     for obj in inserts:
         obj.location.z -= 22
@@ -732,6 +785,76 @@ def export_blender(parts):
     diagram_text('Case: 2 x M2 x 8 PH1 screws + 2 x M2 x 3 inserts', -47, -43, 1.8)
     diagram_text('32 electrical holes remain accessible; no edge clips or PCB drilling', -47, -48, 1.6)
     scene.render.filepath = str(ROOT / 'mounting.png')
+    if '--key-mounting-only' not in sys.argv:
+        bpy.ops.render.render(write_still=True)
+    # Key retention detail: sectioned purchased parts on the left, lid underside
+    # on the right. These presentation copies never alter the saved assembly.
+    for col in (print_collection,reference_collection,studio_collection):
+        for obj in col.objects:
+            if obj.type not in ('CAMERA','LIGHT') and obj!=ground:
+                obj.hide_render=True
+    ground.location.z=-18
+    section_material=material('key mount section face',(0.36,.39,.43))
+    def section_copy(source,name,shift_x=0,lift=0,cut=True):
+        obj=source.copy(); obj.data=source.data.copy(); obj.modifiers.clear()
+        bpy.context.collection.objects.link(obj)
+        obj.location=(0,0,0); obj.rotation_euler=(0,0,0); obj.hide_render=False
+        if cut:
+            cutter=primitive(box(60,80,100,x=-30.02,z=-10))
+            mod=obj.modifiers.new('Presentation section only','BOOLEAN')
+            mod.operation='DIFFERENCE'; mod.solver='EXACT'; mod.object=cutter
+            bpy.context.view_layer.objects.active=obj; bpy.ops.object.modifier_apply(modifier=mod.name)
+            bpy.data.objects.remove(cutter,do_unlink=True)
+        obj.location.x=shift_x; obj.location.z=lift
+        if source.name.startswith('SWITCH_SNAP_LATCH'):
+            obj.data.materials.clear(); obj.data.materials.append(copper)
+            for face in obj.data.polygons: face.material_index=0
+        obj.name=name; move_to(obj,studio_collection); return obj
+    key_lid=evaluate(difference(parts['lid'],
+                               box(60,80,80,x=-30.02,z=-30),
+                               box(80,80,30,z=-35)))
+    key_lid.location=(-23,0,P['base_height'])
+    key_lid.data.materials.clear(); key_lid.data.materials.append(section_material)
+    for face in key_lid.data.polygons: face.material_index=0
+    key_lid.name='Key detail | sectioned lid; lower case posts omitted'
+    move_to(key_lid,studio_collection)
+    for obj in (switch_body,switch_top,switch_stem,*switch_extras):
+        section_copy(obj,'Key detail section | '+obj.name,-23)
+    for obj in (cap,socket_boss):
+        section_copy(obj,'Key detail raised section | '+obj.name,-23,8)
+    # Underside inspection copy, with tall case posts clipped away in this view.
+    underside=evaluate(difference(parts['lid'],box(80,80,30,z=-35)))
+    for vertex in underside.data.vertices:
+        vertex.co.x+=25
+        vertex.co.y=-vertex.co.y
+        vertex.co.z=18-vertex.co.z
+    underside.name='Key detail underside | full ribs and clip land; tall case posts omitted'
+    underside.data.materials.clear(); underside.data.materials.append(section_material)
+    for face in underside.data.polygons: face.material_index=0
+    move_to(underside,studio_collection)
+    for source in (switch_body,*switch_extras):
+        obj=section_copy(source,'Key detail underside | '+source.name,cut=False)
+        for vertex in obj.data.vertices:
+            vertex.co.x+=25
+            vertex.co.y=-vertex.co.y
+            vertex.co.z=18-(vertex.co.z-P['base_height'])
+    cam.location=(-68,-110,94)
+    cam.rotation_euler=(Vector((0,0,22))-cam.location).to_track_quat('-Z','Y').to_euler()
+    cam.data.ortho_scale=113
+    scene.render.resolution_x=1500; scene.render.resolution_y=1500
+    camera_rotation=cam.rotation_euler.to_quaternion()
+    right=camera_rotation @ Vector((1,0,0)); up=camera_rotation @ Vector((0,1,0))
+    forward=camera_rotation @ Vector((0,0,-1))
+    diagram_text('KEY MOUNTING',-52,44,3.2)
+    diagram_text('MX press-fit cap + snap-in switch; no extra screws or glue',-52,39,1.9)
+    diagram_text('Section: cap lifted 8 mm',-52,33,1.7)
+    diagram_text('Underside: ribs, latches and solder access',-2,33,1.65)
+    diagram_text('Cap: hollow shell and blind cross socket press onto the MX stem',-52,-31,1.8)
+    diagram_text('Switch: flange above 1.5 mm plate; two latches (orange) catch underneath',-52,-36,1.65)
+    diagram_text('Square opening prevents rotation; two 2 mm ribs stiffen the lid',-52,-41,1.8)
+    diagram_text('3.4 mm travel leaves 0.8 mm nominal skirt gap; verify with purchased cap',-52,-46,1.65)
+    diagram_text('Socket, latch shape and seating are illustrative; physical fit testing required',-52,-51,1.55)
+    scene.render.filepath=str(ROOT/'key-mounting.png')
     bpy.ops.render.render(write_still=True)
     print('MESH_VALIDATION ' + json.dumps(report))
 

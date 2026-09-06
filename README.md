@@ -48,15 +48,18 @@ rules still apply.
 ## Make one
 
 1. Start with the [condensed shopping list](BOM.md) and [custom keycap order settings](keycap/README.md), then check your board against [the hardware guide](docs/hardware.md).
-2. Solder the two wires, then [build and flash the firmware](firmware/README.md).
+2. Verify the switch coupon and clip the switch into the lid using the [key mounting guide](docs/key-mounting.md). Solder the two wires, then [build and flash the firmware](firmware/README.md).
 3. [Build and install the Mac companion](companion/README.md). Run `gh auth login`
    on the recipient's Mac and grant the app Automation access to Chrome.
 4. Focus a PR and press the button in dry-run mode. Verify the target and body.
-5. Check [component dimensions and remaining measurements](docs/component-accuracy.md), then print the switch and insert coupons and [the enclosure](docs/enclosure.md).
+5. Check [component dimensions and remaining measurements](docs/component-accuracy.md), then print the insert coupons and remaining [enclosure parts](docs/enclosure.md).
    Mount the PCB through its two dedicated holes with M1.6 × 4 mm screws, then
    close the lid with two M2 × 8 mm countersunk screws. Both use brass inserts.
    Add the keycap and adhesive feet.
 6. Enable live reviews in the app when ready.
+
+The [key mounting guide](docs/key-mounting.md) covers the switch's plate clips,
+reinforced lid, centred Tab keycap socket, full travel and service access.
 
 See [the staged bring-up checklist](docs/bring-up.md) for assembly and the
 physical acceptance checks. Setup needs a USB data cable, a soldering iron,

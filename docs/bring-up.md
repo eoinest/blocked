@@ -12,6 +12,11 @@ An LED lighting up only proves the cable supplies power.
 
 ## 2. Check the switch and solder two wires
 
+Print the switch coupon and lid first, following the [key mounting guide](key-mounting.md).
+Check both retaining clips and cap travel on the coupon, then clip the switch
+into the final lid before connecting both ends of its wires. The flange and
+ESP32 are too large to thread through the switch aperture afterward.
+
 With everything unplugged, use a multimeter's continuity mode across the two
 metal switch contacts: open when released, connected when pressed. Wire one
 contact to the documented button GPIO and the other to GND. The switch has no
@@ -57,10 +62,10 @@ has agreed to the test. The recipient must use their own GitHub CLI identity.
 Do not use their own authored PR to test request-changes; GitHub restricts
 self-reviews. Confirm the posted review reads exactly `blocked`.
 
-## 5. Print the fit coupon, then the case
+## 5. Finish the case and check the assembly
 
-Use [the enclosure guide](enclosure.md). First print the switch fit coupon and
-test the actual switch. Then print the shell and check the actual board, plug
+Use [the enclosure guide](enclosure.md). With the switch coupon and lid already
+checked, print the insert coupons and remaining shell. Check the actual board, plug
 overmold, screws, wire routing, and key travel. Nothing should flex the PCB or
 press against a solder joint. Adjust the parameters if your printer or clone
 board needs different clearances.

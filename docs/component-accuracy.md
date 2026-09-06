@@ -33,6 +33,12 @@ No manufacturer-authored S2 Mini PCB/Gerber/STEP source was found in the [offici
 
 ## Measurements needed before declaring fit
 
+The [key mounting guide](key-mounting.md) adds Gateron's specified plate and
+aperture tolerances, lid reinforcement, clip retention and service procedure.
+The hollow cap, socket and latch shapes in Blender explain the interfaces;
+their unspecified dimensions remain approximations. The ribs are original
+enclosure geometry, not a modification to the purchased switch.
+
 1. **PCB:** overall size and thickness; both hole diameters; hole centre spacing; hole centre setback from the antenna edge. Measure from the edge to a hole's near edge and add half its diameter to obtain the centre setback.
 2. **Populated board:** USB socket width, height and overhang; maximum top/bottom component height; button protrusions; solder-joint clearance. Keep all 32 electrical holes accessible.
 3. **Keycap and switch:** cap stem seating depth, skirt clearance at full travel, overall heights and the switch's lowest pin after soldering. Target at least 2 mm from switch pins/solder to the tallest board component.

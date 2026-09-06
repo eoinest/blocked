@@ -9,8 +9,8 @@ This is a **46 × 42 × 22 mm** case for the selected S2 Mini V1.0.0 board, a Ga
 ## How the parts mount
 
 - **PCB:** two M1.6 screws pass through the two large holes at the antenna end into brass inserts in the base standoffs. All 32 electrical header holes remain separate from the mount.
-- **Switch:** its retaining clips engage the lid's 1.5 mm plate around the MX aperture.
-- **Keycap:** the purchased Tab cap seats on the switch stem.
+- **Switch:** its flange bears on the lid, two clips latch beneath the 1.5 mm plate, and the square aperture prevents rotation. Two underside ribs stiffen the lid without thickening the clip land.
+- **Keycap:** the purchased Tab cap presses onto the centred MX cross stem. See the [complete key mounting guide](key-mounting.md) for the section view, fit checks and removal procedure.
 - **Case:** two countersunk M2 screws enter from underneath and engage brass inserts in the lid posts.
 - **Desk:** four adhesive-backed rubber feet fit the bottom pockets. Their exposed side grips the desk by friction.
 
@@ -40,6 +40,8 @@ The origin is the case centre in x/y and the outside base bottom in z. USB faces
 | Case | 46 × 42 × 22 mm; base height 20.5 mm, lid plate 1.5 mm |
 | Shell | 2 mm floor/walls; 3 mm outside corner radius |
 | Switch aperture | 14.1 × 14.1 mm; tune with the switch coupon |
+| Switch aperture / plate finished targets | Gateron: 14.00 +0.05/−0.02 mm aperture, 1.50 +0.01/−0.05 mm plate; CAD aperture compensates for print shrinkage |
+| Lid reinforcing ribs | Two integral 12 × 9.1 × 2 mm ribs, x = 0, y = ±14.05 mm; clip land remains 1.5 mm |
 | PCB envelope | 25.4 × 34.3 mm; centre y = +1.5 mm |
 | PCB bottom / thickness | z = 5.5 mm / **1.6 mm provisional** |
 | PCB mounting holes | Ø2.0 mm; x = ±10.2 mm, y = −12.35 mm |
@@ -89,9 +91,9 @@ The independent [assembly checker](../enclosure/check-assembly.py) tests the sav
 2. Print the switch and both insert coupons in the intended material. The switch clips must latch and return freely. For inserts, choose a bore where the pilot just pre-seats with slight resistance before heating. The nominal M1.6/M2 bores are 2.2/3.2 mm; the initial CAD values add 0.2 mm for printer shrinkage. Update **board_insert_seat_diameter** / **insert_seat_diameter** after the coupon trial. See [CNC Kitchen's sizing guidance](https://www.cnckitchen.com/blog/are-our-heat-set-insert-datasheets-wrong).
 3. Print the base floor-down and lid top-down. Use a 0.4 mm nozzle, 0.1 mm layers for the lid/coupons and 0.16–0.2 mm for the base, starting with four walls and five floor layers. Inspect the slicer's post walls and rear-opening bridge. The lid is 19.7 mm tall in its print orientation because the posts extend upward. PLA is suitable for a desk prototype; PETG is another option.
 4. **Install inserts before electronics.** Heat-set two M1.6 inserts flush into the base posts and two M2 inserts flush into the lid posts. Keep them square, let them cool, and confirm the appropriate screws run freely. Remove debris and confirm the blind bores have tip clearance.
-5. Flash and test the board. With USB unplugged, wire GPIO4 and GND to the switch, insulate exposed terminals and leave enough slack to remove the lid. Keep solder and wires clear of the mounting holes and screw heads.
+5. Flash and test the board. Clip the switch into the lid before connecting both ends of its wires, following the [key mounting guide](key-mounting.md). With USB unplugged, wire GPIO4 and GND to the switch, insulate exposed terminals and leave enough slack to remove the lid. Keep solder and wires clear of the mounting holes and screw heads.
 6. Lower the PCB onto the two standoffs, align its large holes, and install the **two M1.6 × 4 mm screws from above**. Tighten gently until retained. The board must not bend and the screws must not touch adjacent components. Verify every electrical pin hole remains accessible.
-7. Clip the switch into the lid, route the service loop, and hand-seat the lid. Check switch pins and solder remain at least **2 mm** above the tallest PCB component. Close with the **two M2 × 8 mm countersunk screws from underneath**, stopping when secure; heads should be flush or slightly recessed. Do not pull an obstructed lid shut with screws.
+7. Confirm both switch clips latch beneath the lid and the flange sits flat, following the [key mounting guide](key-mounting.md). Route the service loop and hand-seat the lid. Check switch pins and solder remain at least **2 mm** above the tallest PCB component. Close with the **two M2 × 8 mm countersunk screws from underneath**, stopping when secure; heads should be flush or slightly recessed. Do not pull an obstructed lid shut with screws.
 8. Fit the purchased Tab keycap and check full travel/return, including off-centre presses. Cut four 8 × 8 mm feet from the BOM's 1 mm Type D pads, round their corners, and attach them in the recesses.
 9. Test cable insertion/removal and repeated presses. Because the USB end extends beyond the two-hole mount, inspect board flex and fastener stability. Unplug and reopen to check for rubbing or pinched wires before declaring the assembly ready.
 

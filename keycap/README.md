@@ -34,6 +34,9 @@ describes colored caps as ABS. This is an MX-compatible, non-shine-through cap.
 1.5u Tab option is the intended fit; exact external dimensions and stem location
 were not verified against a manufacturer drawing. The Blender reference is
 approximate, so check seating and free return before final assembly.
+The [key mounting guide](../docs/key-mounting.md) explains the centred MX socket,
+switch clips, full-travel checks and removal. The hollow socket shown in Blender
+is illustrative; it does not replace the manufacturer's moulded cap.
 
 For US delivery, the [shipping policy](https://maxkeyboard.com/shipping-information.html)
 lists 3–5 business days for production plus 3–7 business days for standard
