@@ -1,7 +1,7 @@
 {
   "bottom_inset_mm" : 2,
   "caution" : "Canvas represents placement intent; actual vendor top printable dimensions remain unverified. Request proof. Preview outline is not printable artwork.",
-  "color_basis" : "Visual Apple-style gray approximation, not an official Apple ink specification",
+  "color_basis" : "Photo-based neutral gray from Apple MJLX4 image, compared with three independent photos; see color-research.md. Not an official ink specification.",
   "font" : ".SF Compact Regular",
   "font_source" : "Installed macOS \/System\/Library\/Fonts\/SFCompact.ttf; font binary not distributed",
   "ink_bounds_pixels" : [
@@ -10,7 +10,7 @@
     900,
     202.40899123834424
   ],
-  "ink_srgb_hex" : "#6E6E73",
+  "ink_srgb_hex" : "#8B8B8B",
   "left_inset_mm" : 2,
   "nominal_canvas_mm" : [
     27,

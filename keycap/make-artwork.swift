@@ -31,9 +31,9 @@ for run in CTLineGetGlyphRuns(line) as! [CTRun] {
 let box = letters.boundingBoxOfPath
 let scale = 900 / box.width // 9 mm at 100 px/mm
 let width = 2700, height = 1800
-// Visual Apple-style gray approximation; not a manufacturer ink specification.
-let inkHex = "#6E6E73"
-let inkRGB: [CGFloat] = [110.0/255, 110.0/255, 115.0/255, 1]
+// Photo-based match to Apple official MJLX4 image; not a physical ink specification.
+let inkHex = "#8B8B8B"
+let inkRGB: [CGFloat] = [139.0/255, 139.0/255, 139.0/255, 1]
 // SVG y grows down. Artwork's ink bounds have exactly 2 mm left/bottom inset.
 var transform = CGAffineTransform(a: scale, b: 0, c: 0, d: -scale,
     tx: 200 - box.minX * scale, ty: 1600 + box.minY * scale)
@@ -55,7 +55,7 @@ artwork.applyWithBlock { ptr in
 let svg = """
 <svg xmlns="http://www.w3.org/2000/svg" width="27mm" height="18mm" viewBox="0 0 2700 1800">
 <title>blocked — SF Compact Regular, lower-left Tab keycap artwork</title>
-<desc>Transparent nominal placement canvas, not a keycap dimensional drawing. Cool-gray legend (#6E6E73, visual approximation) 9 mm wide, 2 mm from left and bottom. Preserve placement; confirm on vendor proof. Lettering is paths, no embedded font.</desc>
+<desc>Transparent nominal placement canvas, not a keycap dimensional drawing. Neutral-gray legend (#8B8B8B, visual approximation) 9 mm wide, 2 mm from left and bottom. Preserve placement; confirm on vendor proof. Lettering is paths, no embedded font.</desc>
 <path fill="\(inkHex)" d="\(commands.joined(separator: " "))"/>
 </svg>
 """
@@ -82,7 +82,7 @@ let info: [String: Any] = [
     "font": CTFontCopyFullName(font) as String,
     "postscript_name": CTFontCopyPostScriptName(font) as String,
     "font_source": "Installed macOS /System/Library/Fonts/SFCompact.ttf; font binary not distributed",
-    "ink_srgb_hex": inkHex, "color_basis": "Visual Apple-style gray approximation, not an official Apple ink specification",
+    "ink_srgb_hex": inkHex, "color_basis": "Photo-based neutral gray from Apple MJLX4 image, compared with three independent photos; see color-research.md. Not an official ink specification.",
     "text": "blocked", "word_width_mm": 9, "left_inset_mm": 2, "bottom_inset_mm": 2,
     "nominal_canvas_mm": [27,18], "png_pixels": [width,height],
     "ink_bounds_pixels": [artwork.boundingBoxOfPath.minX, artwork.boundingBoxOfPath.minY, artwork.boundingBoxOfPath.width, artwork.boundingBoxOfPath.height],

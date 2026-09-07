@@ -1,0 +1,376 @@
+{
+  "status": "Photo-based approximation; no public Apple physical ink specification found",
+  "selected_srgb_hex": "#8B8B8B",
+  "method": "Three manually selected legend ROIs per image; select pixels with encoded-RGB weighted luminance less than 75% of local white-key patch luminance; report per-channel medians. No ICC profiles were present, so sRGB is assumed. No illumination normalization or claim of physical colorimetry.",
+  "decision": "Use the neutral median (139,139,139) recurring in Apple\u2019s official high-resolution image. Independent photos show a broad lighting-dependent range and are not averaged into a fictitious ink specification.",
+  "samples": [
+    {
+      "file": "apple-official.jpg",
+      "sha256": "b07f598a52b058b18c63d177184a9226622328e0e6f790abd6f7c4b3431c1e70",
+      "pixels": [
+        4000,
+        4000
+      ],
+      "samples": [
+        {
+          "legend": "Q",
+          "ink_roi_xyxy": [
+            629,
+            1840,
+            683,
+            1920
+          ],
+          "white_roi_xyxy": [
+            600,
+            1930,
+            710,
+            1950
+          ],
+          "nearby_key_rgb": [
+            243,
+            244,
+            248
+          ],
+          "threshold_luminance": 183.06,
+          "selected_pixels": 811,
+          "legend_rgb_median": [
+            139,
+            139,
+            139
+          ]
+        },
+        {
+          "legend": "A",
+          "ink_roi_xyxy": [
+            692,
+            2080,
+            744,
+            2155
+          ],
+          "white_roi_xyxy": [
+            650,
+            2170,
+            760,
+            2190
+          ],
+          "nearby_key_rgb": [
+            243,
+            244,
+            248
+          ],
+          "threshold_luminance": 183.06,
+          "selected_pixels": 601,
+          "legend_rgb_median": [
+            139,
+            140,
+            140
+          ]
+        },
+        {
+          "legend": "control",
+          "ink_roi_xyxy": [
+            445,
+            2645,
+            615,
+            2705
+          ],
+          "white_roi_xyxy": [
+            440,
+            2570,
+            600,
+            2610
+          ],
+          "nearby_key_rgb": [
+            243,
+            244,
+            248
+          ],
+          "threshold_luminance": 183.06,
+          "selected_pixels": 1304,
+          "legend_rgb_median": [
+            139,
+            139,
+            139
+          ]
+        }
+      ],
+      "image_url": "https://store.storeimages.cdn-apple.com/1/as-images.apple.com/is/MJLX4?wid=4000&hei=4000&fmt=jpeg&qlt=90&.v=1785993102206"
+    },
+    {
+      "file": "kawabata.jpg",
+      "sha256": "aa4a580f92c936b179fc94c61fed1571925ce015db6769700f05f8d6a29b1e34",
+      "pixels": [
+        1280,
+        670
+      ],
+      "samples": [
+        {
+          "legend": "Q",
+          "ink_roi_xyxy": [
+            389,
+            105,
+            444,
+            164
+          ],
+          "white_roi_xyxy": [
+            350,
+            170,
+            430,
+            195
+          ],
+          "nearby_key_rgb": [
+            197,
+            198,
+            192
+          ],
+          "threshold_luminance": 148.02,
+          "selected_pixels": 761,
+          "legend_rgb_median": [
+            79,
+            84,
+            82
+          ]
+        },
+        {
+          "legend": "A",
+          "ink_roi_xyxy": [
+            397,
+            329,
+            450,
+            386
+          ],
+          "white_roi_xyxy": [
+            368,
+            390,
+            440,
+            420
+          ],
+          "nearby_key_rgb": [
+            189,
+            187,
+            180
+          ],
+          "threshold_luminance": 140.19,
+          "selected_pixels": 735,
+          "legend_rgb_median": [
+            73,
+            78,
+            77
+          ]
+        },
+        {
+          "legend": "tab",
+          "ink_roi_xyxy": [
+            118,
+            124,
+            191,
+            163
+          ],
+          "white_roi_xyxy": [
+            128,
+            88,
+            205,
+            111
+          ],
+          "nearby_key_rgb": [
+            203,
+            206,
+            199
+          ],
+          "threshold_luminance": 153.64,
+          "selected_pixels": 674,
+          "legend_rgb_median": [
+            85,
+            90,
+            91
+          ]
+        }
+      ],
+      "image_url": "https://assets.st-note.com/production/uploads/images/145075035/rectangle_large_type_2_8930053f6dcdf808020b572e7135fa73.jpg?width=1280"
+    },
+    {
+      "file": "applesfera.jpg",
+      "sha256": "058ee53754656f5705bfaf56219daf2b87af95c6335dccc58aa0af9138eae41e",
+      "pixels": [
+        1280,
+        720
+      ],
+      "samples": [
+        {
+          "legend": "Q",
+          "ink_roi_xyxy": [
+            436,
+            332,
+            502,
+            371
+          ],
+          "white_roi_xyxy": [
+            430,
+            303,
+            465,
+            322
+          ],
+          "nearby_key_rgb": [
+            236,
+            240,
+            243
+          ],
+          "threshold_luminance": 179.52,
+          "selected_pixels": 424,
+          "legend_rgb_median": [
+            121,
+            122,
+            127
+          ]
+        },
+        {
+          "legend": "A",
+          "ink_roi_xyxy": [
+            634,
+            397,
+            689,
+            432
+          ],
+          "white_roi_xyxy": [
+            615,
+            385,
+            639,
+            398
+          ],
+          "nearby_key_rgb": [
+            236,
+            239,
+            244
+          ],
+          "threshold_luminance": 179.04,
+          "selected_pixels": 358,
+          "legend_rgb_median": [
+            120,
+            120,
+            126
+          ]
+        },
+        {
+          "legend": "tab",
+          "ink_roi_xyxy": [
+            237,
+            525,
+            295,
+            562
+          ],
+          "white_roi_xyxy": [
+            249,
+            493,
+            280,
+            509
+          ],
+          "nearby_key_rgb": [
+            235,
+            239,
+            242
+          ],
+          "threshold_luminance": 178.77,
+          "selected_pixels": 411,
+          "legend_rgb_median": [
+            148,
+            149,
+            154
+          ]
+        }
+      ],
+      "image_url": "https://i.blogs.es/98e2f3/teclado/1366_2000.jpg"
+    },
+    {
+      "file": "appleinsider.jpg",
+      "sha256": "8a7c7c054b0c7fec9088d9e2d4056e203f9203dbaf5637c68d56435033ce23be",
+      "pixels": [
+        1280,
+        720
+      ],
+      "samples": [
+        {
+          "legend": "shift",
+          "ink_roi_xyxy": [
+            236,
+            497,
+            274,
+            568
+          ],
+          "white_roi_xyxy": [
+            280,
+            495,
+            350,
+            535
+          ],
+          "nearby_key_rgb": [
+            213,
+            209,
+            198
+          ],
+          "threshold_luminance": 156.79,
+          "selected_pixels": 321,
+          "legend_rgb_median": [
+            133,
+            135,
+            128
+          ]
+        },
+        {
+          "legend": "return",
+          "ink_roi_xyxy": [
+            460,
+            474,
+            500,
+            555
+          ],
+          "white_roi_xyxy": [
+            506,
+            485,
+            551,
+            526
+          ],
+          "nearby_key_rgb": [
+            209,
+            205,
+            193
+          ],
+          "threshold_luminance": 153.74,
+          "selected_pixels": 456,
+          "legend_rgb_median": [
+            118,
+            121,
+            113
+          ]
+        },
+        {
+          "legend": "delete",
+          "ink_roi_xyxy": [
+            894,
+            450,
+            958,
+            530
+          ],
+          "white_roi_xyxy": [
+            969,
+            476,
+            1002,
+            504
+          ],
+          "nearby_key_rgb": [
+            212,
+            206,
+            193
+          ],
+          "threshold_luminance": 154.75,
+          "selected_pixels": 554,
+          "legend_rgb_median": [
+            107,
+            109,
+            97
+          ]
+        }
+      ],
+      "image_url": "https://photos5.appleinsider.com/gallery/47827-93583-47145-91853-000-lead-Magic-Keyboard-xl-xl.jpg"
+    }
+  ]
+}
