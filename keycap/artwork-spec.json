@@ -1,0 +1,24 @@
+{
+  "bottom_inset_mm" : 2,
+  "caution" : "Canvas represents placement intent; actual vendor top printable dimensions remain unverified. Request proof. Preview outline is not printable artwork.",
+  "font" : ".SF Compact Regular",
+  "font_source" : "Installed macOS \/System\/Library\/Fonts\/SFCompact.ttf; font binary not distributed",
+  "ink_bounds_pixels" : [
+    200,
+    1397.5910087616558,
+    900,
+    202.40899123834424
+  ],
+  "left_inset_mm" : 2,
+  "nominal_canvas_mm" : [
+    27,
+    18
+  ],
+  "png_pixels" : [
+    2700,
+    1800
+  ],
+  "postscript_name" : ".SFCompact-Regular",
+  "text" : "blocked",
+  "word_width_mm" : 9
+}

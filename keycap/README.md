@@ -11,21 +11,45 @@ The exact 1.5u configuration was checked in the live selector on September 5,
 | Keycap Color | **White** (Beige is available if you prefer a warmer cap) |
 | Print Area | **TOP Print only** |
 | Quantity | **1** |
-| Upload Your Artwork | [blocked-artwork.png](blocked-artwork.png) |
+| Upload Your Artwork | [blocked-tab-upload.svg](blocked-tab-upload.svg) (preferred vector) or [blocked-tab-upload.png](blocked-tab-upload.png) |
+
+The current design uses **Apple SF Compact Regular**, rendered from the font
+already installed on the Mac. The lowercase word sits at the **lower-left of
+the TOP surface**, as viewed by the person typing. Use the selected **R3 1x1.5
+(Tab / \|)** option, White, TOP Print only.
 
 Paste this into the comments field:
 
-> Print lowercase “blocked” in black on the TOP surface, near the front-left
-> corner when viewed from the typist's position. Keep the word approximately
-> 9 mm wide, with about 2 mm clearance from the usable top surface's left and
-> front edges. Leave the rest of the white keycap blank. Do not enlarge the
-> word to fill the entire key. Please provide a placement proof before printing.
+> Print the supplied lowercase “blocked” lettering in black on the TOP surface
+> of the white R3 1x1.5 Tab keycap. Preserve the supplied font shapes. Set the
+> word approximately 9 mm wide, with its visible ink 2 mm from the usable top
+> surface's LEFT and FRONT (lower) edges, viewed from the typist's position.
+> Do not center the word or enlarge it to fill the key. The transparent canvas
+> communicates placement; adjust to your actual printable surface. Please
+> provide a placement proof before printing.
 
-The PNG contains dark text on transparency, exceeds the vendor's 300 px minimum,
-and is below the 2 MB upload limit. It contains the legend only; the comments
-specify its final size and placement. A proof has **not** been requested or
-received; the text above is ready for your eventual order. No order has been
-placed.
+The SVG contains outlined lettering only, with no embedded font or live text.
+The transparent PNG is 2700 × 1800 px, about 102 KB, satisfying the shown
+300 px minimum and 2 MB maximum. Upload **one** of these two files. The
+[placement preview](blocked-tab-placement-preview.png) is illustrative and
+contains a white key shape; **do not upload the preview as print artwork**.
+The 27 × 18 mm artwork canvas conveys layout intent, not verified dimensions
+of the vendor's sculpted top surface. The older `blocked-artwork.png` is
+superseded by these files.
+
+[Apple identifies SF Compact](https://developer.apple.com/fonts/) as part of
+its San Francisco family. This is an Apple-style composition, not a claim that
+the exact weight, spacing and geometry match every Apple keyboard generation.
+The artwork was rendered with the macOS-bundled font; no font file is included.
+[macOS Sequoia's license, section 2E](https://www.apple.com/legal/sla/docs/macOSSequoia.pdf)
+addresses display/printing with bundled fonts and separate font-embedding
+restrictions. The standalone developer-font download has different terms;
+noncommercial intent alone is not blanket font permission.
+
+To regenerate on a Mac with the bundled SF Compact font, run
+`swift keycap/make-artwork.swift` from the repository root. The script creates
+the two upload files, the placement preview and [artwork-spec.json](artwork-spec.json).
+No order or vendor proof has been requested by the project.
 
 Max's [profile guide](https://maxkeyboard.com/mechanical-keycap-layout-and-size-chart.html)
 describes OEM profile, and its [keycap guide](https://blog.maxkeyboard.com/dwkb/keycap-types/)
