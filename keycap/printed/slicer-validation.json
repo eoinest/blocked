@@ -1,0 +1,136 @@
+{
+  "status": "PASS for nominal slicing; unprinted prototypes",
+  "slicer": {
+    "name": "Bambu Studio",
+    "version": "2.8.2.61",
+    "source": "https://github.com/bambulab/BambuStudio/releases/tag/v02.08.02.61",
+    "cli_reference": "https://github.com/bambulab/BambuStudio/wiki/Command-Line-Usage"
+  },
+  "input": {
+    "file": "stl/blocked-tab-all-options.stl",
+    "sha256": "a4e2de4b38ad94ce1dc0aad3e99157e8f00ae2d7b2dfaafd685e36ec318f1dda",
+    "parts": 12,
+    "caps": 9,
+    "fit_coupons": 3,
+    "triangles": 56064,
+    "size_mm": [
+      98.0,
+      92.675,
+      7.888
+    ],
+    "orientation": "Generated face-down orientation retained; arranged by translation only"
+  },
+  "settings": {
+    "machine": "Bambu Lab A1 0.4 nozzle",
+    "filament": "Generic PLA @BBL A1",
+    "bed": "Textured PEI Plate",
+    "layer_height_mm": 0.12,
+    "initial_layer_height_mm": 0.2,
+    "wall_generator": "Arachne",
+    "wall_loops": 4,
+    "infill_percent": 100,
+    "infill_pattern": "Rectilinear (Bambu enum zig-zag)",
+    "support": false,
+    "raft_layers": 0,
+    "brim": false,
+    "outer_wall_speed_mm_s": 30,
+    "small_perimeter_speed_mm_s": 20,
+    "first_layer_wall_and_infill_speed_mm_s": 20,
+    "elephant_foot_compensation_mm": 0,
+    "profile": "a1-process.json",
+    "profile_sha256": "cd4fbd8babd18bc5586a2d2e2549e43610d2ea50bb9f0b83a3025a76861c6880",
+    "base_profile": "0.12mm High Quality @BBL A1, flattened from official bundled profiles"
+  },
+  "slice": {
+    "return_code": 0,
+    "layers": 65,
+    "estimated_total_seconds": 4959.6,
+    "estimated_model_seconds": 4500.9,
+    "estimated_filament_g": 14.32,
+    "model_warning_message": "",
+    "model_warning_count": 0,
+    "metadata_warning_count": 2,
+    "metadata_warnings": [
+      {
+        "msg": "not_support_traditional_timelapse",
+        "level": "2",
+        "error_code": "10018003"
+      },
+      {
+        "msg": "not_support_traditional_timelapse",
+        "level": "3",
+        "error_code": "1000C003"
+      }
+    ],
+    "metadata_warning_note": "A1 traditional-timelapse capability notices; no geometric slicing warning. No printer connected."
+  },
+  "toolpath_checks": {
+    "legend": {
+      "method": "Parsed positive G1/G2/G3 extrusion, including full circles; buffered paths by their emitted LINE_WIDTH. Compared connected negative regions and counter extrusion to the exact widened legend contours at each cap location. This estimates nominal bead footprints, not physical flow.",
+      "caps_checked": [
+        "A0",
+        "B0",
+        "C0",
+        "A1",
+        "B1",
+        "C1",
+        "A2",
+        "B2",
+        "C2"
+      ],
+      "layer_z_mm": [
+        0.2,
+        0.32
+      ],
+      "separate_negative_glyph_regions_per_cap_per_layer": 7,
+      "counter_islands_with_extrusion_per_cap_per_layer": 4,
+      "result": "All nine caps pass on both first layers; enlarged e counter and increased tracking survive slicing."
+    },
+    "socket": {
+      "inspected_part": "A0",
+      "inspected_layer_z_mm": [
+        5.0,
+        7.04
+      ],
+      "result": "Horizontal blind cross and open through split remain visible in extrusion paths; socket halves continue from the previously printed root. No support extrusion generated.",
+      "limit": "Representative toolpath inspection; fit, elastic behavior and every variant dimension require the socket coupons."
+    },
+    "underside_id": {
+      "inspected_part": "A0",
+      "inspected_layer_z_mm": [
+        2.24
+      ],
+      "result": "Both recessed ID glyph paths are present.",
+      "limit": "Small identification marks are approximate at this nozzle size; all twelve IDs were not individually certified for readability."
+    },
+    "small_walls": {
+      "minimum_wall_line_width_mm": 0.345119,
+      "wall_segments_below_0_3mm": 0,
+      "wall_segments_below_0_4mm": 416,
+      "minimum_any_feature_line_width_mm": 0.0735324,
+      "note": "Very small widths occur in gap infill; minimum nominal wall width is separate from physical printable feature size."
+    }
+  },
+  "project": {
+    "file": "blocked-tab-all-options.3mf",
+    "sha256": "0efb030b749259f02f4206803e60710fe18693b5aa7740575e0a1d76172352b0",
+    "embedded_machine_filament_process_verified": true,
+    "gcode_payload_included": false,
+    "grouping": "One combined mesh object containing the twelve disconnected printable shells; split to objects in Studio if selecting individual pieces.",
+    "mesh_repairs": [
+      {
+        "face_count": "56064",
+        "edges_fixed": "0",
+        "degenerate_facets": "0",
+        "facets_removed": "0",
+        "facets_reversed": "0",
+        "backwards_edges": "0"
+      }
+    ]
+  },
+  "limits": [
+    "Not physically printed or fitted. Bed adhesion of small letter islands, extrusion calibration, PLA shrinkage, bridge quality, and socket retention remain unverified.",
+    "Face-down surface texture follows the chosen build plate.",
+    "The saved 3MF contains editable geometry and settings, not printer-ready toolpaths. Slice again after confirming the actual printer, plate and filament."
+  ]
+}

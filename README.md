@@ -49,6 +49,9 @@ rules still apply.
 
 ## Make one
 
+For an immediately printable keycap, use the [three Tab shapes and combined
+A1 print plate](keycap/printed/README.md), including socket-fit testers.
+
 1. Start with the [condensed shopping list](BOM.md) and [custom keycap order settings](keycap/README.md), then check your board against [the hardware guide](docs/hardware.md).
 2. Verify the switch coupon and clip the switch into the lid using the [key mounting guide](docs/key-mounting.md). Solder the two wires, then [build and flash the firmware](firmware/README.md).
 3. [Build and install the Mac companion](companion/README.md). Its setup window

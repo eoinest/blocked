@@ -1,0 +1,185 @@
+{
+  "units": "mm",
+  "printer": "Bambu Lab A1",
+  "nozzle_mm": 0.4,
+  "material_assumption": "regular PLA",
+  "status": "unprinted physical fit prototypes",
+  "socket": {
+    "boss_diameter": 5.2,
+    "depth": 3.6,
+    "horizontal_span": 4.1,
+    "horizontal_bar_base": 1.1,
+    "vertical_slot_base": 1.3,
+    "total_width_additions": [
+      0,
+      0.1,
+      0.2
+    ],
+    "split_axis": "Y",
+    "root_flare_start": 3.8
+  },
+  "styles": [
+    {
+      "id": "A",
+      "name": "Flat Tab",
+      "radius": 2,
+      "top": 7.2,
+      "angle": 0
+    },
+    {
+      "id": "B",
+      "name": "Soft Tab",
+      "radius": 5,
+      "top": 7.2,
+      "angle": 0
+    },
+    {
+      "id": "C",
+      "name": "Tilt Tab",
+      "radius": 3,
+      "top": 7.7,
+      "angle": 5
+    }
+  ],
+  "parts": {
+    "A0": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1256.127,
+      "triangles": 5612,
+      "plate_center_xy": [
+        20,
+        20
+      ]
+    },
+    "B0": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1211.866,
+      "triangles": 5986,
+      "plate_center_xy": [
+        55,
+        20
+      ]
+    },
+    "C0": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1260.631,
+      "triangles": 5960,
+      "plate_center_xy": [
+        90,
+        20
+      ]
+    },
+    "F0": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 245.217,
+      "triangles": 1658
+    },
+    "A1": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1253.882,
+      "triangles": 5252,
+      "plate_center_xy": [
+        20,
+        46
+      ]
+    },
+    "B1": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1209.621,
+      "triangles": 5626,
+      "plate_center_xy": [
+        55,
+        46
+      ]
+    },
+    "C1": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1258.386,
+      "triangles": 5598,
+      "plate_center_xy": [
+        90,
+        46
+      ]
+    },
+    "F1": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 242.989,
+      "triangles": 1284
+    },
+    "A2": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1251.495,
+      "triangles": 5584,
+      "plate_center_xy": [
+        20,
+        72
+      ]
+    },
+    "B2": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1207.235,
+      "triangles": 5958,
+      "plate_center_xy": [
+        55,
+        72
+      ]
+    },
+    "C2": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1255.999,
+      "triangles": 5930,
+      "plate_center_xy": [
+        90,
+        72
+      ]
+    },
+    "F2": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 240.587,
+      "triangles": 1616
+    }
+  },
+  "plate_bounds_mm": [
+    [
+      6.0,
+      104.0
+    ],
+    [
+      10.325027465820312,
+      103.0
+    ],
+    [
+      -4.0651590893503453e-07,
+      7.88798713684082
+    ]
+  ],
+  "plate_size_mm": [
+    98.0,
+    92.675,
+    7.888
+  ],
+  "plate_parts": 12,
+  "legend": {
+    "text": "blocked",
+    "word_width_before_outline": 14.1,
+    "outline_expansion": 0.07,
+    "base_scaled_word_width": 12,
+    "added_tracking": 0.35,
+    "small_counter_expansion": 0.15,
+    "depth": 0.4,
+    "position": "lower left",
+    "source": "../blocked-tab-upload.svg"
+  }
+}

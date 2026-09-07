@@ -1,5 +1,8 @@
 # Order the `blocked` keycap
 
+Want a printable cap while the custom one is being made? See the
+[three Blender-designed Tab prototypes and A1 print plate](printed/README.md).
+
 Recommended: [Max Keyboard — Custom Art & Custom Color Keycaps](https://maxkeyboard.com/custom-art-icon-or-text-cherry-mx-keycaps.html).
 Use a **standard Tab-sized, 1.5u keycap**, with the custom legend **`blocked`**.
 The exact 1.5u configuration was checked in the live selector on September 5,

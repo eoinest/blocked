@@ -1,0 +1,498 @@
+{
+  "status": "PASS",
+  "scope": "Independent audit of exported binary STL geometry only; no actual switch, filament, printer, fit, retention or full-stroke physical test performed.",
+  "methods": [
+    "Parsed binary STL files directly with Python standard library; exact float32 coordinate welding, no mesh repair or geometry modification.",
+    "Checked every edge has exactly two opposing face incidences, every vertex link forms one cycle, zero degenerate triangles, positive signed volume and expected face-connected component counts.",
+    "Checked floor minimum within 0.0001 mm and positive contact triangle area; all 66 individual-part XY bounding-box pairs are disjoint.",
+    "Matched combined-plate connected components exactly to individual exported triangles.",
+    "Inverted exported print transforms to recover source mouth/ceiling, crown and flare coordinates; evaluated nominal fully depressed height against housing top plane."
+  ],
+  "file_results": {
+    "A0-flat-tab.stl": {
+      "triangles": 5612,
+      "unique_vertices": 2808,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1256.12693,
+      "minimum_z_mm": 1.9746732959902147e-07,
+      "maximum_z_mm": 7.200000762939453,
+      "bed_contact_triangle_area_mm2": 453.414791,
+      "bounds_mm": [
+        [
+          6.0,
+          34.0
+        ],
+        [
+          11.0,
+          29.0
+        ],
+        [
+          1.9746732959902147e-07,
+          7.200000762939453
+        ]
+      ],
+      "sha256": "303a91924598e88ad6fe32ceb63b50b4037d67178c724fda8d629c559ab05d88"
+    },
+    "A1-flat-tab.stl": {
+      "triangles": 5252,
+      "unique_vertices": 2628,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1253.882183,
+      "minimum_z_mm": 1.9746732959902147e-07,
+      "maximum_z_mm": 7.200000762939453,
+      "bed_contact_triangle_area_mm2": 453.414775,
+      "bounds_mm": [
+        [
+          6.0,
+          34.0
+        ],
+        [
+          37.0,
+          55.0
+        ],
+        [
+          1.9746732959902147e-07,
+          7.200000762939453
+        ]
+      ],
+      "sha256": "b6318be376d9009f247e8571e71b086e5a5b27ddee535f07571764cc1422b699"
+    },
+    "A2-flat-tab.stl": {
+      "triangles": 5584,
+      "unique_vertices": 2794,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1251.495484,
+      "minimum_z_mm": 1.9746732959902147e-07,
+      "maximum_z_mm": 7.200000762939453,
+      "bed_contact_triangle_area_mm2": 453.41483,
+      "bounds_mm": [
+        [
+          6.0,
+          34.0
+        ],
+        [
+          63.0,
+          81.0
+        ],
+        [
+          1.9746732959902147e-07,
+          7.200000762939453
+        ]
+      ],
+      "sha256": "c5866f61db2a1bab3e86d49454c0a5aaf953296c089f6b37eec5eb9cd8cda0c3"
+    },
+    "B0-soft-tab.stl": {
+      "triangles": 5986,
+      "unique_vertices": 2995,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1211.865984,
+      "minimum_z_mm": 1.9746732959902147e-07,
+      "maximum_z_mm": 7.200000762939453,
+      "bed_contact_triangle_area_mm2": 436.523592,
+      "bounds_mm": [
+        [
+          41.0,
+          69.0
+        ],
+        [
+          11.0,
+          29.0
+        ],
+        [
+          1.9746732959902147e-07,
+          7.200000762939453
+        ]
+      ],
+      "sha256": "b80773370d87ae482c3fec9bf8eec362e22854f3497beee79412ba69e23ea8f3"
+    },
+    "B1-soft-tab.stl": {
+      "triangles": 5626,
+      "unique_vertices": 2815,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1209.621214,
+      "minimum_z_mm": 1.9746732959902147e-07,
+      "maximum_z_mm": 7.200000762939453,
+      "bed_contact_triangle_area_mm2": 436.523576,
+      "bounds_mm": [
+        [
+          41.0,
+          69.0
+        ],
+        [
+          37.0,
+          55.0
+        ],
+        [
+          1.9746732959902147e-07,
+          7.200000762939453
+        ]
+      ],
+      "sha256": "45afd847499b7e1d0261c662b3be9e2d1700b5aaf9e7bb125ecd0c633131b3a8"
+    },
+    "B2-soft-tab.stl": {
+      "triangles": 5958,
+      "unique_vertices": 2981,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1207.234495,
+      "minimum_z_mm": 1.9746732959902147e-07,
+      "maximum_z_mm": 7.200000762939453,
+      "bed_contact_triangle_area_mm2": 436.523631,
+      "bounds_mm": [
+        [
+          41.0,
+          69.0
+        ],
+        [
+          63.0,
+          81.0
+        ],
+        [
+          1.9746732959902147e-07,
+          7.200000762939453
+        ]
+      ],
+      "sha256": "9119c7034f6e9781b62fcde4967058482f5395185632e08cc72787d4aee2efce"
+    },
+    "C0-tilt-tab.stl": {
+      "triangles": 5960,
+      "unique_vertices": 2982,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1260.630641,
+      "minimum_z_mm": -5.960464477539063e-08,
+      "maximum_z_mm": 7.88798713684082,
+      "bed_contact_triangle_area_mm2": 451.167508,
+      "bounds_mm": [
+        [
+          76.0,
+          104.0
+        ],
+        [
+          10.325027465820312,
+          28.541950225830078
+        ],
+        [
+          -5.960464477539063e-08,
+          7.88798713684082
+        ]
+      ],
+      "sha256": "f314cd9d9939fa6ec3902735390f4cc294abbc0681fade61b217e76249e3d1e3"
+    },
+    "C1-tilt-tab.stl": {
+      "triangles": 5598,
+      "unique_vertices": 2801,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1258.385903,
+      "minimum_z_mm": -5.960464477539063e-08,
+      "maximum_z_mm": 7.886665344238281,
+      "bed_contact_triangle_area_mm2": 451.167552,
+      "bounds_mm": [
+        [
+          76.0,
+          104.0
+        ],
+        [
+          36.32502746582031,
+          54.54195022583008
+        ],
+        [
+          -5.960464477539063e-08,
+          7.886665344238281
+        ]
+      ],
+      "sha256": "9bd95a50d6dec04592e00d8d48e9f99f8ddde08f948e23a65cedb07ce9820014"
+    },
+    "C2-tilt-tab.stl": {
+      "triangles": 5930,
+      "unique_vertices": 2967,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 1255.999102,
+      "minimum_z_mm": -5.960464477539063e-08,
+      "maximum_z_mm": 7.885343074798584,
+      "bed_contact_triangle_area_mm2": 451.167554,
+      "bounds_mm": [
+        [
+          76.0,
+          104.0
+        ],
+        [
+          62.32502746582031,
+          80.54194641113281
+        ],
+        [
+          -5.960464477539063e-08,
+          7.885343074798584
+        ]
+      ],
+      "sha256": "760b5de42edce698ccd9bb727efab35424f4730466b563d56576ea22e806b8b5"
+    },
+    "F0-socket-coupon.stl": {
+      "triangles": 1658,
+      "unique_vertices": 829,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 245.217027,
+      "minimum_z_mm": -4.0651590893503453e-07,
+      "maximum_z_mm": 6.599999904632568,
+      "bed_contact_triangle_area_mm2": 85.205156,
+      "bounds_mm": [
+        [
+          15.0,
+          25.0
+        ],
+        [
+          93.0,
+          103.0
+        ],
+        [
+          -4.0651590893503453e-07,
+          6.599999904632568
+        ]
+      ],
+      "sha256": "fb71ce8ab6e7da348d90cacba9f62d77c9b3b8f2d4728af2cd992e81c5fc22e5"
+    },
+    "F1-socket-coupon.stl": {
+      "triangles": 1284,
+      "unique_vertices": 644,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 242.989467,
+      "minimum_z_mm": -4.0651590893503453e-07,
+      "maximum_z_mm": 6.599999904632568,
+      "bed_contact_triangle_area_mm2": 85.205154,
+      "bounds_mm": [
+        [
+          50.0,
+          60.0
+        ],
+        [
+          93.0,
+          103.0
+        ],
+        [
+          -4.0651590893503453e-07,
+          6.599999904632568
+        ]
+      ],
+      "sha256": "c9cb67614e03a5eb481b3182aab918e465158232a28d95379ee0131ca449923e"
+    },
+    "F2-socket-coupon.stl": {
+      "triangles": 1616,
+      "unique_vertices": 810,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 1,
+      "signed_volume_mm3": 240.586585,
+      "minimum_z_mm": -4.0651590893503453e-07,
+      "maximum_z_mm": 6.599999904632568,
+      "bed_contact_triangle_area_mm2": 85.205151,
+      "bounds_mm": [
+        [
+          85.0,
+          95.0
+        ],
+        [
+          93.0,
+          103.0
+        ],
+        [
+          -4.0651590893503453e-07,
+          6.599999904632568
+        ]
+      ],
+      "sha256": "005d997dba94358ca48ad4438926caf06c43c2b85746cae830e43e6c0f199356"
+    },
+    "blocked-tab-all-options.stl": {
+      "triangles": 56064,
+      "unique_vertices": 28054,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 12,
+      "signed_volume_mm3": 11894.035015,
+      "minimum_z_mm": -4.0651590893503453e-07,
+      "maximum_z_mm": 7.88798713684082,
+      "bed_contact_triangle_area_mm2": 4278.933271,
+      "bounds_mm": [
+        [
+          6.0,
+          104.0
+        ],
+        [
+          10.325027465820312,
+          103.0
+        ],
+        [
+          -4.0651590893503453e-07,
+          7.88798713684082
+        ]
+      ],
+      "sha256": "a4e2de4b38ad94ce1dc0aad3e99157e8f00ae2d7b2dfaafd685e36ec318f1dda"
+    },
+    "socket-fit-coupons.stl": {
+      "triangles": 4558,
+      "unique_vertices": 2283,
+      "edge_incidence_not_two": 0,
+      "inconsistently_oriented_edges": 0,
+      "nonmanifold_vertex_links": 0,
+      "degenerate_triangles": 0,
+      "face_connected_components": 3,
+      "signed_volume_mm3": 728.793079,
+      "minimum_z_mm": -4.0651590893503453e-07,
+      "maximum_z_mm": 6.599999904632568,
+      "bed_contact_triangle_area_mm2": 255.615461,
+      "bounds_mm": [
+        [
+          15.0,
+          95.0
+        ],
+        [
+          93.0,
+          103.0
+        ],
+        [
+          -4.0651590893503453e-07,
+          6.599999904632568
+        ]
+      ],
+      "sha256": "f29d71837306093276c06c53e6892ad4413e149ea96c0f4bebec6e510e400e17"
+    }
+  },
+  "plate": {
+    "parts": 12,
+    "xy_bounds_pairs_checked": 66,
+    "minimum_xy_aabb_separation_mm": 7.0,
+    "closest_pair": [
+      "A0-flat-tab.stl",
+      "B0-soft-tab.stl"
+    ],
+    "combined_plate_matches_individual_stls_exactly": true,
+    "combined_fit_coupons_match_individual_stls_exactly": true
+  },
+  "nominal_mechanical_assumptions": {
+    "plate_top_reference_z_mm": 0,
+    "modeled_housing_top_z_mm": 5,
+    "modeled_male_stem_top_at_rest_z_mm": 8.4,
+    "socket_ceiling_depth_mm": 3.6,
+    "derived_socket_mouth_at_rest_z_mm": 4.8,
+    "travel_mm": 3.4,
+    "derived_socket_mouth_at_full_travel_z_mm": 1.4
+  },
+  "recovered_export_clearances": {
+    "A0": {
+      "recovered_socket_mouth_z_mm": -1e-06,
+      "socket_ceiling_faces_at_3_6mm": 72,
+      "recovered_crown_minimum_local_z_mm": 4.799999,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 1.199999,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199999
+    },
+    "A1": {
+      "recovered_socket_mouth_z_mm": -1e-06,
+      "socket_ceiling_faces_at_3_6mm": 84,
+      "recovered_crown_minimum_local_z_mm": 4.799999,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 1.199999,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199999
+    },
+    "A2": {
+      "recovered_socket_mouth_z_mm": -1e-06,
+      "socket_ceiling_faces_at_3_6mm": 76,
+      "recovered_crown_minimum_local_z_mm": 4.799999,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 1.199999,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199999
+    },
+    "B0": {
+      "recovered_socket_mouth_z_mm": -1e-06,
+      "socket_ceiling_faces_at_3_6mm": 72,
+      "recovered_crown_minimum_local_z_mm": 4.799999,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 1.199999,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199999
+    },
+    "B1": {
+      "recovered_socket_mouth_z_mm": -1e-06,
+      "socket_ceiling_faces_at_3_6mm": 84,
+      "recovered_crown_minimum_local_z_mm": 4.799999,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 1.199999,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199999
+    },
+    "B2": {
+      "recovered_socket_mouth_z_mm": -1e-06,
+      "socket_ceiling_faces_at_3_6mm": 76,
+      "recovered_crown_minimum_local_z_mm": 4.799999,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 1.199999,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199999
+    },
+    "C0": {
+      "recovered_socket_mouth_z_mm": -2e-06,
+      "socket_ceiling_faces_at_3_6mm": 72,
+      "recovered_crown_minimum_local_z_mm": 4.543221,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 0.943221,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199998
+    },
+    "C1": {
+      "recovered_socket_mouth_z_mm": -2e-06,
+      "socket_ceiling_faces_at_3_6mm": 84,
+      "recovered_crown_minimum_local_z_mm": 4.543221,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 0.943221,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199998
+    },
+    "C2": {
+      "recovered_socket_mouth_z_mm": -2e-06,
+      "socket_ceiling_faces_at_3_6mm": 76,
+      "recovered_crown_minimum_local_z_mm": 4.543221,
+      "nominal_full_travel_crown_to_housing_top_gap_mm": 0.943221,
+      "nominal_full_travel_flare_to_housing_top_gap_mm": 0.199998
+    }
+  },
+  "uncertainties": [
+    "The male stem height and housing internal opening are approximate references; the split boss nesting into the switch is not validated.",
+    "Printed socket fit, elastic recovery, extraction force and retention are unknown. Nominal near-pocket tip wall thickness is roughly 0.47\u20130.49 mm, near a single 0.4 mm extrusion width; use fit coupons without forcing.",
+    "Crown/flare clearance uses a fixed housing-top envelope and assumed stem seating. Different physical seating changes all calculated gaps.",
+    "Mesh topology and disjoint plate bounds do not prove extrusion quality, overhang behavior, glyph readability, fatigue strength or collision-free internal switch travel.",
+    "No full self-intersection search was run; manifold topology and coherent positive volumes were checked."
+  ],
+  "failures": []
+}
