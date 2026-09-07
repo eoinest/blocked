@@ -66,6 +66,8 @@ The PCB contact collars have approximately 0.99 mm nominal clearance to the near
 
 ## Files and Blender workflow
 
+- [blocked-print-plate.stl](../enclosure/stl/blocked-print-plate.stl): base and lid together, already oriented and separated by 6 mm; requires a 98 × 42 mm footprint before brim/support allowance.
+- [blocked-print-plate-with-coupons.stl](../enclosure/stl/blocked-print-plate-with-coupons.stl): both case parts plus all three fit coupons; 108 × 90 mm footprint. Coupons are normally printed first to tune fit before committing to the case.
 - [blocked.blend](../enclosure/blocked.blend): editable assembly. **PRINTABLE** contains the base, lid and coupons; reference collections contain the purchased-part models and clearance geometry.
 - [base.stl](../enclosure/stl/base.stl) and [lid.stl](../enclosure/stl/lid.stl): millimetre units, oriented for printing. Lid is top-down.
 - [fit-coupon.stl](../enclosure/stl/fit-coupon.stl): switch apertures 14.0, 14.1 and 14.2 mm, marked with one, two and three notches.
@@ -85,6 +87,11 @@ From the repository root:
 /Applications/Blender.app/Contents/MacOS/Blender \
   --background --factory-startup --threads 4 \
   --python enclosure/check-assembly.py
+
+# Rebuild the combined print plates after regenerating individual STLs:
+/Applications/Blender.app/Contents/MacOS/Blender \
+  --background --factory-startup --threads 4 \
+  --python enclosure/print-layout.py
 ```
 
 Use Blender 4 or later; these files were generated with Blender 5.2.1. Regeneration overwrites the generated files, so save manual Blender edits separately. Purchased-part references are **not** printable replacements for the electronics, switch, cap, screws or nuts.

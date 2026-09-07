@@ -1,0 +1,35 @@
+{
+  "blocked-print-plate": {
+    "parts": [
+      "base",
+      "lid"
+    ],
+    "dimensions_mm": [
+      98.0,
+      42.0,
+      20.5
+    ],
+    "minimum_part_spacing_mm": 6,
+    "all_parts_manifold": true,
+    "all_parts_on_z_zero": true,
+    "orientation": "Source print orientation retained: base floor-down, lid top-down"
+  },
+  "blocked-print-plate-with-coupons": {
+    "parts": [
+      "base",
+      "lid",
+      "fit-coupon",
+      "case-fastener-coupon",
+      "board-fastener-coupon"
+    ],
+    "dimensions_mm": [
+      108.0,
+      90.0,
+      20.5
+    ],
+    "minimum_part_spacing_mm": 6,
+    "all_parts_manifold": true,
+    "all_parts_on_z_zero": true,
+    "orientation": "Source print orientation retained: base floor-down, lid top-down"
+  }
+}
