@@ -16,11 +16,14 @@ The exact 1.5u configuration was checked in the live selector on September 5,
 The current design uses **Apple SF Compact Regular**, rendered from the font
 already installed on the Mac. The lowercase word sits at the **lower-left of
 the TOP surface**, as viewed by the person typing. Use the selected **R3 1x1.5
-(Tab / \|)** option, White, TOP Print only.
+(Tab / \|)** option, White, TOP Print only. The lettering is cool gray
+**sRGB #6E6E73 (RGB 110, 110, 115)**, chosen as a visual Apple-style approximation.
+It is not an official Apple ink specification; ask the printer to confirm the
+printed gray on the white cap in the proof.
 
 Paste this into the comments field:
 
-> Print the supplied lowercase “blocked” lettering in black on the TOP surface
+> Print the supplied lowercase “blocked” lettering in cool gray (sRGB #6E6E73) on the TOP surface
 > of the white R3 1x1.5 Tab keycap. Preserve the supplied font shapes. Set the
 > word approximately 9 mm wide, with its visible ink 2 mm from the usable top
 > surface's LEFT and FRONT (lower) edges, viewed from the typist's position.
@@ -29,7 +32,7 @@ Paste this into the comments field:
 > provide a placement proof before printing.
 
 The SVG contains outlined lettering only, with no embedded font or live text.
-The transparent PNG is 2700 × 1800 px, about 102 KB, satisfying the shown
+The transparent PNG is 2700 × 1800 px, under 200 KB, satisfying the shown
 300 px minimum and 2 MB maximum. Upload **one** of these two files. The
 [placement preview](blocked-tab-placement-preview.png) is illustrative and
 contains a white key shape; **do not upload the preview as print artwork**.
