@@ -92,7 +92,7 @@
       "mounting_pad_diameter": 3.5,
       "wire_access_keepout_radius": 1.1
     },
-    "limits": "No Gerbers, board layout, component BOM, or exact clone CAD supplied. Header grid, component placement, underside solder protrusion, antenna traces and corner/notch geometry are inferred. Do not certify fit from these meshes alone. Only the two mounting holes support the PCB; no support is assumed at the USB end."
+    "limits": "No Gerbers, board layout, component BOM, or exact clone CAD supplied. Header grid, component placement, underside solder protrusion, antenna traces and corner/notch geometry are inferred. Do not certify fit from these meshes alone. Two existing mounting holes clamp the PCB. Two additional plain USB-end support strips contact photo-inferred bare underside areas; verify the actual board before tightening."
   },
   "board_photo_envelopes": {
     "status": "Positions and heights below are approximate from official WEMOS photos, not manufacturer package/assembly CAD.",
@@ -350,10 +350,10 @@
     }
   },
   "case_screw": {
-    "part": "Ordered Maierke kit M2x8 socket-cap screw",
+    "part": "Required M2x20 socket-cap screw; confirm this length is in the ordered kit or obtain separately",
     "nominal_assumed": {
       "thread": "M2x0.4",
-      "under_head_length": 8,
+      "under_head_length": 20,
       "head_diameter": 4,
       "head_height": 2.1,
       "drive": "1.5 mm hex"
@@ -361,10 +361,10 @@
     "limits": "Kit head geometry unpublished; conservative nominal envelope based on standard supplier references. Measure purchased parts and print fit coupon. No threads, knurl or exact drive geometry modeled."
   },
   "board_screw": {
-    "part": "Ordered Maierke kit M1.6x4 socket-cap screw",
+    "part": "Required M1.6x6 socket-cap screw; confirm this length is available",
     "nominal_assumed": {
       "thread": "M1.6x0.35",
-      "under_head_length": 4,
+      "under_head_length": 6,
       "head_diameter": 3.2,
       "head_height": 1.7,
       "drive": "1.5 mm hex"
@@ -378,7 +378,25 @@
       8,
       1
     ],
-    "status": "Specified cut-to-size rubber feet, with 1 mm corner radius matching the printed pockets."
+    "status": "Four trim-to-size feet moved clear of all four bottom screw-access bores.",
+    "centers": [
+      [
+        -17,
+        -15
+      ],
+      [
+        -17,
+        15
+      ],
+      [
+        17,
+        -15
+      ],
+      [
+        17,
+        15
+      ]
+    ]
   },
   "wires": {
     "gauge": "30 AWG per BOM",
@@ -425,50 +443,6 @@
     "aperture_cad_compensation": "14.1 mm CAD is a print-fit starting point, not the manufacturer aperture dimension. Coupon choice must produce an actual 13.98\u201314.05 mm opening and 1.45\u20131.51 mm plate at the clip land.",
     "stabilizer": "1.5u Tab is unstabilized per Omnitype keycap size table; one centered MX stem."
   },
-  "captive_nuts": {
-    "source": "Ordered Maierke B0GKFMJH24 assortment",
-    "case": {
-      "thread": "M2",
-      "kit_reported_af": 4,
-      "assumed_thickness": 1.6,
-      "pocket_af": 4.2,
-      "pocket_height": 1.8,
-      "pocket_bottom": 7.8,
-      "loaded_nut_bottom": 7.8
-    },
-    "board": {
-      "thread": "M1.6",
-      "kit_reported_af": 3.5,
-      "assumed_thickness": 1.3,
-      "pocket_af": 3.7,
-      "pocket_height": 1.5,
-      "pocket_top": 4.7,
-      "loaded_nut_top": 4.7,
-      "contact_collar_diameter": 5.2
-    },
-    "installation": "Slide four nuts into inward-facing side pockets before attaching PCB and closing lid. Pocket floors/roofs capture nuts vertically and parallel flats resist rotation. No heat, glue, washers or additional hardware required. With screws removed, loose nuts may slide out sideways; keep the part level and retain the nuts during service.",
-    "limits": "Nut thickness and head dimensions are unmeasured. Standard M1.6 nuts are often AF3.2; this kit reports AF3.5, so do not substitute its pocket assumptions silently. Coupon AF variants and actual-part measurement are required before final printing.",
-    "coupon_variations": {
-      "board_af": [
-        3.3,
-        3.5,
-        3.7,
-        3.8
-      ],
-      "case_af": [
-        4.1,
-        4.2,
-        4.3
-      ],
-      "paired_case_head_bores": [
-        4.2,
-        4.4,
-        4.6
-      ],
-      "head_bore_depth": 2.2,
-      "board_coupon_note": "Includes an integral 1.6 mm PCB-thickness stand-in above the post, for an M1.6x4 screw engagement test."
-    }
-  },
   "reset_boot_service": {
     "mode": "Lid-off access; no extra plungers or unmeasured external holes",
     "actuator_centers_assumed": [
@@ -489,5 +463,88 @@
       7.75
     ],
     "limits": "Use a narrow blunt nonconductive tool and adequate wire slack. Button coordinates and tool envelope are photo-based and not physically verified."
+  },
+  "exposed_nuts": {
+    "case": {
+      "thread": "M2",
+      "af": 4,
+      "assumed_thickness": 1.6,
+      "bearing_z": 22,
+      "screw_bearing_z": 4.4,
+      "screw_tip_z": 24.4
+    },
+    "board": {
+      "thread": "M1.6",
+      "af": 3.5,
+      "assumed_thickness": 1.3,
+      "bearing_z": 7.1,
+      "screw_bearing_z": 2.8,
+      "screw_tip_z": 8.8
+    },
+    "installation": "All four screws enter from underneath. Board nuts rest exposed above the PCB, accessible with the lid removed; case nuts rest exposed above the lid. Hold nuts with a suitable tool while tightening gently. There are no restrictive hex pockets, covered seats or heat-set inserts.",
+    "limits": "Kit length coverage and nut/head dimensions remain unverified. Confirm M1.6x6 and M2x20 lengths before assembly. Standard nut chamfers, full thread formation and actual tightening load are not modeled.",
+    "coupon_variations": {
+      "case_head_bores": [
+        4.2,
+        4.4,
+        4.6
+      ],
+      "case_head_bore_depth": 4.4,
+      "case_total_height": 22,
+      "board_head_bores": [
+        3.4,
+        3.6,
+        3.8
+      ],
+      "board_head_bore_depth": 2.8,
+      "board_total_height_including_pcb_standin": 7.1,
+      "stations_x": [
+        -12,
+        0,
+        12
+      ],
+      "nominal_station_x": 0
+    }
+  },
+  "board_supports": {
+    "mounting_posts": {
+      "centers": [
+        [
+          -10.2,
+          -12.35
+        ],
+        [
+          10.2,
+          -12.35
+        ]
+      ],
+      "diameter": 5.2,
+      "top_z": 5.5,
+      "through_hole": 1.8
+    },
+    "plain_usb_end_supports": {
+      "centers": [
+        [
+          -9.5,
+          17.9
+        ],
+        [
+          11,
+          17.9
+        ]
+      ],
+      "base_rectangle": [
+        3,
+        2
+      ],
+      "contact_rectangle": [
+        2,
+        1
+      ],
+      "contact_collar_height": 0.2,
+      "top_z": 5.5,
+      "holes": 0
+    },
+    "status": "Additional contact footprints inferred from official photos, not measured on the clone. Inspect for solder, switch anchors and components under each pad; do not force the board onto mismatched supports."
   }
 }

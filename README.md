@@ -31,7 +31,7 @@ permission.
 | Controller | Your existing LOLIN-style ESP32-S2 Mini, powered by USB-C |
 | Key | Gateron Baby Kangaroo 2.0 tactile switch with a custom 1.5u `blocked` keycap |
 | Wiring | Two soldered wires: GPIO4 → switch → GND; internal pull-up |
-| Case | 46 × 42 × 22 mm body; two M1.6 screws through dedicated PCB mounting holes; two hidden M2 case screws; captive hex nuts, rear USB-C cutout, recessed feet |
+| Case | 46 × 42 × 22 mm body; two M1.6 screws through dedicated PCB mounting holes; two M2 case screws; all screws enter from below with exposed nuts above; four PCB supports, rear USB-C cutout, recessed feet |
 | Mac | Native Swift menu bar app, USB serial, Chrome Automation, existing `gh` credentials |
 
 The board sends a debounced press over USB serial. The Mac app checks that
@@ -62,9 +62,10 @@ A1 print plate](keycap/printed/README.md), including socket-fit testers.
 4. Keep the button paused, choose **Test next press (no review)**, then focus a PR
    and press the key. Verify the target and body.
 5. Check [component dimensions and remaining measurements](docs/component-accuracy.md), then print the fastener coupons and remaining [enclosure parts](docs/enclosure.md).
-   Mount the PCB through its two dedicated holes with M1.6 × 4 mm screws, then
-   close the lid with two M2 × 8 mm socket-cap screws. Both use captive hex nuts
-   from the ordered Maierke assortment.
+   Mount the PCB through its two dedicated holes with M1.6 × 6 mm screws, then
+   close the lid with two M2 × 20 mm socket-cap screws. All screws enter from
+   below with exposed nuts above; four pads support the board. Check your
+   Maierke kit for these new screw lengths.
    Add the keycap and adhesive feet.
 6. Enable Blocked once when ready. Its enabled/paused state survives restarts.
 

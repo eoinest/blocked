@@ -1,7 +1,8 @@
 # Shopping list — one blocked button
 
-The revised enclosure uses **four screws and four nuts from your ordered
-Maierke kit**. No heat-set inserts or additional mounting hardware are needed.
+The revised enclosure uses **four bottom-entry screws and four exposed nuts**.
+Reuse the nuts from your Maierke kit; check it for the new **M1.6 × 6 and M2 × 20**
+screw lengths, whose inclusion has not been confirmed. No heat-set inserts are needed.
 The fewest-orders route found is one Amazon checkout plus the custom Tab keycap
 order; separate Amazon sellers may ship separate parcels. See the
 [consolidated shopping plan](docs/amazon-shopping.md).
@@ -21,12 +22,12 @@ Total: **$25.98 before shipping/tax**, assuming supplies below are already owned
 Prices and selections checked September 5, 2026; prices may change. The feet's
 adhesive attaches to the case; exposed rubber grips the desk by friction.
 
-## Covered by your ordered kits
+## Mounting hardware — check the new lengths in your kit
 
 | Use | Quantity per button | Source |
 | --- | --- | --- |
-| PCB mounting | **2 × M1.6 × 4 socket-cap screws + 2 × M1.6 nuts** | [Maierke 1050-piece kit](https://www.amazon.com/dp/B0GKFMJH24?th=1), nuts listed as 3.5 mm across flats |
-| Case closure | **2 × M2 × 8 socket-cap screws + 2 × M2 nuts** | Same Maierke kit, nuts listed as 4 mm across flats |
+| PCB mounting | **2 × M1.6 × 6 socket-cap screws + 2 × M1.6 nuts** | [Maierke 1050-piece kit](https://www.amazon.com/dp/B0GKFMJH24?th=1), nuts listed as 3.5 mm across flats |
+| Case closure | **2 × M2 × 20 socket-cap screws + 2 × M2 nuts** | Same Maierke kit, nuts listed as 4 mm across flats |
 | M3 assortment | None needed for this design | [Weideer kit](https://www.amazon.com/dp/B0DS8HYF64?th=1); keep for other projects |
 
 Both screw lengths are measured **under the head**. Use a **1.5 mm hex key**

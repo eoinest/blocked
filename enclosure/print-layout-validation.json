@@ -25,7 +25,7 @@
     "dimensions_mm": [
       108.0,
       90.0,
-      20.5
+      22.0
     ],
     "minimum_part_spacing_mm": 6,
     "all_parts_manifold": true,

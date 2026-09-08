@@ -5,9 +5,9 @@ No purchases have been made by the project.
 
 The fewest-orders route found is **one Amazon checkout plus one Max Keyboard
 order**, assuming solder, filament, a suitable driver and a USB data cable are
-already available. It reuses the nuts and screws in the small fastener kit already
-ordered. The revised Blender/STL files contain captive-nut pockets and flat-bottom
-cap-head recesses. Measure the actual kit and fit the coupons before printing
+already available. The revised design reuses the kit nuts but requires **M1.6 × 6
+and M2 × 20 screws**; check the kit for those lengths before assuming coverage.
+The revised Blender/STL files have exposed nuts and bottom-entry screw recesses. Measure the actual kit and fit the coupons before printing
 the finished case. Separate Amazon sellers may
 still ship in separate packages.
 
@@ -42,25 +42,23 @@ the small matching pack is the useful purchase here.
 
 | Already ordered | Use per button | Compatibility status |
 | --- | --- | --- |
-| [Maierke 1050-piece M1.4/M1.6/M2/M2.5 socket-cap screw, nut and washer kit](https://www.amazon.com/dp/B0GKFMJH24?th=1) | **2 × M1.6 × 4 screws + 2 × M1.6 nuts** for the PCB; **2 × M2 × 8 screws + 2 × M2 nuts** for the case | The selected kit includes these threads and lengths. Nut thickness and screw-head dimensions still need measurement. The revised CAD includes nut pockets and flat-bottom screw recesses; physical fit is still unverified. |
+| [Maierke 1050-piece M1.4/M1.6/M2/M2.5 socket-cap screw, nut and washer kit](https://www.amazon.com/dp/B0GKFMJH24?th=1) | **2 × M1.6 × 6 screws + 2 × M1.6 nuts** for the PCB; **2 × M2 × 20 screws + 2 × M2 nuts** for the case | Threads/nuts match the kit; inclusion of the revised 6 mm and 20 mm lengths is unverified. Nut thickness, screw-head size and the new print fit still need checking. |
 | [Weideer 2322-piece M3 kit](https://www.amazon.com/dp/B0DS8HYF64?th=1) | No parts required for this enclosure | M3 is too large for the board's two dedicated mounting holes. Keep for other projects. |
 
-Do not buy another fastener assortment for this route. The switch clips
+Check the existing kit before buying any missing new-length screws. The switch clips
 into its printed plate and the cap presses onto the MX stem; neither needs extra
 screws or a stabilizer.
 
 ## Revised mounting
 
-The current enclosure replaces all four heat-set inserts with side-loading hex
-nut pockets. The PCB still uses its two dedicated holes; the case closes with
-socket-cap screws in flat-bottom recesses. Locally thickened floor pads retain
-plastic above those recesses. No additional fasteners or washers are required.
+The current enclosure has four screws entering from the bottom and nuts openly
+seated above the PCB/lid. The PCB uses its two dedicated holes plus two plain
+USB-end supports. Feet have moved clear of every screw entry. Hold the exposed
+nuts with fine pliers; remove the keycap for easier case-nut access.
 
-Print the [M1.6 board coupon](../enclosure/stl/board-fastener-coupon.stl) and
-[M2 case coupon](../enclosure/stl/case-fastener-coupon.stl) first. Both screws'
-lengths exclude the heads. Verify head size, nut thickness, full engagement and
-printed pocket fit against the delivered kit. The side slots remain open for
-nut insertion/removal: handle the loose nuts carefully during disassembly.
+Print the updated [M1.6 board coupon](../enclosure/stl/board-fastener-coupon.stl)
+and [M2 case coupon](../enclosure/stl/case-fastener-coupon.stl) to check head-bore
+clearance and full engagement with the new screw lengths. No nut trap needs fitting.
 See [assembly instructions](enclosure.md) and the [fastener audit](fastener-fit.md).
 
 Check existing soldering supplies, filament, USB data cable and matching hex

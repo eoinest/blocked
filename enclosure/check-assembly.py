@@ -175,7 +175,7 @@ hardware = [o for o in objects if o.type == 'MESH' and
             ('NUT_' in o.name.upper() or 'SCREW_' in o.name.upper())]
 nuts = [o for o in hardware if 'NUT_' in o.name.upper()]
 screws = [o for o in hardware if 'SCREW_' in o.name.upper()]
-audit('Four captive nuts and four socket-cap screws modeled', len(nuts) == len(screws) == 4,
+audit('Four exposed nuts and four bottom-entry socket-cap screws modeled', len(nuts) == len(screws) == 4,
       nuts=[o.name for o in nuts], screws=[o.name for o in screws])
 old_hardware = [o.name for o in objects if o.type == 'MESH'
                 and ('heat-set' in o.name.lower() or 'PCB_INSERT_' in o.name
@@ -186,99 +186,108 @@ audit('Old heat-set and countersunk design removed', not old_hardware and not ol
       old_hardware_objects=old_hardware, old_parameters=old_parameters, old_stls=old_stls)
 pairs += [(part, case) for part in hardware for case in (base, lid, board)]
 pairs += [(part, region) for part in hardware for region in headers]
-pairs += [(part, component) for part in hardware for component in components + switch]
+pairs += [(part, component) for part in hardware for component in components + switch + [cap, socket] + travel]
 
-# Audit fixtures describe the ordered hardware and chosen print allowances,
-# independently of the generation tree. Hex pockets have an open loading side;
-# the radial-wall lower bound below applies only to their unopened sides.
-# Intentionally retuning parameters after a fit coupon requires reviewing and
-# updating these fixtures too: they must not silently inherit a geometry error.
+# Independent fixtures for the exposed-nut revision. All four screws point up.
+# Changing CAD dimensions requires deliberately reviewing these checks too.
 fastener_specs = [
-    dict(prefix='CASE', nut_prefix='CASE_NUT_', screw_prefix='CASE_SCREW_', xs=(-17.0, 17.0), y=0.0,
-         af=4.0, nut_thickness=1.6, pocket_af=4.2, pocket_bottom=7.8, pocket_top=9.6,
-         nut_bottom=7.8, nut_top=9.4, post_radius=3.6,
-         shaft_diameter=2.0, length=8.0, head_diameter=4.0, head_height=2.1,
-         screw_bottom=0.1, screw_top=10.2, head_bottom=0.1, head_top=2.2,
-         relief_diameter=2.2, relief_bottom=2.2, relief_top=11.0),
-    dict(prefix='PCB', nut_prefix='PCB_NUT_', screw_prefix='PCB_SCREW_', xs=(-10.2, 10.2), y=-12.35,
-         af=3.5, nut_thickness=1.3, pocket_af=3.7, pocket_bottom=3.2, pocket_top=4.7,
-         nut_bottom=3.4, nut_top=4.7, post_radius=3.2,
-         shaft_diameter=1.6, length=4.0, head_diameter=3.2, head_height=1.7,
-         screw_bottom=3.1, screw_top=8.8, head_bottom=7.1, head_top=8.8,
-         relief_diameter=1.8, relief_bottom=2.4, relief_top=7.1),
+    dict(prefix='CASE', nut_prefix='CASE_NUT_', screw_prefix='CASE_SCREW_', xs=(-17.0,17.0), y=0.0,
+         af=4.0, nut_thickness=1.6, nut_bottom=22.0, nut_top=23.6,
+         shaft_diameter=2.0, length=20.0, head_diameter=4.0, head_height=2.1,
+         head_bottom=2.3, head_top=4.4, screw_top=24.4,
+         clearance=2.2, head_bore=4.4, bearing_top=6.2),
+    dict(prefix='PCB', nut_prefix='PCB_NUT_', screw_prefix='PCB_SCREW_', xs=(-10.2,10.2), y=-12.35,
+         af=3.5, nut_thickness=1.3, nut_bottom=7.1, nut_top=8.4,
+         shaft_diameter=1.6, length=6.0, head_diameter=3.2, head_height=1.7,
+         head_bottom=1.1, head_top=2.8, screw_top=8.8,
+         clearance=1.8, head_bore=3.6, bearing_top=5.5),
 ]
 for spec in fastener_specs:
-    param_prefix = 'board' if spec['prefix'] == 'PCB' else 'case'
-    parameter_expectations = {
-        param_prefix+'_nut_af': spec['af'],
-        param_prefix+'_nut_thickness': spec['nut_thickness'],
-        param_prefix+'_nut_pocket_af': spec['pocket_af'],
-        param_prefix+'_nut_pocket_height': spec['pocket_top']-spec['pocket_bottom'],
-        param_prefix+'_screw_diameter': spec['shaft_diameter'],
-        param_prefix+'_screw_length': spec['length'],
-        param_prefix+'_screw_clearance': spec['relief_diameter'],
-        param_prefix+'_head_diameter': spec['head_diameter'],
-        param_prefix+'_head_height': spec['head_height'],
-        'board_post_radius' if spec['prefix'] == 'PCB' else 'boss_radius': spec['post_radius'],
-    }
-    audit(spec['prefix']+' audit fixture matches intended parameter revision',
-          all(name in P and near(P[name], value) for name, value in parameter_expectations.items()),
-          expected_parameters=parameter_expectations,
-          remedy='After intentional fit-coupon retuning, review and update independent checker fixtures as well.')
-    family_nuts = sorted((o for o in nuts if o.name.startswith(spec['nut_prefix'])), key=lambda o: center(o)[0])
-    family_screws = sorted((o for o in screws if o.name.startswith(spec['screw_prefix'])), key=lambda o: center(o)[0])
-    audit(spec['prefix']+' hardware pair count', len(family_nuts) == len(family_screws) == 2)
-    for nut, screw, x in zip(family_nuts, family_screws, spec['xs']):
-        nb, sb = bounds(nut), bounds(screw)
-        nut_af = min(nb[0][1]-nb[0][0], nb[1][1]-nb[1][0])
-        audit(nut.name+' dimensions and seating', near(nut_af, spec['af'], 0.02)
-              and near(nb[2][0], spec['nut_bottom'], 0.02) and near(nb[2][1], spec['nut_top'], 0.02)
-              and near(center(nut)[0], x) and near(center(nut)[1], spec['y']),
-              modeled_af_mm=round(nut_af, 4), modeled_z_mm=[round(v, 4) for v in nb[2]],
-              expected_af_mm=spec['af'], expected_thickness_mm=spec['nut_thickness'])
-        vertices = [screw.matrix_world @ v.co for v in screw.data.vertices]
-        head_vertices = [v for v in vertices if math.hypot(v.x-x, v.y-spec['y']) > spec['head_diameter']/2-0.05]
-        head_z = [min(v.z for v in head_vertices), max(v.z for v in head_vertices)] if head_vertices else [0, 0]
-        audit(screw.name+' ordered cap-head envelope', near(sb[2][0], spec['screw_bottom'], 0.06)
-              and near(sb[2][1], spec['screw_top'], 0.06)
-              and near(sb[0][1]-sb[0][0], spec['head_diameter'], 0.02)
-              and near(head_z[0], spec['head_bottom'], 0.06) and near(head_z[1], spec['head_top'], 0.06)
-              and near(center(screw)[0], x) and near(center(screw)[1], spec['y']),
-              modeled_total_z_mm=[round(v, 4) for v in sb[2]], modeled_head_z_mm=[round(v, 4) for v in head_z],
-              expected_shaft_length_mm=spec['length'], expected_head_height_mm=spec['head_height'],
-              limit='Nominal unthreaded envelope; delivered hardware dimensions must be measured')
-        gauge = cylinder_probe(f'{spec["prefix"]}_shaft_clearance_{x:+g}', spec['relief_diameter']/2-0.01,
-                               spec['relief_bottom']+0.01, spec['relief_top']-0.01, x, spec['y'])
-        pairs += [(gauge, obstacle) for obstacle in (base, lid, board)]
-        pocket_gauge = hex_pocket_probe(f'{spec["prefix"]}_hex_pocket_{x:+g}', nut, spec['pocket_af']-0.02,
-                                       spec['pocket_bottom']+0.01, spec['pocket_top']-0.01)
-        pairs += [(pocket_gauge, obstacle) for obstacle in (base, lid)]
-        loading_gauge = hex_pocket_probe(f'{spec["prefix"]}_nut_loading_sweep_{x:+g}', nut, spec['af']-0.01,
-                                        spec['nut_bottom']+0.01, spec['nut_top']-0.01,
-                                        sweep_x=-math.copysign(spec['post_radius']+spec['af']/math.sqrt(3)+0.5, x))
-        pairs.append((loading_gauge, lid if spec['prefix'] == 'CASE' else base))
-        if spec['prefix'] == 'CASE':
-            head_gauge = cylinder_probe(f'CASE_head_counterbore_{x:+g}', 2.19, -0.1, 2.19, x, 0)
-            pairs.append((head_gauge, base))
-            annular_support(f'CASE_{x:+g} screw-head bearing shoulder', base, x, 0, 1.12, 1.98, 2.21, 3.99)
-            annular_support(f'CASE_{x:+g} captive-nut bearing floor', lid, x, 0, 1.12, 1.90, 4.31, 7.79)
+    prefix = 'board' if spec['prefix'] == 'PCB' else 'case'
+    expected = {prefix+'_nut_af':spec['af'], prefix+'_nut_thickness':spec['nut_thickness'],
+                prefix+'_screw_diameter':spec['shaft_diameter'], prefix+'_screw_length':spec['length'],
+                prefix+'_screw_clearance':spec['clearance'], prefix+'_head_diameter':spec['head_diameter'],
+                prefix+'_head_height':spec['head_height'], prefix+'_head_recess_depth':spec['head_top'],
+                prefix+'_head_recess_diameter':spec['head_bore']}
+    audit(spec['prefix']+' independent stack matches intended revision',
+          all(name in P and near(P[name], value) for name,value in expected.items()), expected_parameters=expected)
+    family_nuts=sorted((o for o in nuts if o.name.startswith(spec['nut_prefix'])),key=lambda o:center(o)[0])
+    family_screws=sorted((o for o in screws if o.name.startswith(spec['screw_prefix'])),key=lambda o:center(o)[0])
+    audit(spec['prefix']+' hardware pair count',len(family_nuts)==len(family_screws)==2)
+    for nut,screw,x in zip(family_nuts,family_screws,spec['xs']):
+        y=spec['y']; nb,sb=bounds(nut),bounds(screw)
+        af=min(nb[0][1]-nb[0][0],nb[1][1]-nb[1][0])
+        audit(nut.name+' exposed seating',near(af,spec['af'],.02)
+              and near(nb[2][0],spec['nut_bottom'],.02) and near(nb[2][1],spec['nut_top'],.02)
+              and near(center(nut)[0],x) and near(center(nut)[1],y),
+              modeled_z_mm=nb[2],expected_seat_mm=spec['nut_bottom'])
+        vertices=[screw.matrix_world @ v.co for v in screw.data.vertices]
+        head=[v.z for v in vertices if math.hypot(v.x-x,v.y-y)>spec['head_diameter']/2-.05]
+        audit(screw.name+' bottom-entry direction and length',bool(head)
+              and near(min(head),spec['head_bottom'],.06) and near(max(head),spec['head_top'],.06)
+              and near(sb[2][0],spec['head_bottom'],.06) and near(sb[2][1],spec['screw_top'],.06)
+              and near(center(screw)[0],x) and near(center(screw)[1],y),
+              head_z_mm=[min(head),max(head)] if head else [],tip_z_mm=sb[2][1],
+              nominal_under_head_length_mm=spec['length'])
+        bore=cylinder_probe(f'{spec["prefix"]}_through_bore_{x:+g}',spec['clearance']/2-.01,
+                            spec['head_top']+.01,spec['nut_bottom']-.01,x,y)
+        pairs += [(bore,o) for o in (base,lid,board)]
+        head_access=cylinder_probe(f'{spec["prefix"]}_bottom_head_access_{x:+g}',spec['head_bore']/2-.01,
+                                  -.5,spec['head_top']-.01,x,y)
+        pairs.append((head_access,base))
+        # A nut-sized vertical gauge proves there is no roof or side-loading trap.
+        # PCB access assumes lid removed; case nut insertion clears the resting cap.
+        access=cylinder_probe(f'{spec["prefix"]}_vertical_nut_access_{x:+g}',spec['af']/math.sqrt(3)+.05,
+                              spec['nut_bottom']+.01,40,x,y)
+        obstacles=[base,board]+components if spec['prefix']=='PCB' else [base,lid,cap,socket]+switch
+        pairs += [(access,o) for o in obstacles]
+        annular_support(f'{spec["prefix"]}_{x:+g} bottom-head bearing shoulder',base,x,y,
+                        spec['clearance']/2+.02,spec['head_diameter']/2-.02,
+                        spec['head_top']+.01,spec['bearing_top']-.01)
+        if spec['prefix']=='CASE':
+            annular_support(f'CASE_{x:+g} exposed-nut bearing land',lid,x,y,1.12,1.9,20.51,21.99)
         else:
-            annular_support(f'PCB_{x:+g} nut retention roof', base, x, spec['y'], 0.92, 1.65, 4.71, 5.49)
-    pocket_depth = spec['pocket_top']-spec['pocket_bottom']
-    radial_wall = spec['post_radius']-spec['pocket_af']/math.sqrt(3)
-    tip_clearance = spec['relief_top']-spec['screw_top'] if spec['prefix'] == 'CASE' else spec['screw_bottom']-spec['relief_bottom']
-    protrusion = spec['screw_top']-spec['nut_top'] if spec['prefix'] == 'CASE' else spec['nut_bottom']-spec['screw_bottom']
-    audit(spec['prefix']+' nominal fit and remaining side wall',
-          spec['pocket_af']-spec['af'] >= 0.19 and pocket_depth-spec['nut_thickness'] >= 0.19
-          and radial_wall >= 1.0 and tip_clearance >= 0.5 and protrusion >= 0.29,
-          nut_pocket_across_flats_clearance_mm=round(spec['pocket_af']-spec['af'], 3),
-          nut_pocket_axial_clearance_mm=round(pocket_depth-spec['nut_thickness'], 3),
-          unopened_side_radial_wall_lower_bound_mm=round(radial_wall, 3),
-          screw_tip_clearance_to_blind_relief_mm=round(tip_clearance, 3),
-          nominal_screw_protrusion_past_nut_mm=round(protrusion, 3),
-          nominal_thread_engagement_mm=spec['nut_thickness'],
-          scope='Analytical chosen dimensions cross-checked against hardware solids and relief/support gauges; '
-                'does not establish printed strength, actual nut chamfers, thread runout, or installation torque')
+            annular_support(f'PCB_{x:+g} nut bears on board',board,x,y,1.02,1.65,5.51,7.09)
+    audit(spec['prefix']+' full nut engagement and recessed head',
+          spec['screw_top']-spec['nut_top']>=.39 and spec['head_bottom']>=0,
+          protrusion_past_nut_mm=round(spec['screw_top']-spec['nut_top'],3),
+          thread_engagement_mm=spec['nut_thickness'],head_recess_above_floor_mm=spec['head_bottom'],
+          limit='Nominal dimensions; delivered screw/nut/PCB thickness and print fit remain to be checked.')
+
+# Four bearing regions, all at z=5.5; only the antenna pair have screw holes.
+audit('Four-corner support dimensions',near(P['board_bottom'],5.5),board_bottom_mm=P['board_bottom'])
+for x in (-10.2,10.2):
+    annular_support(f'PCB antenna support {x:+g}',base,x,-12.35,1.02,2.4,5.4,5.49)
+for name,x,y in [('left',-9.5,17.9),('right',11.0,17.9)]:
+    bpy.ops.mesh.primitive_cube_add(size=1,location=(x,y,5.45))
+    gauge=bpy.context.object; gauge.name='AUDIT_USB_CORNER_'+name
+    gauge.dimensions=(1.98,.98,.08)
+    bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+    temporary_probes.append(gauge)
+    volume=solid_volume(gauge); filled=intersection_volume(gauge,base)
+    audit('USB corner '+name+' solid support at matching height',filled>=volume-.001,
+          expected_contact_center_mm=[x,y,5.5],contact_footprint_mm=[2,1],filled_mm3=round(filled,6))
+    # Contact cannot extend above the underside of the PCB; general board/base
+    # collision checks below enforce this. Small footprint is photo-derived.
+    bpy.ops.mesh.primitive_cube_add(size=1,location=(x,y,5.55))
+    contact=bpy.context.object; contact.name='AUDIT_USB_CORNER_BOARD_'+name
+    contact.dimensions=(1.98,.98,.08)
+    bpy.ops.object.transform_apply(location=False,rotation=False,scale=True)
+    temporary_probes.append(contact)
+    volume=solid_volume(contact); filled=intersection_volume(contact,board)
+    audit('USB corner '+name+' contacts PCB underside',filled>=volume-.001,
+          reference_board_material_mm3=round(filled,6),limits='Actual clone underside must be bare at contact patch.')
+
+# Foot recesses must not cover any screw entry or driver approach.
+for x in (-17.,17.):
+    for y in (-15.,15.):
+        for spec in fastener_specs:
+            for sx in spec['xs']:
+                dx=max(abs(sx-x)-4,0); dy=max(abs(spec['y']-y)-4,0)
+                gap=math.hypot(dx,dy)-spec['head_bore']/2
+                audit(f'Foot {x:+g},{y:+g} clears {spec["prefix"]} screw {sx:+g}',gap>=.99,
+                      nominal_gap_mm=round(gap,3))
+audit('Foot placement matches accessible screws',near(P.get('foot_x',0),17) and near(P.get('foot_y',0),15))
 
 # Board controls remain reachable after removing the lid, using the expressly
 # modeled service approach. They do not imply fingertip clearance or access
@@ -289,31 +298,18 @@ audit('Both lid-off board-control service approaches modeled', len(board_service
 pairs += [(region, obstacle) for region in board_service for obstacle in [base, board] + hardware + components
           if not obstacle.name.startswith(('RESET actuator', 'BOOT actuator'))]
 
-# The independently gauged nominal coupon stations also check that any isolated
-# CSG triangle repair did not cap a functional bore, pocket, or loading mouth.
-for family, name, x in [('CASE', 'case-fastener-coupon', 0.0), ('PCB', 'board-fastener-coupon', 6.0)]:
-    coupon = bpy.data.objects.get(name)
-    audit(name+' saved mesh present', coupon is not None and coupon.type == 'MESH')
-    if coupon is None:
-        continue
-    spec = next(s for s in fastener_specs if s['prefix'] == family)
-    nut = next((o for o in nuts if o.name.startswith(spec['nut_prefix'])), None)
-    if nut is None:
-        continue
-    pocket = hex_pocket_probe(name+'_nominal_hex_void', nut, spec['pocket_af']-0.02,
-                             spec['pocket_bottom']+0.01, spec['pocket_top']-0.01, center_xy=(x, 0))
-    entry = hex_pocket_probe(name+'_nominal_nut_entry', nut, spec['af']-0.01,
-                            spec['nut_bottom']+0.01, spec['nut_top']-0.01,
-                            sweep_x=6.0, center_xy=(x, 0))
-    bore = cylinder_probe(name+'_nominal_shaft_bore', spec['relief_diameter']/2-0.01,
-                          0.01 if family == 'CASE' else 2.41,
-                          10.99 if family == 'CASE' else 7.09, x, 0)
-    pairs += [(gauge, coupon) for gauge in (pocket, entry, bore)]
-    if family == 'CASE':
-        head = cylinder_probe(name+'_nominal_head_counterbore', 2.19, -0.1, 2.19, x, 0)
-        pairs.append((head, coupon))
-    else:
-        annular_support(name+' 1.6 mm PCB stand-in retained', coupon, x, 0, 0.92, 1.65, 5.51, 7.09)
+# Nominal coupon station x=0: open through-bore, bottom head access, exposed nut.
+for family,name in [('CASE','case-fastener-coupon'),('PCB','board-fastener-coupon')]:
+    coupon=bpy.data.objects.get(name)
+    audit(name+' saved mesh present',coupon is not None and coupon.type=='MESH')
+    if coupon is None: continue
+    spec=next(s for s in fastener_specs if s['prefix']==family)
+    bore=cylinder_probe(name+'_through_bore',spec['clearance']/2-.01,spec['head_top']+.01,
+                        spec['nut_bottom']-.01,0,0)
+    head=cylinder_probe(name+'_head_entry',spec['head_bore']/2-.01,-.1,spec['head_top']-.01,0,0)
+    exposed=cylinder_probe(name+'_exposed_nut',spec['af']/math.sqrt(3)+.05,spec['nut_bottom']+.01,
+                           spec['nut_top']+3,0,0)
+    pairs += [(g,coupon) for g in (bore,head,exposed)]
 
 # Verify the reference PCB's drilled features independently of the case cutouts.
 # GPIO coordinates remain photo-derived; only mounting-hole diameter and X pitch
@@ -357,14 +353,14 @@ report = {
     'scope': 'Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. '
              'Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. '
              'Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. '
-             'Captive nut and cap-screw envelopes, hex-pocket voids, inward nut-loading sweeps, shaft reliefs, '
+             'Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, '
              'case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. '
              'RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.',
     'limits': 'Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. '
               'Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, '
               'nut chamfers/thread runout, printed strength, tightening torque, and USB insertion flex excluded. '
               'Intentionally mating screw/nut thread regions are excluded from collision pairs. '
-              'Nominal nut installation sweeps assume loading the base nuts before the PCB and the lid nuts with the lid removed. '
+              'PCB nut access assumes lid removed; larger nut-gripping tools may require keycap removal. '
               'Service gauges do not certify finger access or unknown soldered wire routing.',
     'checked_pairs': len(results),
     'analytical_and_feature_checks': audits,

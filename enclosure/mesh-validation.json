@@ -8,8 +8,8 @@
       42.0,
       20.5
     ],
-    "volume_mm3": 9684.893,
-    "triangles": 5644
+    "volume_mm3": 9773.009,
+    "triangles": 5098
   },
   "lid": {
     "non_manifold_edges": 0,
@@ -18,10 +18,10 @@
     "dimensions_mm": [
       46.0,
       42.0,
-      17.7
+      15.5
     ],
-    "volume_mm3": 4512.576,
-    "triangles": 3070
+    "volume_mm3": 4331.875,
+    "triangles": 2354
   },
   "fit-coupon": {
     "non_manifold_edges": 0,
@@ -37,26 +37,26 @@
   },
   "case-fastener-coupon": {
     "non_manifold_edges": 0,
-    "repaired_csg_triangles": 1,
+    "repaired_csg_triangles": 0,
     "connected_components": 1,
     "dimensions_mm": [
       36.0,
       12.0,
-      12.0
+      22.0
     ],
-    "volume_mm3": 2151.144,
-    "triangles": 2890
+    "volume_mm3": 3781.034,
+    "triangles": 1984
   },
   "board-fastener-coupon": {
     "non_manifold_edges": 0,
     "repaired_csg_triangles": 0,
     "connected_components": 1,
     "dimensions_mm": [
-      48.0,
+      36.0,
       10.0,
       7.1
     ],
-    "volume_mm3": 1192.143,
-    "triangles": 5958
+    "volume_mm3": 769.584,
+    "triangles": 2698
   }
 }
