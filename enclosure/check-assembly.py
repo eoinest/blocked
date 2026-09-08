@@ -309,65 +309,82 @@ audit('Both lid-off board-control service approaches modeled', len(board_service
 pairs += [(region, obstacle) for region in board_service for obstacle in [base, board] + hardware + components
           if not obstacle.name.startswith(('RESET actuator', 'BOOT actuator'))]
 
-# USB-IF Release 2.4 Figures 3-3 / 3-4 and 3-82, independently fixed here.
-# The reference socket lip is recessed at y=18.95; the overmold must be able
-# to reach that plane through the entire rear wall. Do not validate a plug
-# conveniently parked outside the case. Actual clone mating depth is unknown.
-audit('USB throat dimensions and alignment',
-      near(P['usb_width'],13.5) and near(P['usb_height'],7.6) and near(P['usb_bottom'],4.9)
-      and near(P['usb_corner_radius'],.7) and near(P['usb_leadin_depth'],.4)
-      and near(P['usb_leadin_flare'],.25),
-      throat_mm=[13.5,7.6], center_z_mm=8.7, corner_radius_mm=.7,
-      scope='Nominal cable-overmold opening; not a measured socket-shell fit')
+# Tight socket collar: all dimensions below independently specify this revision.
+# Plug clearance is CONDITIONAL on the actual seated shoulder reaching y>=19.30.
+# Do not interpret a shifted keepout as proof that an unmeasured cable seats.
+audit('USB socket collar dimensions and alignment',
+      near(P['usb_width'],9.6) and near(P['usb_height'],3.6) and near(P['usb_bottom'],6.9)
+      and near(P['usb_corner_radius'],1.65) and near(P['usb_face_y'],19.25)
+      and near(P['usb_collar_back'],18.05) and near(P['usb_required_shoulder_y'],19.30),
+      throat_mm=[9.6,3.6],center_z_mm=8.7,corner_radius_mm=1.65,
+      scope='0.2 mm offset of the photo-derived shell; physical clone fit unverified')
 usb_socket=next(o for o in components if o.name.startswith('USB-C socket'))
 ub=bounds(usb_socket)
-audit('USB socket reference remains aligned with recessed opening',
+audit('USB socket reference remains aligned with collar',
       near(ub[1][1],18.95) and near(center(usb_socket)[0],0) and near(center(usb_socket)[2],8.7),
-      reference_socket_front_y_mm=ub[1][1], reference_socket_center_z_mm=center(usb_socket)[2],
-      outer_wall_y_mm=21, nominal_recess_mm=round(21-ub[1][1],3),
-      limits='Socket outer body and PCB overhang remain photo-derived assumptions.')
+      reference_socket_front_y_mm=ub[1][1],reference_socket_center_z_mm=center(usb_socket)[2],
+      collar_face_y_mm=19.25,required_cable_shoulder_y_mm=19.30,
+      minimum_required_shoulder_gap_ahead_of_socket_mm=.35,
+      limits='Required gap is NOT established by measurement or universally guaranteed by USB-IF.')
 for label,w,h in [('maximum_overmold',12.85,7.0),('overmold_with_0_05_side_gap',12.95,7.1)]:
-    gauge=box_probe('USB_full_insertion_'+label,(-w/2,18.95,8.7-h/2),(w/2,41,8.7+h/2))
+    gauge=box_probe('USB_CONDITIONAL_shoulder_path_'+label,(-w/2,19.30,8.7-h/2),(w/2,41,8.7+h/2))
     pairs += [(gauge,case) for case in (base,lid)]
-# A metal nose can traverse the aperture without wall interference. This
-# tests case access only, not the intentional plug/receptacle mating surfaces.
+# Negative control: a shoulder closer to the socket really WOULD hit the collar.
+blocked=box_probe('USB_unqualified_shoulder_obstruction',(-6.425,18.95,5.2),(6.425,19.25,12.2))
+obstruction=intersection_volume(blocked,base)
+audit('Conditional seating limitation represented by actual collar obstruction',obstruction>.1,
+      obstruction_mm3=round(obstruction,6),physical_seating_verified=False,
+      required_action='Compare fully seated bare-board cable position with registered fit cradle.')
+# Maximum plug metal rectangle sweeps through the throat; actual rounded metal
+# corners are smaller. Mating socket internals are intentionally excluded.
 gauge=box_probe('USB_metal_nose_swept_path',(-4.14,12.2,7.485),(4.14,41,9.915))
 pairs += [(gauge,case) for case in (base,lid)]
-# Check both free space and adjacent material, so an accidentally enlarged
-# opening cannot satisfy all the insertion tests while defeating the revision.
 for name,low,high in [
-    ('width',(-6.74,19.1,8.69),(6.74,20.5,8.71)),
-    ('height',(-.01,19.1,4.91),(.01,20.5,12.49)),
+    ('width',(-4.79,18.8,8.69),(4.79,19.2,8.71)),
+    ('height',(-.01,18.8,6.91),(.01,19.2,10.49)),
+    ('outer_pocket',(-6.74,19.3,8.69),(6.74,20.5,8.71)),
     ('entry_width',(-6.94,20.95,8.6),(6.94,20.99,8.8)),
     ('entry_height',(-.1,20.95,4.71),(.1,20.99,12.69)),
 ]:
     gauge=box_probe('USB_throat_'+name,low,high)
     pairs.append((gauge,base))
 for name,low,high in [
-    ('left',(-6.84,19.1,8.66),(-6.78,20.5,8.74)),
-    ('right',(6.78,19.1,8.66),(6.84,20.5,8.74)),
-    ('below',(-.04,19.1,4.80),(.04,20.5,4.86)),
-    ('above',(-.04,19.1,12.54),(.04,20.5,12.60)),
+    ('left',(-4.9,18.1,8.66),(-4.82,19.2,8.74)),
+    ('right',(4.82,18.1,8.66),(4.9,19.2,8.74)),
+    ('lower_0_5mm_lip',(-.1,18.76,6.7),(.1,19.24,6.85)),
+    ('above',(-.1,18.1,10.55),(.1,19.2,10.7)),
 ]:
-    gauge=box_probe('USB_wall_'+name,low,high)
-    volume=solid_volume(gauge); filled=intersection_volume(gauge,base)
-    audit('USB throat retains '+name+' wall',filled>=volume-.0001,
+    gauge=box_probe('USB_collar_material_'+name,low,high)
+    volume=solid_volume(gauge);filled=intersection_volume(gauge,base)
+    audit('USB collar retains '+name,filled>=volume-.0001,
           gauge_volume_mm3=round(volume,6),plastic_volume_mm3=round(filled,6))
+# Check the entire specified PCB-edge relief, including a small print allowance.
+gauge=box_probe('USB_PCB_edge_relief',(-7.54,18.06,5.31),(7.54,18.74,7.29))
+pairs.append((gauge,base))
 
 usb_coupon=bpy.data.objects.get('usb-fit-coupon')
-audit('Upright USB fit coupon saved',usb_coupon is not None and usb_coupon.type=='MESH')
+audit('Registered USB fit cradle saved',usb_coupon is not None and usb_coupon.type=='MESH')
 if usb_coupon is not None:
     cb=bounds(usb_coupon)
-    audit('USB coupon reproduces horizontal-hole print orientation',
-          all(near(b-a,n) for (a,b),n in zip(cb,(54,8,17.4))) and near(cb[2][0],0),
-          expected_dimensions_mm=[54,8,17.4],actual_bounds_mm=cb,
-          purpose='Upright wall and supporting foot reproduce the base opening bridge direction.')
-    for x in (-18,0,18):
-        gauge=box_probe('USB_coupon_maximum_overmold_'+str(x),
-                        (x-6.425,-5,5.2),(x+6.425,5,12.2))
-        pairs.append((gauge,usb_coupon))
-    gauge=box_probe('USB_coupon_nominal_0_05_side_gap',(-6.475,-5,5.15),(6.475,5,12.25))
+    audit('USB cradle dimensions and print orientation',
+          all(near(b-a,n) for (a,b),n in zip(cb,(30,42,14))) and near(cb[2][0],0),
+          expected_dimensions_mm=[30,42,14],actual_bounds_mm=cb)
+    pairs += [(usb_coupon,o) for o in [board]+components]
+    gauge=box_probe('USB_cradle_CONDITIONAL_shoulder_path',(-6.475,19.30,5.15),(6.475,41,12.25))
     pairs.append((gauge,usb_coupon))
+    gauge=box_probe('USB_cradle_metal_nose_path',(-4.14,12.2,7.485),(4.14,41,9.915))
+    pairs.append((gauge,usb_coupon))
+    for x in (-10.2,10.2):
+        annular_support(f'USB cradle antenna support {x:+g}',usb_coupon,x,-12.35,1.02,2.4,5.4,5.49)
+        gauge=cylinder_probe(f'USB_cradle_mount_bore_{x:+g}',.89,2.81,5.51,x,-12.35)
+        pairs.append((gauge,usb_coupon))
+        gauge=cylinder_probe(f'USB_cradle_head_entry_{x:+g}',1.79,-.1,2.79,x,-12.35)
+        pairs.append((gauge,usb_coupon))
+    for x in (-9.5,11.0):
+        gauge=box_probe(f'USB_cradle_plain_support_{x:+g}',(x-.99,17.41,5.41),(x+.99,18.39,5.49))
+        volume=solid_volume(gauge);filled=intersection_volume(gauge,usb_coupon)
+        audit(f'USB cradle plain support {x:+g}',filled>=volume-.001,
+              expected_contact_top_z_mm=5.5,filled_mm3=round(filled,6))
 
 # Nominal coupon station x=0: open through-bore, bottom head access, exposed nut.
 for family,name in [('CASE','case-fastener-coupon'),('PCB','board-fastener-coupon')]:
@@ -426,7 +443,7 @@ report = {
              'Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. '
              'Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, '
              'case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. '
-             'USB maximum-overmold and metal-nose swept paths, 0.05 mm side-gap envelope, throat boundaries and socket alignment are checked. '
+             'USB overmold paths are conditional on the unverified required shoulder plane at y=19.30; metal-nose path, collar material, PCB relief and registered cradle are checked. '
              'RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.',
     'limits': 'Unmeasured clone and photo-derived components; standardized cable envelope is not a measurement of the purchased cable. Not physical fit certification. '
               'Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, '
@@ -434,6 +451,7 @@ report = {
               'Intentionally mating screw/nut thread regions are excluded from collision pairs. '
               'PCB nut access assumes lid removed; larger nut-gripping tools may require keycap removal. '
               'Service gauges do not certify finger access or unknown soldered wire routing.',
+    'required_physical_checks': ['USB cable must fully seat with its shoulder at least 0.35 mm ahead of actual socket lip; registered cradle test pending.'],
     'checked_pairs': len(results),
     'analytical_and_feature_checks': audits,
     'audit_failures': audit_failures,

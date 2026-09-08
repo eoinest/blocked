@@ -38,8 +38,8 @@ Coordinates use the case bottom as z = 0 and USB toward +y.
 | Exposed PCB nuts | z = 7.1–8.4 mm; nominal screw tips z = 8.8 mm |
 | Exposed case nuts | z = 22.0–23.6 mm; nominal screw tips z = 24.4 mm |
 | Feet | Four 8 × 8 mm recesses at x = ±17, y = ±15 mm, moved clear of all screw entries |
-| Switch / USB aperture | 14.1 mm square × 1.5 mm plate / 13.5 × 7.6 mm rounded cable opening |
-| USB throat / lead-in | R0.7 corners; center z = 8.7 mm; full rear-wall opening with 0.4 mm outer lead-in |
+| Switch / USB aperture | 14.1 mm square × 1.5 mm plate / 9.6 × 3.6 mm rounded socket collar |
+| USB throat / lead-in | R1.65 collar; center z = 8.7 mm; 13.5 × 7.6 mm outer recess and 0.4 mm lead-in |
 
 ![Four PCB support locations](../enclosure/supports.png)
 
@@ -49,7 +49,9 @@ The board should rest evenly without rocking before nuts are fitted. All four co
 
 ## USB fit
 
-The rear opening is reduced from 16 × 10 to **13.5 × 7.6 mm**, with rounded corners and an outer lead-in. It accommodates the USB-IF maximum cable-overmold envelope through the full wall. A shell-sized opening could prevent full insertion because the reference socket lip sits 2.05 mm behind the exterior. The socket body's exact size and location on the purchased clone remain unmeasured; this is a checked nominal design, not a guarantee of perfect physical fit. See [USB dimensions, sources and fit procedure](usb-fit.md).
+The **9.6 × 3.6 mm rounded collar** follows the modeled socket shell with 0.2 mm clearance per side. It sits inside a larger cable-access recess. A backside relief clears the PCB edge, retaining a 0.5 mm lower lip. The exact socket dimensions remain unmeasured.
+
+**This revision requires a physical seating test:** the fully seated cable shoulder must clear the collar face, nominally requiring at least 0.35 mm ahead of the socket lip. Print the registered PCB cradle first. The model checks this conditional clearance but cannot establish it for your actual cable. See [USB dimensions, sources and fit procedure](usb-fit.md).
 
 ![USB opening with ESP32](../enclosure/usb-with-board.png)
 ![USB opening without ESP32](../enclosure/usb-without-board.png)
@@ -64,7 +66,7 @@ The rear opening is reduced from 16 × 10 to **13.5 × 7.6 mm**, with rounded co
 - [case-fastener-coupon.stl](../enclosure/stl/case-fastener-coupon.stl): exposed-nut M2 × 20 stack with Ø4.2/4.4/4.6 head entries.
 - [board-fastener-coupon.stl](../enclosure/stl/board-fastener-coupon.stl): exposed-nut M1.6 × 6 stack with Ø3.4/3.6/3.8 head entries and a nominal PCB-thickness stand-in.
 - [fit-coupon.stl](../enclosure/stl/fit-coupon.stl): switch openings 14.0/14.1/14.2 mm.
-- [usb-fit-coupon.stl](../enclosure/stl/usb-fit-coupon.stl): three cable-opening sizes; the middle, two-notch window matches the revised enclosure.
+- [usb-fit-coupon.stl](../enclosure/stl/usb-fit-coupon.stl): 30 × 42 × 14 mm registered PCB cradle that reproduces the socket collar and mounting positions for a real seating test.
 
 From the repository root:
 
@@ -74,12 +76,12 @@ From the repository root:
 /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --threads 4 --python enclosure/print-layout.py
 ```
 
-The generator updates Blender, OpenSCAD, individual STLs and diagrams. Rebuild combined plates afterward. The independent checker verifies hardware direction/length, exposed nut access, bottom head entries, bearing material, four PCB contacts, and nominal component clearances. USB checks sweep the standard maximum overmold through the entire rear wall to the reference socket lip and check the throat boundaries. The generated validation reports record the latest results and source hashes. Reports do not establish actual print strength or clone fit.
+The generator updates Blender, OpenSCAD, individual STLs and diagrams. Rebuild combined plates afterward. The independent checker verifies hardware direction/length, exposed nut access, bottom head entries, bearing material, four PCB contacts, and nominal component clearances. USB checks verify the collar, PCB relief, metal-plug path and the overmold path conditional on the required shoulder position. The registered cradle verifies the physical cable separately. The generated validation reports record the latest results and source hashes. Reports do not establish actual print strength or clone fit.
 
 ## Print and assemble
 
 1. Use the revised **base and lid together**; do not mix with the old captive-nut parts. For the Bambu A1 with a 0.4 mm nozzle, use PLA, four walls and five floor layers, about 0.16 mm layers for the base and USB coupon and 0.10–0.12 mm for the lid and other coupons. Use the same settings for the USB coupon and base so the fit comparison is meaningful. Inspect small counterbore bridges and the USB opening in the slicer.
-2. Test the fastener coupons with the actual new-length screws. Heads should pass freely, and nuts should engage fully on their open top surfaces. Print the USB coupon upright on its foot and test the actual cable in its middle window; it should slide through freely. Inspect the opening's upper edge for bridge sag before checking fit.
+2. Test the fastener coupons with the actual new-length screws. Heads should pass freely, and nuts should engage fully on their open top surfaces. Print the USB cradle floor-down, mount the actual board using its two holes, and compare cable seating against the bare board. The plastic cable shoulder must not stop short on the collar. Inspect the small lower lip and opening's upper edge before checking fit.
 3. With USB unplugged, seat the board on all four supports. Verify the two USB-end pads contact bare board and do not press on solder. Align the two existing mounting holes.
 4. Insert the **M1.6 × 6 screws from underneath**, place the M1.6 nuts openly on top of the PCB, hold each nut and tighten gently. Check the board remains flat and all GPIO pads/wires clear the supports.
 5. Seat the switch and lid, leaving wire slack for service. Insert **M2 × 20 screws from underneath** and fit the two M2 nuts openly on the lid. Hold the nuts while tightening; stop if the lid does not sit freely. Press the keycap on after tightening.

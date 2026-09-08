@@ -8,8 +8,8 @@
       42.0,
       20.5
     ],
-    "volume_mm3": 9886.521,
-    "triangles": 5528
+    "volume_mm3": 10025.589,
+    "triangles": 5846
   },
   "lid": {
     "non_manifold_edges": 0,
@@ -64,11 +64,11 @@
     "repaired_csg_triangles": 0,
     "connected_components": 1,
     "dimensions_mm": [
-      54.0,
-      8.0,
-      17.4
+      30.0,
+      42.0,
+      14.0
     ],
-    "volume_mm3": 1898.648,
-    "triangles": 1728
+    "volume_mm3": 2933.352,
+    "triangles": 2660
   }
 }

@@ -548,40 +548,43 @@
     "status": "Additional contact footprints inferred from official photos, not measured on the clone. Inspect for solder, switch anchors and components under each pad; do not force the board onto mismatched supports."
   },
   "usb_opening": {
-    "throat_width": 13.5,
-    "throat_height": 7.6,
-    "corner_radius": 0.7,
+    "throat_width": 9.6,
+    "throat_height": 3.6,
+    "corner_radius": 1.65,
     "center_z": 8.7,
-    "bottom_z": 4.9,
-    "wall_depth": 2,
+    "bottom_z": 6.9,
+    "recessed_face_y": 19.25,
+    "collar_back_y": 18.05,
+    "collar_width": 15,
+    "collar_top_z": 14,
+    "pcb_relief_width": 15.1,
+    "pcb_relief_z": [
+      5.3,
+      7.3
+    ],
+    "pcb_relief_front_y": 18.75,
+    "lower_lip_thickness": 0.5,
+    "outer_pocket": [
+      13.5,
+      7.6
+    ],
+    "outer_pocket_bottom_z": 4.9,
     "outer_leadin_depth": 0.4,
     "outer_flare_each_side": 0.25,
+    "conditional_minimum_overmold_shoulder_y": 19.3,
+    "conditional_minimum_seated_shoulder_gap_beyond_socket_lip": 0.35,
+    "status": "PROVISIONAL socket-hugging collar. Nominal0.2mm shell clearance. Standard USB dimensions do not guarantee the required actual fully seated cable shoulder gap. Test the registered fit cradle with your real board and cable before printing the case; never force a cable against the collar.",
+    "coupon_dimensions": [
+      30,
+      42,
+      14
+    ],
+    "coupon_print_orientation": "Actual PCB-registering cradle, upright USB wall and stepped port, four supports and two dedicated mounting-hole screws at assembly coordinates. Uses same2M1.6x6+topnuts.",
     "max_overmold_envelope": [
       12.85,
       7.0
     ],
-    "status": "Provisional printed fit around plug overmold, not a tight bezel around the socket shell. Full-wall opening allows overmold to reach nominal recessed socket lip. Actual clone and cable require measurement and coupon testing.",
-    "coupon_windows": [
-      [
-        13.3,
-        7.4
-      ],
-      [
-        13.5,
-        7.6
-      ],
-      [
-        13.7,
-        7.8
-      ]
-    ],
-    "source": "USB-IF USB Type-C Cable and Connector Specification Release 2.4, October 2024: Figure 3-3 (p54), Figure 3-82 (p147).",
-    "coupon_dimensions": [
-      54,
-      8,
-      17.4
-    ],
-    "coupon_print_orientation": "Upright wall on integral foot: windows bridge horizontally, matching the base rear-wall orientation; lead-ins face +Y.",
-    "socket_visual": "Independent rounded photo-derived outer shell9.2\u00d73.2,r1.45. Standard nominal inner opening8.34\u00d72.56 with illustrative r1.2; no claim of exact clone component CAD."
+    "source": "USB-IF USB Type-C Cable and Connector Specification Release2.4, October2024: Figure3-3(p54),Figure3-82(p147).",
+    "socket_visual": "Independent rounded photo-derived outer9.2x3.2,r1.45. Standard nominal inner8.34x2.56 with illustrative r1.2. Not exact clone CAD."
   }
 }

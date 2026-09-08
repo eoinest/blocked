@@ -31,7 +31,7 @@ No manufacturer-authored S2 Mini PCB/Gerber/STEP source was found in the [offici
 | Exposed hex nuts | Kit lists M1.6 nuts as AF3.5 mm and M2 nuts as AF4 mm. Thickness references and seating assumptions are recorded in the [fastener audit](fastener-fit.md). | Actual thickness, bearing coverage and printed strength need checking; exposed nuts are held with pliers. No heat-set inserts remain in the design. |
 | Feet, wire and USB cable | Foot dimensions follow the cut-to-size BOM; wire paths and cable space show routing intent. | Cable overmold dimensions, exact wire lengths/bends and finished solder joints require the actual parts. |
 
-The revised USB opening uses the **USB-IF Release 2.4 maximum 12.85 × 7.0 mm overmold envelope**, with a 13.5 × 7.6 mm rounded printed throat. This standard describes the cable interface; it does not identify the clone's receptacle manufacturer or its outer shell. The nominal 9.2 × 7.3 × 3.2 mm socket body and 0.3 mm overhang remain photo estimates. The [USB fit record](usb-fit.md) documents sources, insertion-depth constraints and the fit coupon.
+The revised USB collar is **9.6 × 3.6 mm**, with 0.2 mm clearance around the photo-derived **9.2 × 3.2 mm** metal shell. A 13.5 × 7.6 mm recess admits the USB-IF maximum cable overmold. The collar projects 0.30 mm beyond the modeled socket lip; a fully seated cable must leave at least 0.35 mm to clear it. This is a **required, unverified fit condition**, not a universally guaranteed USB dimension. The registered PCB cradle is needed to test the actual socket and cable before the case. See the [USB fit record](usb-fit.md).
 
 ## Measurements needed before declaring fit
 

@@ -1,8 +1,10 @@
-# USB-C opening and cable fit
+# USB-C socket collar and fit cradle
 
-The nominal opening is **13.5 mm wide × 7.6 mm high**, with **0.7 mm corner radii**, centered at **z = 8.7 mm**. It passes through the entire USB-side wall. An outer lead-in extends **0.4 mm** into the wall and widens the opening by **0.25 mm per side** at the exterior. These are prototype enclosure dimensions, not measurements of the user's board or cable.
+The revised **9.6 × 3.6 mm rounded opening, R1.65**, follows the nominal **9.2 × 3.2 mm, R1.45** metal socket with **0.2 mm clearance per side**. Its center is z = 8.7 mm. This is a socket-shaped collar inside a recess, replacing the previous plug-sized through-hole.
 
-The opening clears a cable plug's overmold, rather than tightly wrapping the receptacle's metal shell. There is no smaller inner web that could stop the cable shoulder before the plug seats. The existing PCB position, supports, mounting holes and USB-side controls remain the reference assembly geometry.
+A **13.5 × 7.6 mm outer recess**, R0.7, gives the cable body room to approach the collar. Its exterior lead-in is 0.4 mm deep and widens by 0.25 mm per side. Four PCB supports and all bottom-entry screws are retained.
+
+**Prototype fit condition:** the fully seated cable's plastic shoulder must sit at least **0.35 mm ahead of the actual socket lip**, assuming the modeled socket position. This is a required clearance, not a measurement of the user's cable. The physical board and seated cable must be tested before treating this as a confirmed fit.
 
 ## What the primary sources establish
 
@@ -21,24 +23,24 @@ The [USB-IF specification landing page](https://usb.org/usb-type-cr-cable-and-co
 
 These dimensions do **not** identify the clone's receptacle. The [official WEMOS schematic](https://docs.wemos.cc/en/latest/_static/files/sch_s2_mini_v1.0.0.pdf) labels it `USB_C_16P`, without a connector manufacturer's part number. A receptacle's outside shell, PCB mounting height and length depend on the selected part. For example, [GCT USB4105](https://gct.co/connector/usb4105) has a published 3.31 mm profile and 7.35 mm body length; an [Amphenol receptacle drawing](https://cdn.amphenol-cs.com/media/wysiwyg/files/drawing/10168357.pdf) shows an 8.94 × 3.16 mm shell. Neither part is confirmed on the user's board.
 
-## Why there is no tight inner bezel
+USB-IF §3.2.1, note 7, printed page 46 recommends a **6.20 ± 0.20 mm effective receptacle shell length at system level**. This does not grant a universal 0.30 mm forward bezel allowance. The collar therefore remains conditional on the measured cable shoulder position.
 
-The current illustrative model places the PCB edge at y = 18.65 mm and the socket lip at y = 18.95 mm, **2.05 mm behind** the exterior wall at y = 21 mm. Its 9.2 × 7.3 × 3.2 mm socket body and 0.3 mm PCB overhang are photo-based assumptions.
+## Collar depth and PCB clearance
 
-A 0.8 mm web starting just beyond the PCB at y = 18.75 mm would end at y = 19.55 mm, projecting 0.6 mm beyond the modeled socket lip. The standard's product-clearance recommendation does not establish that an actual seated cable leaves that much space ahead of this receptacle. A smaller opening there could let the metal tip enter while preventing complete electrical engagement. A future shell-shaped bezel needs the actual seated cable shoulder position, shell dimensions and board placement measured together.
+The nominal PCB edge is at y = 18.65 mm and socket lip at y = 18.95 mm. The collar face sits at **y = 19.25 mm**, 0.30 mm ahead of that lip and 1.75 mm behind the case exterior. The cable shoulder must remain at or beyond y = 19.30 mm to provide 0.05 mm axial clearance.
 
-## Corner clearance and coupon
+The reinforced frame extends back to y = 18.05 mm. A backside PCB-edge relief ends at y = 18.75 mm, spanning z = 5.3–7.3 mm. It clears the nominal board and leaves a **0.5 mm lower lip**; the top and sides retain 1.2 mm depth. Inspect the small lip in the slicer and after printing. It must not press on the PCB or socket.
 
-For the nominal opening, a centered **12.85 × 7.0 mm rectangular envelope** fits inside the rounded corners, even without assuming the overmold itself is rounded. Straight-side margins are 0.325 mm horizontally and 0.300 mm vertically. At the closest corner, the distance from the corner-arc center is `sqrt(0.375² + 0.400²) = 0.5483 mm`, below the 0.7 mm radius, leaving approximately **0.1517 mm radial clearance**. These are CAD clearances; extrusion error and cable misalignment consume them.
+The actual socket's outer profile, height above the board and 0.3 mm overhang remain photo-derived assumptions. The collar's 0.2 mm clearance is a starting print allowance. It is not a zero-clearance press fit, nor proof that every clone or cable fits.
 
-The USB coupon is an upright **54 × 2 × 17.4 mm wall** on a **54 × 8 × 2 mm foot**. Its openings sit at z = 8.7 mm and reproduce the case's corner radius and entrance geometry. One, two or three notches on the top edge identify these openings:
+## Test the fit cradle before printing the case
 
-| Notches | Width × height | Purpose |
-| --- | --- | --- |
-| 1 | 13.3 × 7.4 mm | Tight comparison; only about 0.010 mm nominal corner clearance to the full rectangular envelope |
-| 2 | 13.5 × 7.6 mm | Nominal enclosure opening |
-| 3 | 13.7 × 7.8 mm | More printing and cable clearance |
+[usb-fit-coupon.stl](../enclosure/stl/usb-fit-coupon.stl) is now a **30 × 42 × 14 mm cradle** with the same four PCB supports, two mounting holes, recessed collar and rear opening as the case. It replaces the previous three-hole cable gauge. Registering the actual board on its mounting holes lets this print test both the socket outline and cable seating depth.
 
-Print the coupon upright on its foot, using the same material and slicer settings as the case. This reproduces the case's vertical opening and bridging across its roof; printing the coupon flat would miss possible bridge sag. Choose an opening that admits the **actual cable overmold freely**, without forcing or scraping. The coupon checks opening size and print behavior; it cannot by itself prove axial seating against the board.
+1. On the Bambu A1, print the cradle floor-down with the same filament, nozzle and layer settings intended for the base. With a 0.4 mm nozzle, start with PLA, 0.16 mm layers and four walls. Inspect the thin collar lip and bridge above the port in the slicer; print dimensions are subject to extrusion and shrinkage.
+2. With USB disconnected, rest the actual board on all four pads. Use the same two M1.6 × 6 mm bottom-entry screws and exposed M1.6 nuts. Do not pull the board into alignment by tightening the nuts.
+3. The socket should enter the rounded collar freely, without bending the board or rubbing the metal shell. Check the underside relief clears the PCB and solder joints.
+4. Compare the cable's fully seated position in the bare board against its position in the cradle. The plastic shoulder must not bottom against the collar before the plug seats. Check both plug orientations and USB enumeration. Enumeration alone does not prove full seating.
+5. If the collar is tight or blocks seating, stop and update its dimensions from measurements before printing the full case. A tighter profile must not be obtained by forcing the connector against the board.
 
-Before final assembly, seat the cable directly in the bare board and note its shoulder position. Repeat with the board mounted in the case: the shoulder must not stop on the enclosure before reaching the same seated position. Check both cable orientations, USB enumeration and light cable movement. If an unusually large overmold or printing variation does not fit, enlarge the opening rather than forcing the cable against the board connector. Exact clone fit remains unverified until this physical check is completed.
+The combined STL with coupons includes this cradle. The nominal geometry audit checks the required shoulder plane and plug path; it explicitly does not certify that the actual cable meets that plane.

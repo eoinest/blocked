@@ -17,11 +17,14 @@ module base() {
       translate([-9.5, 17.9, 5.25]) translate([-1, -0.5, 0]) cube([2, 1, 0.25]);
       translate([11, 17.9, 1.95]) linear_extrude(height=3.35,scale=[0.666667,0.5]) square([3,2],center=true);
       translate([11, 17.9, 5.25]) translate([-1, -0.5, 0]) cube([2, 1, 0.25]);
+      translate([0, 18.65, 2]) translate([-7.5, -0.6, 0]) cube([15, 1.2, 12]);
       translate([-17, 0, 1.95]) cylinder(h=4.25, r1=3.8, r2=3.8, $fn=64);
       translate([17, 0, 1.95]) cylinder(h=4.25, r1=3.8, r2=3.8, $fn=64);
     }
-    translate([0, 20, 4.9]) translate([0,-3,3.8]) rotate([-90,0,0]) linear_extrude(height=6,scale=[1,1]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
+    translate([0, 20, 6.9]) translate([0,-3,1.8]) rotate([-90,0,0]) linear_extrude(height=6,scale=[1,1]) offset(r=1.65,$fn=64) square([6.3,0.3],center=true);
+    translate([0, 21.125, 4.9]) translate([0,-1.875,3.8]) rotate([-90,0,0]) linear_extrude(height=3.75,scale=[1,1]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
     translate([0, 20.825, 4.9]) translate([0,-0.225,3.8]) rotate([-90,0,0]) linear_extrude(height=0.45,scale=[1.04167,1.07401]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
+    translate([0, 17.875, 5.3]) translate([-7.55, -0.875, 0]) cube([15.1, 1.75, 2]);
     translate([-10.2, -12.35, -0.05]) cylinder(h=5.6, r1=0.9, r2=0.9, $fn=64);
     translate([-10.2, -12.35, -0.05]) cylinder(h=2.85, r1=1.8, r2=1.8, $fn=64);
     translate([10.2, -12.35, -0.05]) cylinder(h=5.6, r1=0.9, r2=0.9, $fn=64);
@@ -118,21 +121,24 @@ module board_fastener_coupon() {
 module usb_fit_coupon() {
   difference() {
     union() {
-      translate([0, 0, 0]) linear_extrude(height=2, scale=1) offset(r=1, $fn=64) square([52, 6], center=true);
-      translate([0, 0, 1.9]) translate([-27, -1, 0]) cube([54, 2, 15.5]);
+      translate([0, 0, 0]) linear_extrude(height=2, scale=1) offset(r=2, $fn=64) square([26, 38], center=true);
+      translate([-10.2, -12.35, 1.95]) cylinder(h=3.55, r1=2.6, r2=2.6, $fn=64);
+      translate([10.2, -12.35, 1.95]) cylinder(h=3.55, r1=2.6, r2=2.6, $fn=64);
+      translate([-9.5, 17.9, 1.95]) linear_extrude(height=3.35,scale=[0.666667,0.5]) square([3,2],center=true);
+      translate([-9.5, 17.9, 5.25]) translate([-1, -0.5, 0]) cube([2, 1, 0.25]);
+      translate([11, 17.9, 1.95]) linear_extrude(height=3.35,scale=[0.666667,0.5]) square([3,2],center=true);
+      translate([11, 17.9, 5.25]) translate([-1, -0.5, 0]) cube([2, 1, 0.25]);
+      translate([0, 18.65, 2]) translate([-7.5, -0.6, 0]) cube([15, 1.2, 12]);
+      translate([0, 20, 1.95]) translate([-8, -1, 0]) cube([16, 2, 12.05]);
     }
-    translate([-18, 0, 5]) translate([0,-1.05,3.7]) rotate([-90,0,0]) linear_extrude(height=2.1,scale=[1,1]) offset(r=0.7,$fn=64) square([11.9,6],center=true);
-    translate([-18, 0.825, 5]) translate([0,-0.225,3.7]) rotate([-90,0,0]) linear_extrude(height=0.45,scale=[1.04229,1.07601]) offset(r=0.7,$fn=64) square([11.9,6],center=true);
-    translate([-18, 0, 16.65]) translate([-0.4, -1.05, 0]) cube([0.8, 2.1, 1]);
-    translate([0, 0, 4.9]) translate([0,-1.05,3.8]) rotate([-90,0,0]) linear_extrude(height=2.1,scale=[1,1]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
-    translate([0, 0.825, 4.9]) translate([0,-0.225,3.8]) rotate([-90,0,0]) linear_extrude(height=0.45,scale=[1.04167,1.07401]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
-    translate([-0.75, 0, 16.65]) translate([-0.4, -1.05, 0]) cube([0.8, 2.1, 1]);
-    translate([0.75, 0, 16.65]) translate([-0.4, -1.05, 0]) cube([0.8, 2.1, 1]);
-    translate([18, 0, 4.8]) translate([0,-1.05,3.9]) rotate([-90,0,0]) linear_extrude(height=2.1,scale=[1,1]) offset(r=0.7,$fn=64) square([12.3,6.4],center=true);
-    translate([18, 0.825, 4.8]) translate([0,-0.225,3.9]) rotate([-90,0,0]) linear_extrude(height=0.45,scale=[1.04106,1.07212]) offset(r=0.7,$fn=64) square([12.3,6.4],center=true);
-    translate([16.5, 0, 16.65]) translate([-0.4, -1.05, 0]) cube([0.8, 2.1, 1]);
-    translate([18, 0, 16.65]) translate([-0.4, -1.05, 0]) cube([0.8, 2.1, 1]);
-    translate([19.5, 0, 16.65]) translate([-0.4, -1.05, 0]) cube([0.8, 2.1, 1]);
+    translate([0, 20, 6.9]) translate([0,-3,1.8]) rotate([-90,0,0]) linear_extrude(height=6,scale=[1,1]) offset(r=1.65,$fn=64) square([6.3,0.3],center=true);
+    translate([0, 21.125, 4.9]) translate([0,-1.875,3.8]) rotate([-90,0,0]) linear_extrude(height=3.75,scale=[1,1]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
+    translate([0, 20.825, 4.9]) translate([0,-0.225,3.8]) rotate([-90,0,0]) linear_extrude(height=0.45,scale=[1.04167,1.07401]) offset(r=0.7,$fn=64) square([12.1,6.2],center=true);
+    translate([0, 17.875, 5.3]) translate([-7.55, -0.875, 0]) cube([15.1, 1.75, 2]);
+    translate([-10.2, -12.35, -0.05]) cylinder(h=5.6, r1=0.9, r2=0.9, $fn=64);
+    translate([-10.2, -12.35, -0.05]) cylinder(h=2.85, r1=1.8, r2=1.8, $fn=64);
+    translate([10.2, -12.35, -0.05]) cylinder(h=5.6, r1=0.9, r2=0.9, $fn=64);
+    translate([10.2, -12.35, -0.05]) cylinder(h=2.85, r1=1.8, r2=1.8, $fn=64);
   }
 }
 

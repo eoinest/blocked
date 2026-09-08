@@ -1,12 +1,15 @@
 {
   "status": "PASS",
-  "blend_sha256": "58c637d6f8e7005ec32ac54f99655f04f5807aa319903f3afbc68d5f3c6e2461",
-  "parameters_sha256": "e4ae346e308a2a9972caf562f6c1ecd08f117246dd876242b525b8390d289dcc",
-  "checker_sha256": "ee0249c89507d7afcdccc49527045d479a336c414e375d06673e0325f09f411b",
+  "blend_sha256": "50df3a83063638836d0aaa91b83a76bc6af8b818ca61ed0d69dd4ced8979c9a2",
+  "parameters_sha256": "98d505a4bd3fb2f4c73026e1040bc6304ed9fa65419d5618779c97674f395ab3",
+  "checker_sha256": "7d9cbf50102cdaa351ab61b35c7051940f898b49e1fcc4a2e53f8a5e595e8109",
   "blender_version": "5.2.1 LTS",
-  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. USB maximum-overmold and metal-nose swept paths, 0.05 mm side-gap envelope, throat boundaries and socket alignment are checked. RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.",
+  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. USB overmold paths are conditional on the unverified required shoulder plane at y=19.30; metal-nose path, collar material, PCB relief and registered cradle are checked. RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.",
   "limits": "Unmeasured clone and photo-derived components; standardized cable envelope is not a measurement of the purchased cable. Not physical fit certification. Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, nut chamfers/thread runout, printed strength, tightening torque, and USB insertion flex excluded. Intentionally mating screw/nut thread regions are excluded from collision pairs. PCB nut access assumes lid removed; larger nut-gripping tools may require keycap removal. Service gauges do not certify finger access or unknown soldered wire routing.",
-  "checked_pairs": 1326,
+  "required_physical_checks": [
+    "USB cable must fully seat with its shoulder at least 0.35 mm ahead of actual socket lip; registered cradle test pending."
+  ],
+  "checked_pairs": 1360,
   "analytical_and_feature_checks": [
     {
       "check": "Four exposed nuts and four bottom-entry socket-cap screws modeled",
@@ -399,76 +402,115 @@
       ]
     },
     {
-      "check": "USB throat dimensions and alignment",
+      "check": "USB socket collar dimensions and alignment",
       "status": "PASS",
       "throat_mm": [
-        13.5,
-        7.6
+        9.6,
+        3.6
       ],
       "center_z_mm": 8.7,
-      "corner_radius_mm": 0.7,
-      "scope": "Nominal cable-overmold opening; not a measured socket-shell fit"
+      "corner_radius_mm": 1.65,
+      "scope": "0.2 mm offset of the photo-derived shell; physical clone fit unverified"
     },
     {
-      "check": "USB socket reference remains aligned with recessed opening",
+      "check": "USB socket reference remains aligned with collar",
       "status": "PASS",
       "reference_socket_front_y_mm": 18.950000762939453,
       "reference_socket_center_z_mm": 8.700000047683716,
-      "outer_wall_y_mm": 21,
-      "nominal_recess_mm": 2.05,
-      "limits": "Socket outer body and PCB overhang remain photo-derived assumptions."
+      "collar_face_y_mm": 19.25,
+      "required_cable_shoulder_y_mm": 19.3,
+      "minimum_required_shoulder_gap_ahead_of_socket_mm": 0.35,
+      "limits": "Required gap is NOT established by measurement or universally guaranteed by USB-IF."
     },
     {
-      "check": "USB throat retains left wall",
+      "check": "Conditional seating limitation represented by actual collar obstruction",
       "status": "PASS",
-      "gauge_volume_mm3": 0.00672,
-      "plastic_volume_mm3": 0.00672
+      "obstruction_mm3": 17.322203,
+      "physical_seating_verified": false,
+      "required_action": "Compare fully seated bare-board cable position with registered fit cradle."
     },
     {
-      "check": "USB throat retains right wall",
+      "check": "USB collar retains left",
       "status": "PASS",
-      "gauge_volume_mm3": 0.00672,
-      "plastic_volume_mm3": 0.00672
+      "gauge_volume_mm3": 0.00704,
+      "plastic_volume_mm3": 0.00704
     },
     {
-      "check": "USB throat retains below wall",
+      "check": "USB collar retains right",
       "status": "PASS",
-      "gauge_volume_mm3": 0.00672,
-      "plastic_volume_mm3": 0.00672
+      "gauge_volume_mm3": 0.00704,
+      "plastic_volume_mm3": 0.00704
     },
     {
-      "check": "USB throat retains above wall",
+      "check": "USB collar retains lower_0_5mm_lip",
       "status": "PASS",
-      "gauge_volume_mm3": 0.00672,
-      "plastic_volume_mm3": 0.00672
+      "gauge_volume_mm3": 0.0144,
+      "plastic_volume_mm3": 0.0144
     },
     {
-      "check": "Upright USB fit coupon saved",
+      "check": "USB collar retains above",
+      "status": "PASS",
+      "gauge_volume_mm3": 0.033,
+      "plastic_volume_mm3": 0.033
+    },
+    {
+      "check": "Registered USB fit cradle saved",
       "status": "PASS"
     },
     {
-      "check": "USB coupon reproduces horizontal-hole print orientation",
+      "check": "USB cradle dimensions and print orientation",
       "status": "PASS",
       "expected_dimensions_mm": [
-        54,
-        8,
-        17.4
+        30,
+        42,
+        14
       ],
       "actual_bounds_mm": [
         [
-          -27.0,
-          27.0
+          -15.0,
+          15.0
         ],
         [
-          -4.0,
-          4.0
+          -21.0,
+          21.0
         ],
         [
           0.0,
-          17.399999618530273
+          14.0
         ]
-      ],
-      "purpose": "Upright wall and supporting foot reproduce the base opening bridge direction."
+      ]
+    },
+    {
+      "check": "USB cradle antenna support -10.2",
+      "status": "PASS",
+      "gauge_volume_mm3": 1.333485,
+      "plastic_volume_within_gauge_mm3": 1.333483,
+      "tested_support_thickness_mm": 0.09,
+      "gauge_inner_radius_mm": 1.02,
+      "gauge_outer_radius_mm": 2.4,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "USB cradle antenna support +10.2",
+      "status": "PASS",
+      "gauge_volume_mm3": 1.333485,
+      "plastic_volume_within_gauge_mm3": 1.333483,
+      "tested_support_thickness_mm": 0.09,
+      "gauge_inner_radius_mm": 1.02,
+      "gauge_outer_radius_mm": 2.4,
+      "scope": "Continuous nominal plastic around screw axis; not print-strength or load certification"
+    },
+    {
+      "check": "USB cradle plain support -9.5",
+      "status": "PASS",
+      "expected_contact_top_z_mm": 5.5,
+      "filled_mm3": 0.155232
+    },
+    {
+      "check": "USB cradle plain support +11",
+      "status": "PASS",
+      "expected_contact_top_z_mm": 5.5,
+      "filled_mm3": 0.155232
     },
     {
       "check": "case-fastener-coupon saved mesh present",
@@ -1221,12 +1263,12 @@
       "intersection_mm3": 0.0
     },
     {
-      "first": "USB_PLUG_KEEPOUT | USB-IF maximum overmold envelope to nominal socket lip; actual cable unverified",
+      "first": "USB_PLUG_KEEPOUT | conditional shoulder threshold y19.30; actual fully seated cable gap UNVERIFIED",
       "second": "base",
       "intersection_mm3": 0.0
     },
     {
-      "first": "USB_PLUG_KEEPOUT | USB-IF maximum overmold envelope to nominal socket lip; actual cable unverified",
+      "first": "USB_PLUG_KEEPOUT | conditional shoulder threshold y19.30; actual fully seated cable gap UNVERIFIED",
       "second": "lid",
       "intersection_mm3": 0.0
     },
@@ -6856,22 +6898,22 @@
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_full_insertion_maximum_overmold",
+      "first": "AUDIT_USB_CONDITIONAL_shoulder_path_maximum_overmold",
       "second": "base",
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_full_insertion_maximum_overmold",
+      "first": "AUDIT_USB_CONDITIONAL_shoulder_path_maximum_overmold",
       "second": "lid",
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_full_insertion_overmold_with_0_05_side_gap",
+      "first": "AUDIT_USB_CONDITIONAL_shoulder_path_overmold_with_0_05_side_gap",
       "second": "base",
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_full_insertion_overmold_with_0_05_side_gap",
+      "first": "AUDIT_USB_CONDITIONAL_shoulder_path_overmold_with_0_05_side_gap",
       "second": "lid",
       "intersection_mm3": 0.0
     },
@@ -6896,6 +6938,11 @@
       "intersection_mm3": 0.0
     },
     {
+      "first": "AUDIT_USB_throat_outer_pocket",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
       "first": "AUDIT_USB_throat_entry_width",
       "second": "base",
       "intersection_mm3": 0.0
@@ -6906,22 +6953,187 @@
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_coupon_maximum_overmold_-18",
+      "first": "AUDIT_USB_PCB_edge_relief",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "PCB_S2_MINI",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "BOOT actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "BOOT | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "CRYSTAL | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "ESP32 | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "LED | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 1 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 10 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 11 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 12 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 13 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 14 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 15 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 16 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 17 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 18 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 19 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 2 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 20 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 3 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 4 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 5 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 6 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 7 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 8 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "Passive 9 | photo-estimated package and placement",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "REGULATOR | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "RESET actuator | approximate photo envelope",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "RESET | approximate photo-located envelope, not assembly CAD",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "usb-fit-coupon",
+      "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_cradle_CONDITIONAL_shoulder_path",
       "second": "usb-fit-coupon",
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_coupon_maximum_overmold_0",
+      "first": "AUDIT_USB_cradle_metal_nose_path",
       "second": "usb-fit-coupon",
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_coupon_maximum_overmold_18",
+      "first": "AUDIT_USB_cradle_mount_bore_-10.2",
       "second": "usb-fit-coupon",
       "intersection_mm3": 0.0
     },
     {
-      "first": "AUDIT_USB_coupon_nominal_0_05_side_gap",
+      "first": "AUDIT_USB_cradle_head_entry_-10.2",
+      "second": "usb-fit-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_cradle_mount_bore_+10.2",
+      "second": "usb-fit-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_cradle_head_entry_+10.2",
       "second": "usb-fit-coupon",
       "intersection_mm3": 0.0
     },

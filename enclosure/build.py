@@ -90,13 +90,24 @@ def geometry():
                     x=x,y=P['front_support_y'],z=floor-EPS),
             box(P['front_support_width'],P['front_support_depth'],P['front_support_contact_height']+EPS,
                 x=x,y=P['front_support_y'],z=collar_z-EPS)])
+    board_additions=list(additions)
+    collar=box(P['usb_collar_width'],P['usb_face_y']-P['usb_collar_back'],
+               P['usb_collar_top']-floor,y=(P['usb_face_y']+P['usb_collar_back'])/2,z=floor)
+    additions.append(collar)
     for x in (-sx,sx):
         additions.append(cylinder(P['case_pad_radius'],P['case_pad_top']-floor+EPS,x=x,z=floor-EPS))
-    cuts = [tunnel(P['usb_width'],2*wall+2,P['usb_height'],P['usb_corner_radius'],
-                   y=d/2-wall/2,z=P['usb_bottom']),
-            tunnel(P['usb_width'],P['usb_leadin_depth']+EPS,P['usb_height'],P['usb_corner_radius'],
-                   y=d/2-P['usb_leadin_depth']/2+EPS/2,z=P['usb_bottom'],
-                   flare=P['usb_leadin_flare']*(P['usb_leadin_depth']+EPS)/P['usb_leadin_depth'])]
+    usb_cuts=[
+        tunnel(P['usb_width'],2*wall+2,P['usb_height'],P['usb_corner_radius'],
+               y=d/2-wall/2,z=P['usb_bottom']),
+        tunnel(P['usb_outer_width'],d/2+2-P['usb_face_y'],P['usb_outer_height'],P['usb_outer_radius'],
+               y=(d/2+2+P['usb_face_y'])/2,z=P['usb_outer_bottom']),
+        tunnel(P['usb_outer_width'],P['usb_leadin_depth']+EPS,P['usb_outer_height'],P['usb_outer_radius'],
+               y=d/2-P['usb_leadin_depth']/2+EPS/2,z=P['usb_outer_bottom'],
+               flare=P['usb_leadin_flare']*(P['usb_leadin_depth']+EPS)/P['usb_leadin_depth']),
+        box(P['usb_pcb_relief_width'],P['usb_pcb_relief_front']-17,
+            P['usb_pcb_relief_top']-P['usb_pcb_relief_bottom'],
+            y=(17+P['usb_pcb_relief_front'])/2,z=P['usb_pcb_relief_bottom'])]
+    cuts=list(usb_cuts)
     for x in (-P['board_mount_x'],P['board_mount_x']):
         cuts.extend([
             cylinder(P['board_screw_clearance']/2,P['board_bottom']+2*EPS,
@@ -168,17 +179,16 @@ def geometry():
     board_coupon=difference(union(rounded(36,10,1.5,1.5),
                                    *[cylinder(P['board_post_radius'],board_top-1.4,x=x,z=1.4)
                                      for x in (-12,0,12)]),*board_coupon_cuts)
-    usb_cuts=[]
-    for index,(x,width,height) in enumerate(((-18,13.3,7.4),(0,13.5,7.6),(18,13.7,7.8))):
-        bottom=8.7-height/2
-        usb_cuts.extend([
-            tunnel(width,wall+2*EPS,height,P['usb_corner_radius'],x=x,z=bottom),
-            tunnel(width,P['usb_leadin_depth']+EPS,height,P['usb_corner_radius'],
-                   x=x,y=wall/2-P['usb_leadin_depth']/2+EPS/2,z=bottom,
-                   flare=P['usb_leadin_flare']*(P['usb_leadin_depth']+EPS)/P['usb_leadin_depth'])])
-        for tick in range(index+1):
-            usb_cuts.append(box(.8,wall+2*EPS,1,x=x+1.5*tick-.75*index,z=16.65))
-    usb_coupon=difference(union(rounded(54,8,2,1),box(54,wall,15.5,z=1.9)),*usb_cuts)
+    # The fit cradle fixes the actual PCB at assembly coordinates, so a real
+    # cable can be tested fully seated against the collar and recessed pocket.
+    cradle_cuts=list(usb_cuts)
+    for x in (-P['board_mount_x'],P['board_mount_x']):
+        cradle_cuts.extend([
+            cylinder(P['board_screw_clearance']/2,P['board_bottom']+2*EPS,x=x,y=P['board_mount_y'],z=-EPS),
+            cylinder(P['board_head_recess_diameter']/2,P['board_head_recess_depth']+EPS,x=x,y=P['board_mount_y'],z=-EPS)])
+    usb_coupon=difference(union(rounded(30,42,floor,2),*board_additions,collar,
+                                box(16,wall,P['usb_collar_top']-floor+EPS,
+                                    y=d/2-wall/2,z=floor-EPS)),*cradle_cuts)
     return {"base":base,"lid":lid,"fit-coupon":coupon,
             "case-fastener-coupon":case_coupon,"board-fastener-coupon":board_coupon,
             "usb-fit-coupon":usb_coupon}
@@ -635,8 +645,8 @@ def export_blender(parts):
     cable_body.data.materials.append(black)
     cable=wire_path('USB_CABLE | illustrative 3.5 mm cable',
                      [(0,38,board_top+1.6),(0,45,board_top+1.6),(5,54,board_top+1.6),(14,64,board_top+1.6)],black,1.75)
-    cable_keepout=primitive(box(12.85,18,7,y=usb_y+socket['length']/2+9,z=board_top+1.6-3.5))
-    cable_keepout.name='USB_PLUG_KEEPOUT | USB-IF maximum overmold envelope to nominal socket lip; actual cable unverified'
+    cable_keepout=primitive(box(12.85,18,7,y=P['usb_required_shoulder_y']+9,z=board_top+1.6-3.5))
+    cable_keepout.name='USB_PLUG_KEEPOUT | conditional shoulder threshold y19.30; actual fully seated cable gap UNVERIFIED'
     cable_keepout.display_type='WIRE'; cable_keepout.hide_render=True
     move_to(cable_keepout,keepout_collection)
     # These approaches are meaningful with the lid removed. They intentionally
