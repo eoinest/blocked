@@ -19,8 +19,8 @@ public struct PullRequest: Equatable {
         let tail = Array(parts.dropFirst(5))
         // GitHub's conversation, commits, checks and files views only.
         guard tail.isEmpty || tail == [""] ||
-              (tail.count == 1 && ["files", "commits", "checks"].contains(String(tail[0]))) ||
-              (tail.count == 2 && tail[1].isEmpty && ["files", "commits", "checks"].contains(String(tail[0]))) else { return nil }
+              (tail.count == 1 && ["files", "changes", "commits", "checks"].contains(String(tail[0]))) ||
+              (tail.count == 2 && tail[1].isEmpty && ["files", "changes", "commits", "checks"].contains(String(tail[0]))) else { return nil }
         owner = String(parts[1]); repository = String(parts[2]); number = String(parts[4])
     }
 

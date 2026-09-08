@@ -38,6 +38,8 @@ Chrome exposes its windows, active tab, and tab URL in its
 The app first checks macOS's frontmost application. It must not select a stale
 Chrome window when the user is working in a different app. With multiple Chrome
 windows, the target is the active tab in Chrome's front window.
+Read-only Apple events address the captured foreground process ID directly;
+bundle-ID lookup can select an unrelated background Chrome automation process.
 
 macOS asks the user to let Blocked automate Chrome; the app includes an
 [Apple Events usage description](https://developer.apple.com/documentation/bundleresources/information-property-list/nsappleeventsusagedescription).

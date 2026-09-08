@@ -3,7 +3,7 @@ import XCTest
 
 final class BlockedCoreTests: XCTestCase {
     func testCanonicalPullRequest() {
-        for suffix in ["", "/", "/files", "/commits", "/checks", "/files/", "?diff=split#discussion_r1"] {
+        for suffix in ["", "/", "/files", "/changes", "/changes/", "/changes?diff=split#discussion_r1", "/commits", "/checks", "/files/", "?diff=split#discussion_r1"] {
             XCTAssertEqual(PullRequest(url: "https://github.com/eoinest/blocked/pull/42" + suffix)?.url,
                            "https://github.com/eoinest/blocked/pull/42")
         }

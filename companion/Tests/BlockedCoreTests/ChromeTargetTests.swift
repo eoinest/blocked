@@ -11,7 +11,8 @@ final class ChromeTargetTests: XCTestCase {
         let target = try ChromeTarget.read(frontmost: {
             frontmostReads += 1
             return chrome
-        }, fields: {
+        }, fields: { processID in
+            XCTAssertEqual(processID, chrome.processID)
             fieldReads += 1
             return ["105", "210", url]
         })
@@ -25,6 +26,33 @@ final class ChromeTargetTests: XCTestCase {
         XCTAssertEqual(fieldReads, 1)
     }
 
+    func testMultipleChromeInstancesReadOnlyTheCapturedForegroundProcess() throws {
+        // Main Chrome and an automation Chrome can share the exact bundle ID.
+        // Bundle-ID dispatch previously returned the automation instance's localhost tab.
+        let main = ChromeTarget.ApplicationIdentity(processID: 661, bundleID: "com.google.Chrome")
+        let automation = ChromeTarget.ApplicationIdentity(processID: 9999, bundleID: "com.google.Chrome")
+        let fieldsByPID: [pid_t: [String]] = [
+            main.processID: ["233235865", "233235833", "https://github.com/generaltranslation/content/pull/471"],
+            automation.processID: ["301", "302", "http://localhost:3000/aa-demo.html"]
+        ]
+        var requestedPIDs = [pid_t]()
+        let readFields: (pid_t) throws -> [String] = { pid in
+            requestedPIDs.append(pid)
+            return try XCTUnwrap(fieldsByPID[pid])
+        }
+
+        let target = try ChromeTarget.read(frontmost: { main }, fields: readFields)
+        XCTAssertEqual(target.processID, main.processID)
+        XCTAssertEqual(target.pr.url, "https://github.com/generaltranslation/content/pull/471")
+        XCTAssertEqual(requestedPIDs, [main.processID])
+
+        requestedPIDs.removeAll()
+        XCTAssertThrowsError(try ChromeTarget.read(frontmost: { automation }, fields: readFields)) { error in
+            XCTAssertEqual(error.localizedDescription, "The focused Chrome tab must be a github.com pull request.")
+        }
+        XCTAssertEqual(requestedPIDs, [automation.processID], "Never fall back to a background Chrome instance containing a PR")
+    }
+
     func testNonChromeOrMissingForegroundNeverReadsBrowser() {
         let identities: [ChromeTarget.ApplicationIdentity?] = [
             nil,
@@ -35,7 +63,7 @@ final class ChromeTargetTests: XCTestCase {
         ]
         for identity in identities {
             var readBrowser = false
-            XCTAssertThrowsError(try ChromeTarget.read(frontmost: { identity }, fields: {
+            XCTAssertThrowsError(try ChromeTarget.read(frontmost: { identity }, fields: { _ in
                 readBrowser = true
                 return ["105", "210", url]
             }))
@@ -55,7 +83,9 @@ final class ChromeTargetTests: XCTestCase {
             XCTAssertThrowsError(try ChromeTarget.read(frontmost: {
                 reads += 1
                 return reads == 1 ? chrome : second
-            }, fields: { ["105", "210", url] }))
+            }, fields: { _ in ["105", "210", url] })) { error in
+                XCTAssertEqual(error.localizedDescription, "Focus changed while reading Chrome. Focus your PR and press again.")
+            }
             XCTAssertEqual(reads, 2)
         }
     }
@@ -66,7 +96,7 @@ final class ChromeTargetTests: XCTestCase {
             ["", "210", url], ["105", "", url], ["105", "210", ""]
         ]
         for fields in malformed {
-            XCTAssertThrowsError(try ChromeTarget.read(frontmost: { chrome }, fields: { fields }),
+            XCTAssertThrowsError(try ChromeTarget.read(frontmost: { chrome }, fields: { _ in fields }),
                                  "Unexpected browser response must not become a target: \(fields)")
         }
     }
@@ -84,7 +114,7 @@ final class ChromeTargetTests: XCTestCase {
             "not a URL"
         ]
         for invalid in invalidURLs {
-            XCTAssertThrowsError(try ChromeTarget.read(frontmost: { chrome }, fields: { ["105", "210", invalid] }), invalid)
+            XCTAssertThrowsError(try ChromeTarget.read(frontmost: { chrome }, fields: { _ in ["105", "210", invalid] }), invalid)
         }
     }
 
@@ -98,7 +128,7 @@ final class ChromeTargetTests: XCTestCase {
             XCTAssertThrowsError(try ChromeTarget.read(frontmost: {
                 reads += 1
                 return chrome
-            }, fields: { throw expected })) { error in
+            }, fields: { _ in throw expected })) { error in
                 let actual = error as NSError
                 XCTAssertEqual(actual.domain, expected.domain)
                 XCTAssertEqual(actual.code, expected.code)

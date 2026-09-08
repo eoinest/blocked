@@ -74,7 +74,7 @@ registered by the build script: only enabling the setup checkbox or choosing
 **Open at login** in the running app requests registration.
 
 Chrome must be frontmost when the press is handled. Opening Blocked settings
-means Chrome is no longer the target. Conversation, files, commits and checks
+means Chrome is no longer the target. Conversation, files (`/files` and `/changes`), commits and checks
 views are supported; query strings and anchors are ignored when constructing
 its canonical PR URL. Other browsers, Enterprise hosts, issues and arbitrary
 subpaths remain unsupported. Chrome's “Allow JavaScript from Apple Events”,
@@ -84,7 +84,7 @@ Accessibility and Input Monitoring permissions are not required.
 
 `USB CDC → identity + sequence check → foreground Chrome + active tab → strict PR URL parser → gh pr review`
 
-The app uses `NSWorkspace.frontmostApplication` and a fixed AppleScript to read Chrome's front-window ID, active-tab ID, and URL. It reads twice, requires matching results, and rejects reads taking one second or more. It then launches `gh` with a separate argument array, without a shell. The operation targets the captured PR URL. A tab switch after `gh` starts cannot recall the already-started network request.
+The app uses `NSWorkspace.frontmostApplication` and read-only Apple events addressed to that exact process ID to read Chrome's front-window ID, active-tab ID, and URL. Addressing Chrome by bundle ID can select a separate background automation instance, so the reader never falls back to that lookup. It reads twice, requires matching results, and rejects reads taking one second or more. It then launches `gh` with a separate argument array, without a shell. The operation targets the captured PR URL. A tab switch after `gh` starts cannot recall the already-started network request.
 
 There is no press queue. Busy presses, bursts, duplicate sequence numbers, data delayed by a blocked run loop/sleep, and presses inside the two-second debounce window are discarded. A live attempt reserves that PR for sixty seconds, including failures. `gh` has a twenty-second timeout and is never retried automatically: a timeout may mean GitHub received the review but its response was lost. Check the PR before trying again. GitHub may reject self-reviews, closed PRs, or reviews the signed-in account cannot submit; those errors are shown as returned by gh.
 
@@ -132,7 +132,7 @@ It restores the previously active app. macOS can request Automation permission f
 the test runner. The fixture URLs need not resolve to real PRs; this tests URL
 detection, not remote PR existence. It never invokes gh or submits a review.
 If macOS prevents foreground activation, `BLOCKED_CHROME_INTEGRATION=reader`
-tests real AppleScript window/tab responses with an injected foreground identity;
+tests real Apple-event window/tab responses with an injected foreground identity;
 that mode **does not verify actual foreground-app detection**.
 
 The Swift app and packaging can be built without hardware. Real USB enumeration,
