@@ -9,7 +9,7 @@ final class SetupWindow: NSWindowController {
 
     private let githubStatus = SetupWindow.text("Connect the GitHub account that will post your reviews.")
     private let chromeStatus = SetupWindow.text("Allow Blocked to read the active tab in your focused Chrome window.")
-    private let buttonStatus = SetupWindow.text("Plug in your Blocked button when you are ready. You can finish setup first.")
+    private let buttonStatus = SetupWindow.text("Plug in your Blocked button whenever you’re ready. It reconnects automatically when unplugged and plugged back in.")
     private let messageLabel = SetupWindow.text("")
     private let explanationLabel = SetupWindow.text("")
     private let codeLabel = NSTextField(labelWithString: "")
@@ -159,6 +159,9 @@ final class SetupWindow: NSWindowController {
 
         loginCheckbox.state = .on
         stack.addArrangedSubview(loginCheckbox)
+        let backgroundHint = Self.text("Blocked stays in your menu bar. Leave this checked so your button is ready after restarting your Mac.")
+        stack.addArrangedSubview(backgroundHint)
+        backgroundHint.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true
         messageLabel.isHidden = true
         stack.addArrangedSubview(messageLabel)
         messageLabel.widthAnchor.constraint(equalTo: stack.widthAnchor).isActive = true

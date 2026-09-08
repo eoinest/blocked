@@ -1,0 +1,28 @@
+Blocked — one button, one review
+
+For Intel and Apple Silicon Macs running macOS 13 or newer.
+
+1. Drag Blocked into Applications, then open it from Applications.
+2. Follow the setup window: sign in to GitHub in your browser and allow
+   Blocked to control Google Chrome when macOS asks.
+3. Leave "Open Blocked when I log in" checked, then click Enable Blocked.
+4. Plug in your prepared button with a USB data cable. Open a GitHub pull
+   request in the focused Chrome window and try the app's dry run first.
+
+The live action requests changes on that pull request with the message
+"blocked" using your GitHub account. Use the menu-bar app to change settings.
+GitHub CLI is included; you do not need Homebrew or Terminal.
+Unplug and reconnect whenever you like; leave Blocked running in the menu
+bar and it reconnects automatically. No BOOT or RESET button is needed.
+
+PRIVATE BETA / FIRST OPEN
+An unnotarized beta may need an extra macOS approval. After trying to open
+Blocked, go to System Settings > Privacy & Security > Open Anyway, then
+confirm Open. Only do this for the copy you received from someone you trust.
+On a managed work Mac, your administrator may need to approve it.
+Apple's instructions: https://support.apple.com/en-us/102445
+
+Your GitHub sign-in stays on your Mac. This download does not include the
+sender's credentials or settings.
+
+Source and setup details: https://github.com/eoinest/blocked

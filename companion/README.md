@@ -8,7 +8,8 @@ A small native menu bar app connects the USB button to the pull request in the a
 ## Recipient experience
 
 The gift should arrive **assembled, flashed and tested**. The recipient installs
-Blocked, opens it once, and completes its setup window:
+Blocked from the disk image by dragging it into Applications, opens it once,
+and completes its setup window:
 
 1. **GitHub:** the app checks for an existing GitHub CLI sign-in and displays the
    account. If needed, **Connect GitHub** displays a one-time code and opens
@@ -23,6 +24,14 @@ Blocked, opens it once, and completes its setup window:
    the Mac. macOS may require approval in Login Items.
 4. Plug in the pre-flashed button with a USB data cable, open a PR in Chrome,
    and press. No serial-port selection or per-launch arming is needed.
+
+Unplugging and reconnecting starts a fresh USB session automatically. The app
+rescans for the button while disconnected, so a changed USB port name is fine.
+Leave Blocked running in the menu bar; installing it alone does not start a
+process after you explicitly quit it. With **Open at login** enabled, it starts
+again when you sign into your Mac. No BOOT or RESET press is needed for normal use.
+
+For the single file to send to a friend, see [packaging and distribution](../docs/distribution.md).
 
 Enabled/paused state survives app restarts. **Pause button** stops submissions
 until enabled again. Changing action/message or advanced settings requires
@@ -108,7 +117,7 @@ Identity is a version/compatibility check, not cryptographic authentication. Seq
 
 ## Verification
 
-`swift test` runs 43 offline tests and skips the opt-in Chrome integration test.
+`swift test` runs the offline regression suite and skips the opt-in Chrome integration test.
 Coverage includes URL boundaries, exact window/tab identities, application or tab
 changes during capture, slow reads, dry run without even looking up gh, busy
 presses, per-PR failure cooldowns, and the production press coordinator through a
@@ -135,11 +144,21 @@ If macOS prevents foreground activation, `BLOCKED_CHROME_INTEGRATION=reader`
 tests real Apple-event window/tab responses with an injected foreground identity;
 that mode **does not verify actual foreground-app detection**.
 
-The Swift app and packaging can be built without hardware. Real USB enumeration,
-DTR/RTS behavior, switch presses, the packaged app's first-run Automation
-permission, and a deliberately authorized test review still need checking on the
-intended Mac and board. A test runner's Automation permission does not establish
-that the packaged app has permission. See the root bring-up instructions.
+The Swift app and packaging can be built without hardware. A fresh recipient Mac
+still needs its own first-run and physical unplug/replug checks. A test runner's
+Automation permission does not establish that the packaged app has permission.
+See the root bring-up instructions.
+
+### Local verification — September 7, 2026
+
+- Physical switch → ESP32 USB → packaged companion → focused Chrome PR → GitHub
+  request-changes review with body `blocked` passed on the assembled device.
+  The user confirmed success and dismissed the test review afterward.
+- Fixed targeting when background Chrome automation processes share the same
+  bundle ID as the visible browser; all reads now address the captured PID.
+- Changed the per-PR cooldown to ten seconds and verified its boundary tests.
+- The development app uses the user's existing GitHub sign-in; distributed
+  artifacts contain the app and bundled CLI, not credentials or preferences.
 
 ### Local verification — September 5, 2026
 

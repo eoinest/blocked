@@ -33,6 +33,9 @@ APP="$STAGING/Blocked.app"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp "$BIN_DIR/BlockedKey" "$APP/Contents/MacOS/BlockedKey"
 cp Resources/Info.plist "$APP/Contents/Info.plist"
+cp ../LICENSE "$APP/Contents/Resources/Blocked-LICENSE.txt"
+swift scripts/make-icon.swift "$STAGING/Blocked.iconset"
+iconutil -c icns "$STAGING/Blocked.iconset" -o "$APP/Contents/Resources/Blocked.icns"
 if [[ "$BUNDLE_GH" == 1 ]]; then
   "$COMPANION_DIR/scripts/bundle-gh.sh" "$APP"
   # Sign nested executable first; the outer signature then seals its contents.

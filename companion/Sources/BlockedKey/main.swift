@@ -48,11 +48,12 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         serial.manualPath = defaults.string(forKey: "serialPort") ?? ""
         statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
         statusItem.button?.title = "▣"
+        statusItem.button?.setAccessibilityLabel("Blocked")
         statusItem.button?.toolTip = "Blocked — dry run"
         let menu = NSMenu()
         menu.addItem(modeLine); menu.addItem(statusLine); menu.addItem(.separator())
         armItem.target = self; menu.addItem(armItem)
-        for (title, selector) in [("Setup & connections…", #selector(showSetup)), ("Settings…", #selector(showSettings)), ("Test next press (no review)", #selector(testButton)), ("Last result…", #selector(showResult)), ("Reconnect button", #selector(reconnect)), ("Quit Blocked", #selector(quit))] {
+        for (title, selector) in [("Setup & connections…", #selector(showSetup)), ("Settings…", #selector(showSettings)), ("Test next press (no review)", #selector(testButton)), ("Last result…", #selector(showResult)), ("Reconnect button", #selector(reconnect)), ("How to use Blocked…", #selector(showHelp)), ("Quit Blocked", #selector(quit))] {
             let item = NSMenuItem(title: title, action: selector, keyEquivalent: "")
             item.target = self; menu.addItem(item)
         }
@@ -189,6 +190,14 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         feedback.show("The next press will only show the detected PR. Nothing will be posted.", error: false)
     }
     @objc private func quit() { NSApp.terminate(nil) }
+
+    @objc private func showHelp() {
+        let alert = NSAlert()
+        alert.messageText = "Your button is ready when Blocked is running"
+        alert.informativeText = "Plug in your button with a USB data cable, focus a GitHub pull request in Chrome, then press once. Unplugging and reconnecting works automatically—no reset button or port selection needed.\n\nKeep Open at login enabled so Blocked starts with your Mac. If you quit Blocked, reopen it from Applications.\n\nEach press posts your configured review. The same PR has a 10-second cooldown. Pressing again does not undo a review; dismiss it in GitHub to remove a test block.\n\nSetup & connections shows your GitHub account, Chrome permission, and button connection. Test next press checks the detected PR without posting."
+        NSApp.activate(ignoringOtherApps: true)
+        alert.runModal()
+    }
 
     @objc private func showSettings() {
         if let settings { settings.makeKeyAndOrderFront(nil); NSApp.activate(ignoringOtherApps: true); return }
