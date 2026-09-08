@@ -49,6 +49,8 @@ rules still apply.
 
 ## Make one
 
+For soldering and switch checks, open the [standalone USB Button Tester](docs/button-test.md).
+
 For an immediately printable keycap, use the [three Tab shapes and combined
 A1 print plate](keycap/printed/README.md), including socket-fit testers.
 

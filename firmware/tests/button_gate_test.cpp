@@ -1,4 +1,5 @@
 #include "../blocked_key/ButtonGate.h"
+#include "../blocked_key/ButtonSession.h"
 #include <cassert>
 #include <iostream>
 
@@ -38,4 +39,45 @@ int main() {
   assert(!button.update(true, 16));
   assert(button.update(true, 41));
   std::cout << "Button gate: boot, hold, bounce, reconnect, and clock-wrap checks passed\n";
+
+  using Output = ButtonSession::Output;
+  ButtonSession session;
+  assert(session.update(true, 0) == Output::None); // Idle never emits.
+  assert(session.test(true, 100) == Output::StateDown); // Held-start snapshot.
+  assert(session.update(true, 1099) == Output::None);
+  assert(session.update(true, 1100) == Output::StateDown); // Held heartbeat.
+  assert(session.update(false, 1110) == Output::None);
+  assert(session.update(true, 1120) == Output::None); // Release bounce.
+  assert(session.update(false, 1130) == Output::None);
+  assert(session.update(false, 1154) == Output::None);
+  assert(session.update(false, 1155) == Output::StateUp);
+  assert(session.update(true, 1160) == Output::None);
+  assert(session.update(false, 1170) == Output::None); // Press bounce.
+  assert(session.update(true, 1180) == Output::None);
+  assert(session.update(true, 1204) == Output::None);
+  assert(session.update(true, 1205) == Output::StateDown); // Never PRESS in TEST.
+  assert(session.update(true, 2204) == Output::None);
+  assert(session.update(true, 2205) == Output::StateDown);
+
+  session.hello(true, 2300); // Leaving TEST while held cannot fire.
+  assert(session.update(true, 4000) == Output::None); // Nor heartbeat in HELLO.
+  assert(session.update(false, 4001) == Output::None);
+  assert(session.update(false, 4026) == Output::None);
+  assert(session.update(true, 4027) == Output::None);
+  assert(session.update(true, 4052) == Output::Press);
+  assert(session.update(true, 6000) == Output::None);
+  assert(session.test(false, 6001) == Output::StateUp); // TEST replaces HELLO.
+  session.disconnect(false, 6002);
+  assert(session.update(true, 9000) == Output::None); // No diagnostics after disconnect.
+  session.hello(false, 9001);
+  assert(session.update(true, 9002) == Output::None); // No stable release since HELLO.
+  assert(session.update(true, 9027) == Output::None);
+
+  assert(session.test(false, UINT32_MAX - 499) == Output::StateUp);
+  assert(session.update(false, 499) == Output::None);
+  assert(session.update(false, 500) == Output::StateUp); // Heartbeat across wrap.
+  assert(session.test(true, 501) == Output::StateDown); // Repeated TEST resnapshots.
+  assert(session.update(true, 1500) == Output::None);
+  assert(session.update(true, 1501) == Output::StateDown);
+  std::cout << "Diagnostics: snapshots, debounce, heartbeat, mode changes, disconnect, and clock-wrap checks passed\n";
 }

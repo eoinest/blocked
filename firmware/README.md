@@ -28,7 +28,7 @@ ARDUINO_NETWORK_CONNECTION_TIMEOUT=600s arduino-cli compile --profile s2-mini fi
 
 ## Flash
 
-Close the companion app and serial monitors first. Use a **data-capable** USB-C cable. Flashing replaces any existing MicroPython or other program on this board.
+Close the companion app, Button Tester and serial monitors first. Use a **data-capable** USB-C cable. Flashing replaces any existing MicroPython or other program on this board.
 
 1. Hold the board's **0 / BOOT** button.
 2. Tap and release **RST / RESET**, then release **0 / BOOT**. This selects the ROM USB downloader. Alternatively hold BOOT while plugging in USB, then release it.
@@ -52,15 +52,33 @@ ASCII lines ending in LF. Input also accepts CRLF. USB CDC uses nominal 115200 b
 | Host → board | `HELLO` | Start or restart an application session. |
 | Board → host | `BLOCKED_KEY 1` | Device identity and protocol version. |
 | Board → host | `PRESS 1` | Fresh press; counter increments each event until reboot (32-bit unsigned wrap). |
+| Host → board | `TEST` | Start or restart button diagnostics; suppress action events. |
+| Board → host | `BLOCKED_TEST 1` | Diagnostic protocol identity, followed immediately by a state snapshot. |
+| Board → host | `STATE UP`, `STATE DOWN` | Released / pressed state during diagnostics. |
 | Host → board | `RESULT OK`, `RESULT DRY_RUN`, `RESULT ERROR` | Optional feedback, currently ignored by this firmware. |
 
 After every handshake, the switch must remain released for **25 ms**, then pressed for **25 ms**, before an event can fire. Booting with the key held, holding it down, contact bounce, and reconnecting while held do not create presses. Events before a handshake or while disconnected are discarded. Unknown and oversized input lines are ignored. Sequence numbers are for session deduplication, not durable event delivery. The device does not retry actions.
 
 `BLOCKED_KEY 1` identifies compatible firmware; it is not cryptographic authentication. The USB connection has the privileges of the locally configured companion app.
 
+## Test the switch and solder joints
+
+Close the companion app before opening a serial monitor or button tester: only one program should own the board's serial port. Connect with DTR and RTS asserted, then send `TEST` followed by a newline. The board replies, for example:
+
+```text
+BLOCKED_TEST 1
+STATE UP
+```
+
+The initial snapshot samples the pin immediately, so a button held when testing starts reports `STATE DOWN`. Later changes must remain stable for **25 ms** before being reported. The board also repeats its current debounced state **1,000 ms** after the latest state report; a held button therefore remains visibly testable. Short contact bounce creates no extra transitions. Diagnostics never emits `PRESS` or advances its sequence counter.
+
+Press and release several times: expect `DOWN` when held and `UP` when released. An always-UP reading can indicate an open connection; an always-DOWN reading can indicate a short or use of the wrong switch contacts. For the selected normally-open switch, the two wires connect GPIO **4** to **GND**; the firmware supplies the pull-up internally.
+
+Send `HELLO` to return to production mode. It replies `BLOCKED_KEY 1` and requires a fresh stable release before the next press can trigger an action. Sending `TEST` again restarts diagnostics with another snapshot. Disconnecting or resetting ends either session; reconnect and send a new command. A serial monitor can be used for this test without GitHub credentials or an open browser.
+
 ## Verification
 
-The ESP32-S2 sketch compiled locally with the pinned profile and Arduino CLI 1.3.1: **301,938 bytes flash** (23%) and **34,736 bytes global RAM** (10%). The installer reported a network failure fetching the unrelated RISC-V toolchain; the required Xtensa/S2 toolchain completed the build and emitted the firmware `.bin` and `.elf`. The portable button-state checks also passed. This is a compile and logic check, not a physical-device test.
+The ESP32-S2 sketch, including diagnostic mode, compiled locally with the pinned profile and Arduino CLI 1.3.1: **302,118 bytes flash** (23%) and **34,736 bytes global RAM** (10%). The installer reported a network failure fetching the unrelated RISC-V toolchain; the cached Xtensa/S2 toolchain completed the build successfully. The portable production and diagnostic state checks also passed. This is a compile and logic check, not a physical-device test; no board was flashed during verification.
 
 Run the portable button-state regression checks:
 
@@ -69,6 +87,6 @@ c++ -std=c++17 -Wall -Wextra -Werror firmware/tests/button_gate_test.cpp -o /tmp
 /tmp/blocked-key-button-test
 ```
 
-The checks exercise contact bounce, no repeat while held, held boot, reconnect, short release, and unsigned clock wrap. They do not emulate USB hardware. Physical USB enumeration, electrical wiring, cable behavior, and actual switch feel still need a bench test on your board. Start with the companion app's dry-run mode; use the assembly checklist in [hardware.md](../docs/hardware.md).
+The checks exercise contact bounce, no repeat while held, held boot, reconnect, short release, and unsigned clock wrap. Diagnostic checks cover immediate held/released snapshots, debounced transitions in both directions, heartbeat timing, mode changes, disconnect reset, and heartbeat clock wrap. They do not emulate USB hardware. Physical USB enumeration, electrical wiring, cable behavior, and actual switch feel still need a bench test on your board. Start with `TEST` for wiring, then the companion app's dry-run mode; use the assembly checklist in [hardware.md](../docs/hardware.md).
 
 References: [Espressif USB CDC API](https://docs.espressif.com/projects/arduino-esp32/en/latest/api/usb_cdc.html), [Espressif USB flashing guide](https://docs.espressif.com/projects/arduino-esp32/en/latest/tutorials/cdc_dfu_flash.html), [pinned board definitions](https://github.com/espressif/arduino-esp32/blob/3.3.1/boards.txt), [LOLIN Arduino instructions](https://docs.wemos.cc/en/latest/tutorials/s2/get_started_with_arduino_s2.html).

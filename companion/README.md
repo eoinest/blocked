@@ -1,5 +1,8 @@
 # Blocked for macOS
 
+For soldering checks, use the separate [USB Button Tester](../docs/button-test.md):
+a live pressed/released display and counter with no GitHub actions.
+
 A small native menu bar app connects the USB button to the pull request in the active Google Chrome window. No browser extension or injected JavaScript is needed. The default review is **Request changes**, with the body **blocked**.
 
 ## Recipient experience

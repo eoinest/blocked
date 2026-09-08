@@ -14,6 +14,8 @@ class ButtonGate {
     armed_ = false;
   }
 
+  bool stablePressed() const { return stable_; }
+
   bool update(bool pressed, uint32_t now) {
     if (pressed != raw_) {
       raw_ = pressed;

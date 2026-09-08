@@ -55,6 +55,9 @@ The USB socket must have clearance for the **cable's molded plug**, not only the
 
 ## First bench test — still required
 
+For a simple wiring check before testing reviews, use the standalone
+[USB Button Tester](button-test.md) to see live press/release state and a counter.
+
 This project has not yet been soldered or physically printed and fitted. Complete these checks before using the gift for real reviews:
 
 - With Blocked paused and **Test next press (no review)** selected, connect the board while the key is held. There should be **no action**. Release it and make a fresh press.

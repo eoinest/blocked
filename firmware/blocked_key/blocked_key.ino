@@ -2,7 +2,7 @@
 #include <USB.h>
 #include <USBCDC.h>
 #include <atomic>
-#include "ButtonGate.h"
+#include "ButtonSession.h"
 
 #if !CONFIG_IDF_TARGET_ESP32S2
 #error "This firmware targets ESP32-S2. Select LOLIN S2 Mini."
@@ -13,11 +13,10 @@
 
 constexpr uint8_t kButtonPin = 4;  // Board pad marked 4 / IO4, never USB D+/D-.
 USBCDC keySerial;
-ButtonGate button;
+ButtonSession button;
 std::atomic<uint32_t> disconnectEpoch{0};
 uint32_t observedEpoch = 0;
 uint32_t sequence = 0;
-bool identified = false;
 char command[64];
 size_t commandLength = 0;
 bool commandOverflow = false;
@@ -31,19 +30,38 @@ void onCDCEvent(void *, esp_event_base_t, int32_t event, void *) {
 }
 
 void resetSession() {
-  identified = false;
   commandLength = 0;
   commandOverflow = false;
-  button.reset(isPressed(), millis());
+  button.disconnect(isPressed(), millis());
+}
+
+void sendOutput(ButtonSession::Output output) {
+  switch (output) {
+    case ButtonSession::Output::Press:
+      // Exactly one event per physical press; no queued offline actions.
+      keySerial.printf("PRESS %lu\n", static_cast<unsigned long>(++sequence));
+      break;
+    case ButtonSession::Output::StateUp:
+      keySerial.print("STATE UP\n");
+      break;
+    case ButtonSession::Output::StateDown:
+      keySerial.print("STATE DOWN\n");
+      break;
+    case ButtonSession::Output::None:
+      break;
+  }
 }
 
 void handleCommand() {
   command[commandLength] = '\0';
   if (commandLength == 5 && memcmp(command, "HELLO", 5) == 0) {
     // Every handshake starts a fresh release-before-press window.
-    button.reset(isPressed(), millis());
-    identified = true;
+    button.hello(isPressed(), millis());
     keySerial.print("BLOCKED_KEY 1\n");
+  } else if (commandLength == 4 && memcmp(command, "TEST", 4) == 0) {
+    const auto snapshot = button.test(isPressed(), millis());
+    keySerial.print("BLOCKED_TEST 1\n");
+    sendOutput(snapshot);
   }
   // Optional RESULT OK / RESULT DRY_RUN / RESULT ERROR are intentionally ignored.
   // The app is the source of truth for whether the review reached GitHub.
@@ -90,9 +108,6 @@ void loop() {
     }
   }
 
-  if (identified && button.update(isPressed(), millis())) {
-    // Exactly one event per physical press; no retries or queued offline actions.
-    keySerial.printf("PRESS %lu\n", static_cast<unsigned long>(++sequence));
-  }
+  sendOutput(button.update(isPressed(), millis()));
   delay(1);
 }
