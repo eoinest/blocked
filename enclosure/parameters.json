@@ -29,9 +29,9 @@
   "board_mount_y": -12.35,
   "board_mount_hole": 2.0,
   "board_post_radius": 2.6,
-  "usb_width": 16.0,
-  "usb_height": 10.0,
-  "usb_bottom": 4.0,
+  "usb_width": 13.5,
+  "usb_height": 7.6,
+  "usb_bottom": 4.9,
   "pad_size": 8.0,
   "pad_recess": 0.5,
   "lid_rib_width": 12.0,
@@ -73,5 +73,8 @@
   "front_support_right_x": 11.0,
   "front_support_base_width": 3.0,
   "front_support_base_depth": 2.0,
-  "front_support_contact_height": 0.2
+  "front_support_contact_height": 0.2,
+  "usb_corner_radius": 0.7,
+  "usb_leadin_depth": 0.4,
+  "usb_leadin_flare": 0.25
 }

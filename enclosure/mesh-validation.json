@@ -8,8 +8,8 @@
       42.0,
       20.5
     ],
-    "volume_mm3": 9773.009,
-    "triangles": 5098
+    "volume_mm3": 9886.521,
+    "triangles": 5528
   },
   "lid": {
     "non_manifold_edges": 0,
@@ -58,5 +58,17 @@
     ],
     "volume_mm3": 769.584,
     "triangles": 2698
+  },
+  "usb-fit-coupon": {
+    "non_manifold_edges": 0,
+    "repaired_csg_triangles": 0,
+    "connected_components": 1,
+    "dimensions_mm": [
+      54.0,
+      8.0,
+      17.4
+    ],
+    "volume_mm3": 1898.648,
+    "triangles": 1728
   }
 }

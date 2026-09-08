@@ -38,7 +38,8 @@ Coordinates use the case bottom as z = 0 and USB toward +y.
 | Exposed PCB nuts | z = 7.1–8.4 mm; nominal screw tips z = 8.8 mm |
 | Exposed case nuts | z = 22.0–23.6 mm; nominal screw tips z = 24.4 mm |
 | Feet | Four 8 × 8 mm recesses at x = ±17, y = ±15 mm, moved clear of all screw entries |
-| Switch / USB aperture | 14.1 mm square × 1.5 mm plate / 16 × 10 mm cable opening |
+| Switch / USB aperture | 14.1 mm square × 1.5 mm plate / 13.5 × 7.6 mm rounded cable opening |
+| USB throat / lead-in | R0.7 corners; center z = 8.7 mm; full rear-wall opening with 0.4 mm outer lead-in |
 
 ![Four PCB support locations](../enclosure/supports.png)
 
@@ -46,15 +47,24 @@ The small USB-end contact patches were chosen from the official board underside 
 
 The board should rest evenly without rocking before nuts are fitted. All four contacts have the same nominal height; do not tighten the screws to force a bowed board onto a high printed support. See the [component accuracy record](component-accuracy.md) and [fastener stack audit](fastener-fit.md).
 
+## USB fit
+
+The rear opening is reduced from 16 × 10 to **13.5 × 7.6 mm**, with rounded corners and an outer lead-in. It accommodates the USB-IF maximum cable-overmold envelope through the full wall. A shell-sized opening could prevent full insertion because the reference socket lip sits 2.05 mm behind the exterior. The socket body's exact size and location on the purchased clone remain unmeasured; this is a checked nominal design, not a guarantee of perfect physical fit. See [USB dimensions, sources and fit procedure](usb-fit.md).
+
+![USB opening with ESP32](../enclosure/usb-with-board.png)
+![USB opening without ESP32](../enclosure/usb-without-board.png)
+
 ## Files and Blender workflow
 
 - [blocked-print-plate.stl](../enclosure/stl/blocked-print-plate.stl): **revised base and lid in one print file**, floor/top-down respectively, 6 mm apart.
-- [blocked-print-plate-with-coupons.stl](../enclosure/stl/blocked-print-plate-with-coupons.stl): base, lid, switch and fastener coupons together.
+- [blocked-print-plate-with-coupons.stl](../enclosure/stl/blocked-print-plate-with-coupons.stl): base, lid, switch, fastener and USB coupons together.
 - [blocked.blend](../enclosure/blocked.blend): editable Blender assembly. PRINTABLE contains case parts and coupons; other collections are component references.
+- [usb-review.blend](../enclosure/usb-review.blend): matched review scenes with the ESP32 and with the enclosure alone.
 - [base.stl](../enclosure/stl/base.stl), [lid.stl](../enclosure/stl/lid.stl): individual print-oriented parts.
 - [case-fastener-coupon.stl](../enclosure/stl/case-fastener-coupon.stl): exposed-nut M2 × 20 stack with Ø4.2/4.4/4.6 head entries.
 - [board-fastener-coupon.stl](../enclosure/stl/board-fastener-coupon.stl): exposed-nut M1.6 × 6 stack with Ø3.4/3.6/3.8 head entries and a nominal PCB-thickness stand-in.
 - [fit-coupon.stl](../enclosure/stl/fit-coupon.stl): switch openings 14.0/14.1/14.2 mm.
+- [usb-fit-coupon.stl](../enclosure/stl/usb-fit-coupon.stl): three cable-opening sizes; the middle, two-notch window matches the revised enclosure.
 
 From the repository root:
 
@@ -64,12 +74,12 @@ From the repository root:
 /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --threads 4 --python enclosure/print-layout.py
 ```
 
-The generator updates Blender, OpenSCAD, individual STLs and diagrams. Rebuild combined plates afterward. The independent checker verifies hardware direction/length, exposed nut access, bottom head entries, bearing material, four PCB contacts, and nominal component clearances. The September 8 revision passed 1,312 nominal collision/access pairs and 53 feature audits; all five individual printable meshes are single-body and manifold. Reports do not establish actual print strength or clone fit.
+The generator updates Blender, OpenSCAD, individual STLs and diagrams. Rebuild combined plates afterward. The independent checker verifies hardware direction/length, exposed nut access, bottom head entries, bearing material, four PCB contacts, and nominal component clearances. USB checks sweep the standard maximum overmold through the entire rear wall to the reference socket lip and check the throat boundaries. The generated validation reports record the latest results and source hashes. Reports do not establish actual print strength or clone fit.
 
 ## Print and assemble
 
-1. Use the revised **base and lid together**; do not mix with the old captive-nut parts. For the Bambu A1 with a 0.4 mm nozzle, use PLA, four walls and five floor layers, about 0.16 mm layers for the base and 0.10–0.12 mm for the lid/coupons. Inspect small counterbore bridges and the USB opening in the slicer.
-2. Test the fastener coupons with the actual new-length screws. Heads should pass freely, and nuts should engage fully on their open top surfaces. No nut pocket needs cleaning or press-fitting.
+1. Use the revised **base and lid together**; do not mix with the old captive-nut parts. For the Bambu A1 with a 0.4 mm nozzle, use PLA, four walls and five floor layers, about 0.16 mm layers for the base and USB coupon and 0.10–0.12 mm for the lid and other coupons. Use the same settings for the USB coupon and base so the fit comparison is meaningful. Inspect small counterbore bridges and the USB opening in the slicer.
+2. Test the fastener coupons with the actual new-length screws. Heads should pass freely, and nuts should engage fully on their open top surfaces. Print the USB coupon upright on its foot and test the actual cable in its middle window; it should slide through freely. Inspect the opening's upper edge for bridge sag before checking fit.
 3. With USB unplugged, seat the board on all four supports. Verify the two USB-end pads contact bare board and do not press on solder. Align the two existing mounting holes.
 4. Insert the **M1.6 × 6 screws from underneath**, place the M1.6 nuts openly on top of the PCB, hold each nut and tighten gently. Check the board remains flat and all GPIO pads/wires clear the supports.
 5. Seat the switch and lid, leaving wire slack for service. Insert **M2 × 20 screws from underneath** and fit the two M2 nuts openly on the lid. Hold the nuts while tightening; stop if the lid does not sit freely. Press the keycap on after tightening.

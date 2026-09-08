@@ -73,6 +73,17 @@ def cylinder_probe(name, radius, bottom, top, x, y):
     return obj
 
 
+def box_probe(name, low, high):
+    """Independent Cartesian gauge, in assembled coordinates."""
+    bpy.ops.mesh.primitive_cube_add(size=1, location=tuple((a+b)/2 for a,b in zip(low,high)))
+    obj = bpy.context.object
+    obj.name = 'AUDIT_' + name
+    obj.dimensions = tuple(b-a for a,b in zip(low,high))
+    bpy.ops.object.transform_apply(location=False, rotation=False, scale=True)
+    temporary_probes.append(obj)
+    return obj
+
+
 def center(obj):
     return [(low + high)/2 for low, high in bounds(obj)]
 
@@ -298,6 +309,66 @@ audit('Both lid-off board-control service approaches modeled', len(board_service
 pairs += [(region, obstacle) for region in board_service for obstacle in [base, board] + hardware + components
           if not obstacle.name.startswith(('RESET actuator', 'BOOT actuator'))]
 
+# USB-IF Release 2.4 Figures 3-3 / 3-4 and 3-82, independently fixed here.
+# The reference socket lip is recessed at y=18.95; the overmold must be able
+# to reach that plane through the entire rear wall. Do not validate a plug
+# conveniently parked outside the case. Actual clone mating depth is unknown.
+audit('USB throat dimensions and alignment',
+      near(P['usb_width'],13.5) and near(P['usb_height'],7.6) and near(P['usb_bottom'],4.9)
+      and near(P['usb_corner_radius'],.7) and near(P['usb_leadin_depth'],.4)
+      and near(P['usb_leadin_flare'],.25),
+      throat_mm=[13.5,7.6], center_z_mm=8.7, corner_radius_mm=.7,
+      scope='Nominal cable-overmold opening; not a measured socket-shell fit')
+usb_socket=next(o for o in components if o.name.startswith('USB-C socket'))
+ub=bounds(usb_socket)
+audit('USB socket reference remains aligned with recessed opening',
+      near(ub[1][1],18.95) and near(center(usb_socket)[0],0) and near(center(usb_socket)[2],8.7),
+      reference_socket_front_y_mm=ub[1][1], reference_socket_center_z_mm=center(usb_socket)[2],
+      outer_wall_y_mm=21, nominal_recess_mm=round(21-ub[1][1],3),
+      limits='Socket outer body and PCB overhang remain photo-derived assumptions.')
+for label,w,h in [('maximum_overmold',12.85,7.0),('overmold_with_0_05_side_gap',12.95,7.1)]:
+    gauge=box_probe('USB_full_insertion_'+label,(-w/2,18.95,8.7-h/2),(w/2,41,8.7+h/2))
+    pairs += [(gauge,case) for case in (base,lid)]
+# A metal nose can traverse the aperture without wall interference. This
+# tests case access only, not the intentional plug/receptacle mating surfaces.
+gauge=box_probe('USB_metal_nose_swept_path',(-4.14,12.2,7.485),(4.14,41,9.915))
+pairs += [(gauge,case) for case in (base,lid)]
+# Check both free space and adjacent material, so an accidentally enlarged
+# opening cannot satisfy all the insertion tests while defeating the revision.
+for name,low,high in [
+    ('width',(-6.74,19.1,8.69),(6.74,20.5,8.71)),
+    ('height',(-.01,19.1,4.91),(.01,20.5,12.49)),
+    ('entry_width',(-6.94,20.95,8.6),(6.94,20.99,8.8)),
+    ('entry_height',(-.1,20.95,4.71),(.1,20.99,12.69)),
+]:
+    gauge=box_probe('USB_throat_'+name,low,high)
+    pairs.append((gauge,base))
+for name,low,high in [
+    ('left',(-6.84,19.1,8.66),(-6.78,20.5,8.74)),
+    ('right',(6.78,19.1,8.66),(6.84,20.5,8.74)),
+    ('below',(-.04,19.1,4.80),(.04,20.5,4.86)),
+    ('above',(-.04,19.1,12.54),(.04,20.5,12.60)),
+]:
+    gauge=box_probe('USB_wall_'+name,low,high)
+    volume=solid_volume(gauge); filled=intersection_volume(gauge,base)
+    audit('USB throat retains '+name+' wall',filled>=volume-.0001,
+          gauge_volume_mm3=round(volume,6),plastic_volume_mm3=round(filled,6))
+
+usb_coupon=bpy.data.objects.get('usb-fit-coupon')
+audit('Upright USB fit coupon saved',usb_coupon is not None and usb_coupon.type=='MESH')
+if usb_coupon is not None:
+    cb=bounds(usb_coupon)
+    audit('USB coupon reproduces horizontal-hole print orientation',
+          all(near(b-a,n) for (a,b),n in zip(cb,(54,8,17.4))) and near(cb[2][0],0),
+          expected_dimensions_mm=[54,8,17.4],actual_bounds_mm=cb,
+          purpose='Upright wall and supporting foot reproduce the base opening bridge direction.')
+    for x in (-18,0,18):
+        gauge=box_probe('USB_coupon_maximum_overmold_'+str(x),
+                        (x-6.425,-5,5.2),(x+6.425,5,12.2))
+        pairs.append((gauge,usb_coupon))
+    gauge=box_probe('USB_coupon_nominal_0_05_side_gap',(-6.475,-5,5.15),(6.475,5,12.25))
+    pairs.append((gauge,usb_coupon))
+
 # Nominal coupon station x=0: open through-bore, bottom head access, exposed nut.
 for family,name in [('CASE','case-fastener-coupon'),('PCB','board-fastener-coupon')]:
     coupon=bpy.data.objects.get(name)
@@ -355,8 +426,9 @@ report = {
              'Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. '
              'Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, '
              'case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. '
+             'USB maximum-overmold and metal-nose swept paths, 0.05 mm side-gap envelope, throat boundaries and socket alignment are checked. '
              'RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.',
-    'limits': 'Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. '
+    'limits': 'Unmeasured clone and photo-derived components; standardized cable envelope is not a measurement of the purchased cable. Not physical fit certification. '
               'Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, '
               'nut chamfers/thread runout, printed strength, tightening torque, and USB insertion flex excluded. '
               'Intentionally mating screw/nut thread regions are excluded from collision pairs. '

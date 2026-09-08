@@ -17,6 +17,7 @@ LAYOUTS = {
         ("base", 0, 0), ("lid", 52, 0),
         ("fit-coupon", 0, 48), ("case-fastener-coupon", 72, 48),
         ("board-fastener-coupon", 0, 80),
+        ("usb-fit-coupon", 42, 80),
     ],
 }
 report = {}

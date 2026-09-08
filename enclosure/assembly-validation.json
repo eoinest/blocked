@@ -1,12 +1,12 @@
 {
   "status": "PASS",
-  "blend_sha256": "61d816b6300767cfbb2deb348a78827b47a95910e4845b5951686b62dabce29d",
-  "parameters_sha256": "9c7345304af586ad9c5cf14d50ecfb93b66e29a47334922850c446a66fe0dede",
-  "checker_sha256": "3d0127019cac65950be2ba769f6188d9bbfcb27548eda94f32cd0ed2dfb2bf09",
+  "blend_sha256": "58c637d6f8e7005ec32ac54f99655f04f5807aa319903f3afbc68d5f3c6e2461",
+  "parameters_sha256": "e4ae346e308a2a9972caf562f6c1ecd08f117246dd876242b525b8390d289dcc",
+  "checker_sha256": "ee0249c89507d7afcdccc49527045d479a336c414e375d06673e0325f09f411b",
   "blender_version": "5.2.1 LTS",
-  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.",
-  "limits": "Unmeasured clone, photo-derived components and cable envelope; not physical fit certification. Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, nut chamfers/thread runout, printed strength, tightening torque, and USB insertion flex excluded. Intentionally mating screw/nut thread regions are excluded from collision pairs. PCB nut access assumes lid removed; larger nut-gripping tools may require keycap removal. Service gauges do not certify finger access or unknown soldered wire routing.",
-  "checked_pairs": 1312,
+  "scope": "Nominal un-beveled solids only. All 32 modeled header access cylinders clear case parts. Switch references, populated PCB envelopes, and assumed USB plug checked against case and each other as listed. Includes latch/service clearance to the reinforced lid and illustrative cap clearance to case at rest and full travel. Exposed nut and bottom-entry screw envelopes, vertical nut access, through bores, four PCB bearing regions, case head counterbores, continuous plastic bearing-ring gauges, and PCB drilled features are checked independently. USB maximum-overmold and metal-nose swept paths, 0.05 mm side-gap envelope, throat boundaries and socket alignment are checked. RESET/BOOT service gauges are tested with the lid removed, excluding their intentional actuator contact.",
+  "limits": "Unmeasured clone and photo-derived components; standardized cable envelope is not a measurement of the purchased cable. Not physical fit certification. Actual keycap socket/skirt fit, socket-to-switch internal nesting, clip strength, solder joints, wire bends, screw thread form, nut chamfers/thread runout, printed strength, tightening torque, and USB insertion flex excluded. Intentionally mating screw/nut thread regions are excluded from collision pairs. PCB nut access assumes lid removed; larger nut-gripping tools may require keycap removal. Service gauges do not certify finger access or unknown soldered wire routing.",
+  "checked_pairs": 1326,
   "analytical_and_feature_checks": [
     {
       "check": "Four exposed nuts and four bottom-entry socket-cap screws modeled",
@@ -397,6 +397,78 @@
         "BOOT_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
         "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board"
       ]
+    },
+    {
+      "check": "USB throat dimensions and alignment",
+      "status": "PASS",
+      "throat_mm": [
+        13.5,
+        7.6
+      ],
+      "center_z_mm": 8.7,
+      "corner_radius_mm": 0.7,
+      "scope": "Nominal cable-overmold opening; not a measured socket-shell fit"
+    },
+    {
+      "check": "USB socket reference remains aligned with recessed opening",
+      "status": "PASS",
+      "reference_socket_front_y_mm": 18.950000762939453,
+      "reference_socket_center_z_mm": 8.700000047683716,
+      "outer_wall_y_mm": 21,
+      "nominal_recess_mm": 2.05,
+      "limits": "Socket outer body and PCB overhang remain photo-derived assumptions."
+    },
+    {
+      "check": "USB throat retains left wall",
+      "status": "PASS",
+      "gauge_volume_mm3": 0.00672,
+      "plastic_volume_mm3": 0.00672
+    },
+    {
+      "check": "USB throat retains right wall",
+      "status": "PASS",
+      "gauge_volume_mm3": 0.00672,
+      "plastic_volume_mm3": 0.00672
+    },
+    {
+      "check": "USB throat retains below wall",
+      "status": "PASS",
+      "gauge_volume_mm3": 0.00672,
+      "plastic_volume_mm3": 0.00672
+    },
+    {
+      "check": "USB throat retains above wall",
+      "status": "PASS",
+      "gauge_volume_mm3": 0.00672,
+      "plastic_volume_mm3": 0.00672
+    },
+    {
+      "check": "Upright USB fit coupon saved",
+      "status": "PASS"
+    },
+    {
+      "check": "USB coupon reproduces horizontal-hole print orientation",
+      "status": "PASS",
+      "expected_dimensions_mm": [
+        54,
+        8,
+        17.4
+      ],
+      "actual_bounds_mm": [
+        [
+          -27.0,
+          27.0
+        ],
+        [
+          -4.0,
+          4.0
+        ],
+        [
+          0.0,
+          17.399999618530273
+        ]
+      ],
+      "purpose": "Upright wall and supporting foot reproduce the base opening bridge direction."
     },
     {
       "check": "case-fastener-coupon saved mesh present",
@@ -1149,12 +1221,12 @@
       "intersection_mm3": 0.0
     },
     {
-      "first": "USB_PLUG_KEEPOUT | assumed envelope, verify actual cable",
+      "first": "USB_PLUG_KEEPOUT | USB-IF maximum overmold envelope to nominal socket lip; actual cable unverified",
       "second": "base",
       "intersection_mm3": 0.0
     },
     {
-      "first": "USB_PLUG_KEEPOUT | assumed envelope, verify actual cable",
+      "first": "USB_PLUG_KEEPOUT | USB-IF maximum overmold envelope to nominal socket lip; actual cable unverified",
       "second": "lid",
       "intersection_mm3": 0.0
     },
@@ -6781,6 +6853,76 @@
     {
       "first": "RESET_SERVICE_KEEPOUT | lid-off 1.5 mm blunt-tool approach, unverified board",
       "second": "USB-C socket | photo-derived dimensions and 0.3 mm overhang, unverified clone",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_full_insertion_maximum_overmold",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_full_insertion_maximum_overmold",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_full_insertion_overmold_with_0_05_side_gap",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_full_insertion_overmold_with_0_05_side_gap",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_metal_nose_swept_path",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_metal_nose_swept_path",
+      "second": "lid",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_throat_width",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_throat_height",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_throat_entry_width",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_throat_entry_height",
+      "second": "base",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_coupon_maximum_overmold_-18",
+      "second": "usb-fit-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_coupon_maximum_overmold_0",
+      "second": "usb-fit-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_coupon_maximum_overmold_18",
+      "second": "usb-fit-coupon",
+      "intersection_mm3": 0.0
+    },
+    {
+      "first": "AUDIT_USB_coupon_nominal_0_05_side_gap",
+      "second": "usb-fit-coupon",
       "intersection_mm3": 0.0
     },
     {

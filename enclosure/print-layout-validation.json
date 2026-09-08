@@ -20,7 +20,8 @@
       "lid",
       "fit-coupon",
       "case-fastener-coupon",
-      "board-fastener-coupon"
+      "board-fastener-coupon",
+      "usb-fit-coupon"
     ],
     "dimensions_mm": [
       108.0,
