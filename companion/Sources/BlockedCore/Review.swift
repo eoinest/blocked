@@ -82,7 +82,7 @@ public struct PressGate {
     }
     public mutating func finish() { busy = false }
     public mutating func reserveSubmission(_ pr: PullRequest, now: TimeInterval) -> Bool {
-        guard now - (lastSubmission[pr.url] ?? -.infinity) >= 60 else { return false }
+        guard now - (lastSubmission[pr.url] ?? -.infinity) >= 10 else { return false }
         // Keep the reservation on failure: a timed-out request may have reached GitHub.
         lastSubmission[pr.url] = now
         return true

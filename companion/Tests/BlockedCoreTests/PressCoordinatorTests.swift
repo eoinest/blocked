@@ -83,13 +83,13 @@ final class PressCoordinatorTests: XCTestCase {
         XCTAssertEqual(h.commands.count, 1)
     }
 
-    func testFailedAttemptReservesSamePRForSixtySeconds() {
+    func testFailedAttemptReservesSamePRForTenSeconds() {
         let h = Harness(); h.press()
         h.completion?(.failure(ReviewRunnerError(message: "not authorized")))
         h.time = 2; h.press()
         XCTAssertEqual(h.commands.count, 1)
-        XCTAssertTrue(h.reports.last?.0.contains("last minute") == true)
-        h.time = 60; h.press()
+        XCTAssertTrue(h.reports.last?.0.contains("last 10 seconds") == true)
+        h.time = 10; h.press()
         XCTAssertEqual(h.commands.count, 2)
     }
 
@@ -119,7 +119,7 @@ final class PressCoordinatorTests: XCTestCase {
         XCTAssertEqual(h.reports.last?.0, "launch failed")
         h.launchError = nil; h.time = 2; h.press()
         XCTAssertEqual(h.commands.count, 1)
-        h.time = 60; h.press(); XCTAssertEqual(h.commands.count, 2)
+        h.time = 10; h.press(); XCTAssertEqual(h.commands.count, 2)
     }
 
     func testWholePressFlowThroughRealLocalFakeGHProcess() throws {

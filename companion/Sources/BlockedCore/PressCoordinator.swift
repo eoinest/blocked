@@ -41,7 +41,7 @@ public final class PressCoordinator {
                 throw BlockedError.message("gh was not found. Install GitHub CLI and run gh auth login in Terminal, or set its absolute path in Settings.")
             }
             guard gate.reserveSubmission(first.pr, now: started) else {
-                throw BlockedError.message("Already attempted this PR in the last minute. Check it before trying again.")
+                throw BlockedError.message("Already attempted this PR in the last 10 seconds. Check it before trying again.")
             }
             submitting("Submitting \(first.pr.owner)/\(first.pr.repository)#\(first.pr.number)…")
             try submit(path, command.arguments) { [weak self] outcome in

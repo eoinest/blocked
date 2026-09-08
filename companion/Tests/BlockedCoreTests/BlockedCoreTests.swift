@@ -49,7 +49,7 @@ final class BlockedCoreTests: XCTestCase {
         XCTAssertTrue(gate.begin(now: 2))
         let pr = PullRequest(url: "https://github.com/a/b/pull/1")!
         XCTAssertTrue(gate.reserveSubmission(pr, now: 2))
-        XCTAssertFalse(gate.reserveSubmission(pr, now: 61))
-        XCTAssertTrue(gate.reserveSubmission(pr, now: 62))
+        XCTAssertFalse(gate.reserveSubmission(pr, now: 11.999))
+        XCTAssertTrue(gate.reserveSubmission(pr, now: 12))
     }
 }
