@@ -47,6 +47,10 @@ The review is authored by the account authenticated in **GitHub CLI**, which may
 differ from the account signed into Chrome. GitHub's permissions and branch
 rules still apply.
 
+## General-purpose command buttons
+
+[Key Command](key-command/README.md) is a separate macOS app for assigning each button a shell command or keyboard shortcut. It uses [separate firmware](firmware/key_command/README.md), supports multiple boards, and runs alongside Blocked. The [two-button print plate](docs/two-button-print.md) includes two enclosures and two blank Tab caps.
+
 ## Make one
 
 For soldering and switch checks, open the [standalone USB Button Tester](docs/button-test.md).

@@ -1,0 +1,40 @@
+KEY COMMAND
+A physical button for your shell commands and keyboard shortcuts.
+macOS 13 or later · Apple silicon and Intel
+
+INSTALL
+Drag Key Command.app to Applications, then open it there.
+Key Command is separate from Blocked and does not need GitHub or Chrome setup.
+
+PRIVATE BETA / FIRST OPEN
+This build is ad-hoc signed and has not been notarized by Apple. If macOS blocks the first launch, open System Settings > Privacy & Security and use Open Anyway for Key Command, then confirm. Only do this for the build you intended to install.
+
+CONNECT YOUR BUTTON
+Your ESP32-S2 Mini must be flashed with the separate Key Command firmware first.
+Use a USB data cable. Each board has a stable identity and can have its own action.
+Normal use needs no BOOT or RESET presses; reconnecting restores the binding.
+
+ASSIGN AN ACTION
+Choose the connected button. Give it a name and select Shell command or Keyboard shortcut.
+Save the action and enable that button when ready. New buttons start disabled.
+Use the physical-button test before enabling an action if you are checking wiring.
+
+SHELL COMMANDS
+Commands run as your macOS user, using zsh. Choose the working directory when needed.
+Start with a harmless command such as: /usr/bin/say 'Button connected'
+Commands have the same access as your user; use commands you understand.
+You can inspect their result, cancel a running command, and set a timeout.
+
+KEYBOARD SHORTCUTS
+Record a shortcut and grant Key Command Accessibility access when you choose to use shortcuts.
+A physical press sends the shortcut to the application that is currently focused.
+Some applications, secure fields, and reserved system shortcuts may reject simulated keys.
+
+DAILY USE
+Keep Key Command running in the menu bar. Enable Open at login if you want it to start automatically.
+Unplugging and reconnecting a configured button does not require setup again.
+A button held during connection must be released before the next press can run an action.
+
+SOURCE AND FIRMWARE
+https://github.com/eoinest/blocked/tree/main/key-command
+https://github.com/eoinest/blocked/tree/main/firmware/key_command
