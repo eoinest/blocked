@@ -1,0 +1,590 @@
+{
+  "output": "enclosure/stl/blocked-three-devices-blank-caps.stl",
+  "units": "mm",
+  "bed_mm": [
+    256,
+    256
+  ],
+  "footprint_mm": [
+    98,
+    162
+  ],
+  "centered_on_bed": true,
+  "part_count": 9,
+  "contents": {
+    "bases": 3,
+    "lids": 3,
+    "blank_keycaps": 3
+  },
+  "minimum_xy_bounding_box_separation_mm": 6.0,
+  "all_parts_manifold": true,
+  "all_parts_single_body": true,
+  "all_parts_on_z_zero": true,
+  "export_reimport_component_count": 9,
+  "zero_area_triangles_omitted_after_float32_translation": 0,
+  "post_translation_vertex_weld_tolerance_mm": 1e-05,
+  "keycap": {
+    "style": "A Flat Tab",
+    "fit": 2,
+    "reason": "README recommends roomiest fit2 first",
+    "face_legend": null,
+    "underside_id": null,
+    "all_text_cutters_omitted": true,
+    "dimensions_mm": [
+      28,
+      18,
+      7.2
+    ],
+    "print_orientation": "face-down, socket upward",
+    "socket_boss_diameter_mm": 5.2,
+    "socket_depth_mm": 3.6,
+    "horizontal_pocket_mm": [
+      4.1,
+      1.3
+    ],
+    "through_Y_slot_width_mm": 1.5,
+    "open_socket_probe_results": [
+      {
+        "offset_xy_mm": [
+          0,
+          0
+        ],
+        "ceiling_z_mm": 3.6
+      },
+      {
+        "offset_xy_mm": [
+          1.8,
+          0
+        ],
+        "ceiling_z_mm": 3.6
+      },
+      {
+        "offset_xy_mm": [
+          -1.8,
+          0
+        ],
+        "ceiling_z_mm": 3.6
+      },
+      {
+        "offset_xy_mm": [
+          0,
+          2.2
+        ],
+        "ceiling_z_mm": 3.6
+      },
+      {
+        "offset_xy_mm": [
+          0,
+          -2.2
+        ],
+        "ceiling_z_mm": 3.6
+      }
+    ],
+    "blank_master_mesh": {
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1258.35,
+      "triangles": 1208
+    }
+  },
+  "exported_socket_probe_results": [
+    {
+      "part": "blank_cap_1",
+      "offset_xy_mm": [
+        0,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_1",
+      "offset_xy_mm": [
+        1.8,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_1",
+      "offset_xy_mm": [
+        -1.8,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_1",
+      "offset_xy_mm": [
+        0,
+        2.2
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_1",
+      "offset_xy_mm": [
+        0,
+        -2.2
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_2",
+      "offset_xy_mm": [
+        0,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_2",
+      "offset_xy_mm": [
+        1.8,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_2",
+      "offset_xy_mm": [
+        -1.8,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_2",
+      "offset_xy_mm": [
+        0,
+        2.2
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_2",
+      "offset_xy_mm": [
+        0,
+        -2.2
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_3",
+      "offset_xy_mm": [
+        0,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_3",
+      "offset_xy_mm": [
+        1.8,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_3",
+      "offset_xy_mm": [
+        -1.8,
+        0
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_3",
+      "offset_xy_mm": [
+        0,
+        2.2
+      ],
+      "ceiling_z_mm": 3.6
+    },
+    {
+      "part": "blank_cap_3",
+      "offset_xy_mm": [
+        0,
+        -2.2
+      ],
+      "ceiling_z_mm": 3.6
+    }
+  ],
+  "parts": [
+    {
+      "name": "base_1",
+      "source": "base",
+      "bounds_mm": [
+        [
+          79.0,
+          125.0
+        ],
+        [
+          47.0,
+          89.0
+        ],
+        [
+          0.0,
+          20.5
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 10025.588,
+      "triangles": 5846
+    },
+    {
+      "name": "lid_1",
+      "source": "lid",
+      "bounds_mm": [
+        [
+          131.0,
+          177.0
+        ],
+        [
+          47.0,
+          89.0
+        ],
+        [
+          0.0,
+          15.5
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 4331.874,
+      "triangles": 2354
+    },
+    {
+      "name": "base_2",
+      "source": "base",
+      "bounds_mm": [
+        [
+          79.0,
+          125.0
+        ],
+        [
+          95.0,
+          137.0
+        ],
+        [
+          0.0,
+          20.5
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 10025.588,
+      "triangles": 5846
+    },
+    {
+      "name": "lid_2",
+      "source": "lid",
+      "bounds_mm": [
+        [
+          131.0,
+          177.0
+        ],
+        [
+          95.0,
+          137.0
+        ],
+        [
+          0.0,
+          15.5
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 4331.873,
+      "triangles": 2354
+    },
+    {
+      "name": "base_3",
+      "source": "base",
+      "bounds_mm": [
+        [
+          79.0,
+          125.0
+        ],
+        [
+          143.0,
+          185.0
+        ],
+        [
+          0.0,
+          20.5
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 10025.589,
+      "triangles": 5846
+    },
+    {
+      "name": "lid_3",
+      "source": "lid",
+      "bounds_mm": [
+        [
+          131.0,
+          177.0
+        ],
+        [
+          143.0,
+          185.0
+        ],
+        [
+          0.0,
+          15.5
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 4331.873,
+      "triangles": 2354
+    },
+    {
+      "name": "blank_cap_1",
+      "source": "blank",
+      "bounds_mm": [
+        [
+          80.0,
+          108.0
+        ],
+        [
+          191.0,
+          209.0
+        ],
+        [
+          0.0,
+          7.200000762939453
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1258.35,
+      "triangles": 1200
+    },
+    {
+      "name": "blank_cap_2",
+      "source": "blank",
+      "bounds_mm": [
+        [
+          114.0,
+          142.0
+        ],
+        [
+          191.0,
+          209.0
+        ],
+        [
+          0.0,
+          7.200000762939453
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1258.35,
+      "triangles": 1200
+    },
+    {
+      "name": "blank_cap_3",
+      "source": "blank",
+      "bounds_mm": [
+        [
+          148.0,
+          176.0
+        ],
+        [
+          191.0,
+          209.0
+        ],
+        [
+          0.0,
+          7.200000762939453
+        ]
+      ],
+      "nonmanifold_edges": 0,
+      "components": 1,
+      "volume_mm3": 1258.35,
+      "triangles": 1200
+    }
+  ],
+  "reimported_parts": [
+    {
+      "name": "base_1",
+      "volume_mm3": 10025.5859,
+      "bounds_mm": [
+        [
+          79.0,
+          125.0
+        ],
+        [
+          47.0,
+          89.0
+        ],
+        [
+          0.0,
+          20.5
+        ]
+      ]
+    },
+    {
+      "name": "base_2",
+      "volume_mm3": 10025.5861,
+      "bounds_mm": [
+        [
+          79.0,
+          125.0
+        ],
+        [
+          95.0,
+          137.0
+        ],
+        [
+          0.0,
+          20.5
+        ]
+      ]
+    },
+    {
+      "name": "base_3",
+      "volume_mm3": 10025.5858,
+      "bounds_mm": [
+        [
+          79.0,
+          125.0
+        ],
+        [
+          143.0,
+          185.0
+        ],
+        [
+          0.0,
+          20.5
+        ]
+      ]
+    },
+    {
+      "name": "blank_cap_1",
+      "volume_mm3": 1258.3503,
+      "bounds_mm": [
+        [
+          80.0,
+          108.0
+        ],
+        [
+          191.0,
+          209.0
+        ],
+        [
+          0.0,
+          7.200000762939453
+        ]
+      ]
+    },
+    {
+      "name": "blank_cap_2",
+      "volume_mm3": 1258.35,
+      "bounds_mm": [
+        [
+          114.0,
+          142.0
+        ],
+        [
+          191.0,
+          209.0
+        ],
+        [
+          0.0,
+          7.200000762939453
+        ]
+      ]
+    },
+    {
+      "name": "blank_cap_3",
+      "volume_mm3": 1258.3502,
+      "bounds_mm": [
+        [
+          148.0,
+          176.0
+        ],
+        [
+          191.0,
+          209.0
+        ],
+        [
+          0.0,
+          7.200000762939453
+        ]
+      ]
+    },
+    {
+      "name": "lid_1",
+      "volume_mm3": 4331.8737,
+      "bounds_mm": [
+        [
+          131.0,
+          177.0
+        ],
+        [
+          47.0,
+          89.0
+        ],
+        [
+          0.0,
+          15.5
+        ]
+      ]
+    },
+    {
+      "name": "lid_2",
+      "volume_mm3": 4331.8726,
+      "bounds_mm": [
+        [
+          131.0,
+          177.0
+        ],
+        [
+          95.0,
+          137.0
+        ],
+        [
+          0.0,
+          15.5
+        ]
+      ]
+    },
+    {
+      "name": "lid_3",
+      "volume_mm3": 4331.8731,
+      "bounds_mm": [
+        [
+          131.0,
+          177.0
+        ],
+        [
+          143.0,
+          185.0
+        ],
+        [
+          0.0,
+          15.5
+        ]
+      ]
+    }
+  ],
+  "read_only_source_sha256": {
+    "enclosure/blocked.blend": "50df3a83063638836d0aaa91b83a76bc6af8b818ca61ed0d69dd4ced8979c9a2",
+    "enclosure/usb-review.blend": "7101e89964b3ce27fbd0b32b447226b35ee8d9b89efe3e39ec38fa5c28acddb7",
+    "keycap/printed/build.py": "261fe191a8d782078a74cd9a9829f085c74b9a7026927bcbd5ddd65d42acc049",
+    "enclosure/stl/base.stl": "2d4adb67072827ccbe9f1d6451ae9707ca55b5caf4e82c6156d0f3eda7e47ba6",
+    "enclosure/stl/lid.stl": "0165cca0395369e425a22b6836fda7b1e811571673b415829545c4cf0caebcc4"
+  },
+  "output_sha256": "7c6b1aadc59c392c11a303a3260db6df2aee59c26ba84cf0276a2b885b483150",
+  "limitations": [
+    "Physical switch socket fit remains unverified; use existingF2 tester first if needed.",
+    "Thin split socket walls need slicer inspection; manifold checks do not establish print strength.",
+    "Latest socket-hugging case retains its documented conditional cable seating requirement.",
+    "No slicing or physical printing was performed by this plate builder."
+  ]
+}

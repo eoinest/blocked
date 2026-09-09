@@ -64,7 +64,7 @@ No notarization upload occurs unless that option is supplied. Ad-hoc beta signin
 
 ## Hardware and printing
 
-The [two-button print plate](../docs/two-button-print.md) contains two copies of the latest enclosure and two blank Tab caps. The socket-hugging USB collar is still conditional on the actual board and seated cable; follow the [USB fit procedure](../docs/usb-fit.md) before committing to the complete print.
+The [three-button print plate](../docs/three-button-print.md) contains three copies of the latest enclosure and three blank Tab caps. The socket-hugging USB collar is still conditional on the actual board and seated cable; follow the [USB fit procedure](../docs/usb-fit.md) before committing to the complete print.
 
 The [firmware guide](../firmware/key_command/README.md) covers build, explicit-port upload and protocol diagnostics. Firmware compilation and simulated transport tests do not replace physical tests with the additional boards.
 

@@ -1,10 +1,13 @@
 #!/usr/bin/env python3
-"""Two current enclosures plus two blank A2 Flat Tab caps, one STL.
+"""Two or three current enclosures with matching blank A2 Flat Tab caps, one STL.
 
 Run in Blender: blender -b --factory-startup --threads 4 --python enclosure/two-device-plate.py
+Append -- --sets 3 for three complete sets (default: two).
 Existing geometry generators and .blend files are read-only. Only this plate/report are written.
 """
+import argparse
 import ast
+import sys
 import hashlib
 import json
 import math
@@ -18,8 +21,14 @@ from mathutils import Vector
 ROOT = Path(__file__).resolve().parent
 REPO = ROOT.parent
 CAP_SOURCE = REPO / 'keycap/printed/build.py'
-OUTPUT = ROOT / 'stl/blocked-two-devices-blank-caps.stl'
-REPORT = ROOT / 'two-device-plate-validation.json'
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--sets', type=int, choices=(2, 3), default=2)
+arguments = parser.parse_args(sys.argv[sys.argv.index('--')+1:] if '--' in sys.argv else [])
+SETS = arguments.sets
+COUNT_WORD = {2: 'two', 3: 'three'}[SETS]
+OUTPUT = ROOT / f'stl/blocked-{COUNT_WORD}-devices-blank-caps.stl'
+REPORT = ROOT / f'{COUNT_WORD}-device-plate-validation.json'
+FOOTPRINT = (98, 48*SETS+18)
 BED = 256.0
 
 def digest(path):
@@ -79,11 +88,14 @@ for dx,dy in ((1.1,2),(-1.1,-2)):
     hit,point,normal,index = blank.ray_cast(Vector((14+dx,9+dy,top+.5)),Vector((0,0,-1)))
     assert hit and abs(point.z-top) < .002, ('boss rim',point[:])
 
-# Two base/lid rows and two caps beneath; all original case print orientations retained.
-layout = [('base_1','base',0,0), ('lid_1','lid',52,0),
-          ('base_2','base',0,48), ('lid_2','lid',52,48),
-          ('blank_cap_1','blank',9,96), ('blank_cap_2','blank',61,96)]
-offset = ((BED-98)/2, (BED-114)/2)
+# One base/lid row per set, with matching blank caps beneath.
+layout = []
+for i in range(SETS):
+    layout.extend([(f'base_{i+1}', 'base', 0, 48*i),
+                   (f'lid_{i+1}', 'lid', 52, 48*i)])
+cap_xs = (9, 61) if SETS == 2 else (1, 35, 69)
+layout.extend((f'blank_cap_{i+1}', 'blank', x, 48*SETS) for i,x in enumerate(cap_xs))
+offset = ((BED-FOOTPRINT[0])/2, (BED-FOOTPRINT[1])/2)
 parts=[]
 records=[]
 for name,source,x,y in layout:
@@ -135,7 +147,7 @@ for obj in parts:
         normal.normalize()
         triangles.append((*normal,*points[0],*points[1],*points[2],0))
 with OUTPUT.open('wb') as handle:
-    handle.write(b'Two enclosures and two blank Tab caps; millimeters'.ljust(80,b'\0'))
+    handle.write(f'{SETS} enclosures and {SETS} blank Tab caps; millimeters'.encode('ascii').ljust(80,b'\0'))
     handle.write(struct.pack('<I',len(triangles)))
     for triangle in triangles:handle.write(struct.pack('<12fH',*triangle))
 
@@ -164,7 +176,7 @@ while remaining:
     assert abs(volume-match[0]['volume_mm3'])<.02, (match[0]['name'],volume,match[0]['volume_mm3'])
     exported_parts.append(dict(name=match[0]['name'],volume_mm3=round(volume,4),bounds_mm=bounds))
 bm.free()
-assert len(exported_parts)==6
+assert len(exported_parts)==3*SETS
 exported_socket_probes=[]
 for cap in (r for r in records if r['source']=='blank'):
     cx=cap['bounds_mm'][0][0]+14;cy=cap['bounds_mm'][1][0]+9
@@ -175,8 +187,8 @@ for cap in (r for r in records if r['source']=='blank'):
 assert preserved == {path:digest(REPO/path) for path in preserved}
 report={
     'output':str(OUTPUT.relative_to(REPO)), 'units':'mm', 'bed_mm':[256,256],
-    'footprint_mm':[98,114], 'centered_on_bed':True,
-    'part_count':6, 'contents':{'bases':2,'lids':2,'blank_keycaps':2},
+    'footprint_mm':list(FOOTPRINT), 'centered_on_bed':True,
+    'part_count':3*SETS, 'contents':{'bases':SETS,'lids':SETS,'blank_keycaps':SETS},
     'minimum_xy_bounding_box_separation_mm':round(min(gaps),4),
     'all_parts_manifold':True,'all_parts_single_body':True,'all_parts_on_z_zero':True,
     'export_reimport_component_count':len(exported_parts),
@@ -196,4 +208,4 @@ report={
                    'Latest socket-hugging case retains its documented conditional cable seating requirement.',
                    'No slicing or physical printing was performed by this plate builder.']}
 REPORT.write_text(json.dumps(report,indent=2)+'\n')
-print(json.dumps({'output':str(OUTPUT),'report':str(REPORT),'parts':6,'footprint_mm':[98,114],'minimum_gap_mm':min(gaps)}))
+print(json.dumps({'output':str(OUTPUT),'report':str(REPORT),'parts':3*SETS,'footprint_mm':list(FOOTPRINT),'minimum_gap_mm':min(gaps)}))

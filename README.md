@@ -49,7 +49,7 @@ rules still apply.
 
 ## General-purpose command buttons
 
-[Key Command](key-command/README.md) is a separate macOS app for assigning each button a shell command or keyboard shortcut. It uses [separate firmware](firmware/key_command/README.md), supports multiple boards, and runs alongside Blocked. The [two-button print plate](docs/two-button-print.md) includes two enclosures and two blank Tab caps.
+[Key Command](key-command/README.md) is a separate macOS app for assigning each button a shell command or keyboard shortcut. It uses [separate firmware](firmware/key_command/README.md), supports multiple boards, and runs alongside Blocked. The [three-button print plate](docs/three-button-print.md) includes three enclosures and three blank Tab caps.
 
 ## Make one
 
